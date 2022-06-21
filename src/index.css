@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+  text-transform: inherit;
+  border-radius: 4px;
+  min-width: 10px;
+  min-height: 10px;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+}

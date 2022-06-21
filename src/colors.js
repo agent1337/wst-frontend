@@ -1,0 +1,9 @@
+export const main = "#29CC8F";
+export const white = "#FFFFFF";
+export const text = "#323232";
+export const danger = "#F68C8D";
+export const warning = "#FFBE81";
+export const grey = "#CCCCCC";
+export const black = "#000000";
+export const line = "#52B535";
+export const twitter = "#5B9BE2";
