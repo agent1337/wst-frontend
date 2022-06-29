@@ -5,24 +5,47 @@ import AuthInput from '../../../custom/inputs/authInput/AuthInput';
 import { styles } from './authForm.styles';
 import SeparatorLine from '../../../custom/separatorLine/SeparatorLine';
 import AuthFooter from '../authFooter/AuthFooter';
-import { useDispatch } from 'react-redux';
+import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
+import { authentication } from '../../context/base';
+import { useHistory } from 'react-router-dom';
+import { signup, gotwitter } from '../../../api/auth';
 
 const SignupForm = () => {
-    const dispatch = useDispatch()
+    const history = useHistory()
 
     const [user, setUser] = useState({
         email: "",
         password: "",
     });
 
-    async function onSubmitForm(e) {
-        e.preventDefault();
-    }
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setUser({ ...user, [name]: value });
     };
+
+    async function onSubmitForm(e) {
+        e.preventDefault();
+        const register = await signup(user.email, user.password)
+        if (!register) return
+        history.push("/resumes");
+    }
+
+    const goWithTwitter = () => {
+        const provider = new TwitterAuthProvider();
+        signInWithPopup(authentication, provider)
+            .then((res) => {
+                let data = {
+                    name: res._tokenResponse.screenName,
+                    externalId: res.user.uid
+                }
+
+                const twit = gotwitter(data)
+                if (!twit) return
+
+                history.push("/resumes");
+            })
+            .catch((err) => console.log(err))
+    }
 
     return (
         <>
@@ -52,8 +75,9 @@ const SignupForm = () => {
                     <Grid sx={styles.content}>
                         <SeparatorLine />
 
-                        <button style={{ ...styles.button, ...styles.twitButton }}
-                        // onClick={loginTwitter}
+                        <button
+                            style={{ ...styles.button, ...styles.twitButton }}
+                            onClick={goWithTwitter}
                         >
                             Sign-up with Twitter
                         </button>

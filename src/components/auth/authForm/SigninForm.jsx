@@ -6,11 +6,13 @@ import { styles } from './authForm.styles';
 import SeparatorLine from '../../../custom/separatorLine/SeparatorLine';
 import AuthCheckbox from '../authCheckbox/AuthCheckbox';
 import AuthFooter from '../authFooter/AuthFooter';
-import { useDispatch } from 'react-redux';
-import { login } from '../../../redux/auth/auth.actions';
+import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
+import { authentication } from '../../context/base';
+import { useHistory } from 'react-router-dom';
+import { signin, gotwitter } from '../../../api/auth';
 
 const SigninForm = () => {
-    const dispatch = useDispatch()
+    const history = useHistory();
 
     const [user, setUser] = useState({
         email: "",
@@ -19,13 +21,32 @@ const SigninForm = () => {
 
     async function onSubmitForm(e) {
         e.preventDefault();
-        dispatch(login(user.email, user.password))
+        const login = await signin(user.email, user.password)
+        if (!login) return
+        history.push("/resumes");
     }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setUser({ ...user, [name]: value });
     };
+
+    const goWithTwitter = () => {
+        const provider = new TwitterAuthProvider();
+        signInWithPopup(authentication, provider)
+            .then((res) => {
+                let data = {
+                    name: res._tokenResponse.screenName,
+                    externalId: res.user.uid
+                }
+
+                const twit = gotwitter(data)
+                if (!twit) return
+
+                history.push("/resumes");
+            })
+            .catch((err) => console.log(err))
+    }
 
     return (
         <>
@@ -66,7 +87,7 @@ const SigninForm = () => {
                         <SeparatorLine />
 
                         <button style={{ ...styles.button, ...styles.twitButton }}
-                        // onClick={loginTwitter}
+                            onClick={goWithTwitter}
                         >
                             Sign-in with Twitter
                         </button>

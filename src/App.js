@@ -4,7 +4,7 @@ import AuthorizedRoutes from './routes/AuthorizedRoutes';
 
 export default function App() {
   const auth = false;
-
+  
   return (
     <Suspense fallback={<></>}>
       {!auth 
