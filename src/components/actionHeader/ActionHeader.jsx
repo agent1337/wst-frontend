@@ -2,14 +2,7 @@ import React from 'react';
 import { Box, } from "@mui/material";
 import ActionButton from '../../custom/buttons/actionButton/ActionButton';
 
-export default function ActionHeader({ type }) {
-
-    const saveResume = async () => {
-    };
-
-    const publishResume = async () => {
-
-    };
+export default function ActionHeader({ type, publishResume }) {
 
     const openEditResume = () => {
 
@@ -32,7 +25,7 @@ export default function ActionHeader({ type }) {
             <Box sx={{ display: "flex", }}>
                 {type === 'first' && (
                     <>
-                        <ActionButton text={"Save changes"} func={saveResume} />
+                        <ActionButton text={"Save changes"} func={publishResume} />
                         <ActionButton text={"Publish"} func={publishResume} />
                     </>
                 )}

@@ -1,4 +1,4 @@
-import { main } from "../../../colors";
+import { danger, main } from "../../../colors";
 
 export const styles = {
     input: {
@@ -9,4 +9,7 @@ export const styles = {
         marginBottom: "23px",
         outlineColor: `${main}`
     },
+    require: {
+        color: `${danger}`
+    }
 }

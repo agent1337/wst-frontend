@@ -14,16 +14,29 @@ export default function ExperienceIntroduction() {
             />
 
             <AutoInput
+                name={"workHistory"}
+                type={"text"}
+                title={"Work history"}
+
+            />
+
+            <AutoInput
                 name={"industries"}
                 type={"text"}
-                title={"Industries"}
-           
+                title={"Industry"}
+
             />
 
             <AutoInput
                 name={"experiences"}
                 type={"text"}
-                title={"Experiences"}
+                title={"Experience / Skills"}
+            />
+
+            <AutoInput
+                name={"languages"}
+                type={"text"}
+                title={"Languages"}
             />
 
             <AutoInput
@@ -53,13 +66,13 @@ export default function ExperienceIntroduction() {
             <AutoInput
                 name={"skills"}
                 type={"text"}
-                title={"Skills"}
+                title={"Skills I want to Learn"}
             />
 
             <AutoInput
                 name={"interests"}
                 type={"text"}
-                title={"Interests"}
+                title={"Industries I am Interested in"}
             />
 
             <UploadFile />

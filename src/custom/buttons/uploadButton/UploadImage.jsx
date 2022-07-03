@@ -21,7 +21,7 @@ export default function UploadImage() {
                     style={styles.uploadInput}
                 />
                 <Typography sx={styles.text}>Image or up to 1 min Video with self introduction</Typography>
-                {img && <img src={img} alt="image" style={styles.image}/>}
+                {img && <img src={img} alt="" style={styles.image}/>}
             </label>
         </Box>
     )

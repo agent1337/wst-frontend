@@ -19,8 +19,6 @@ export default function UploadedFile({ file }) {
                     <button className="button">Delete</button>
                 </div>
             </div>
-
-            <iframe src="" frameborder="0"></iframe>
         </Box>
     )
 }
