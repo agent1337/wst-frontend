@@ -5,15 +5,16 @@ import { styles } from './createResumeButton.styles';
 
 export default function CreateResumeButton() {
     return (
-        <Box sx={{ ...styles.cardsItem }}>
-            <a href="/resume/create">
+        <a href="/resume/create">
+            <Box sx={{ ...styles.cardsItem }}>
                 <Box sx={{ ...styles.card, ...styles.createButton }}>
                     <Box sx={{ ...styles.content }}>
                         <AddOutlinedIcon sx={{ color: "#C4C4C4" }} />
                         <Typography sx={{ fontSize: "12px" }}>Create new Resume</Typography>
                     </Box>
+                    <img src="../../book.png" alt="resume" style={styles.image} />
                 </Box>
-            </a>
-        </Box>
+            </Box>
+        </a>
     )
 }

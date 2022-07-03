@@ -36,4 +36,10 @@ export const styles = {
     transform: "translate(-50%, -50%)",
     width: "100%",
   },
+  image: {
+    width: '40px',
+    position: 'absolute',
+    bottom: '0px',
+    right: '0px',
+  }
 };
