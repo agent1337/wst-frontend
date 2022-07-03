@@ -5,7 +5,7 @@ import { main } from '../../colors';
 const styles = {
     logo: {
         display: "flex",
-        // marginLeft: "-52px",
+        marginLeft: "-68px",
         alignItems: "center",
       },
     title: {

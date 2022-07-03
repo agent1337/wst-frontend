@@ -20,7 +20,6 @@ const data = [
 
 const styles = {
     navigation: {
-        marginLeft: "10px",
         display: "flex",
         "@media (max-width: 800px)": {
             display: "none",
@@ -39,16 +38,17 @@ export default function Navigation() {
                         key={index}
                         to={link.src}
                         className="link"
-                        style={{ margin: "0 10px", }}
+                        style={{ marginRight: "10px", }}
                     >
                         <Typography
                             style={
                                 location.pathname === `${link.src}`
                                     ? {
+                                        paddingBottom: '8px',
                                         borderBottom: `1px solid ${main}`,
-                                        color: `${main}`, fontSize: '14px'
+                                        color: `${main}`, fontSize: '14px',
                                     }
-                                    : { borderBottom: "1px solid transparent", fontSize: '14px' }
+                                    : { borderBottom: "8px solid transparent", fontSize: '14px' }
                             }
                         >
                             {link.link}
