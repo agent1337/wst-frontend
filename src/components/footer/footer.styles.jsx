@@ -32,7 +32,6 @@ export const styles = {
 
   mobileFooter: {
     fontSize: '12px',
-    background: 'pink',
     padding: "0 18px",
     background: "#FCFCFC",
     // "@media (min-width: 531px)": {

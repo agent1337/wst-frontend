@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import { alertReducer } from './alert/alert.reducers';
+// import { alertReducer } from './alert/alert.reducers';
+import { resumeReducer } from './resume/resume.reducers';
 
 const rootReducer = combineReducers({
-	alert: alertReducer,
+	// alert: alertReducer,
+	resume: resumeReducer,
 })
 
 export default rootReducer;

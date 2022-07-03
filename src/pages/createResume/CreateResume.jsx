@@ -14,13 +14,11 @@ export default function CreateResume() {
 
             <Grid container sx={{ paddingTop: '13px'}}>
                 <Grid item xs={12} sm={5} md={5} lg={4.5} sx={{ ...styles.introduction }}>
-                    <SelfIntroduction
-                    />
+                    <SelfIntroduction />
                    
                 </Grid>
                 <Grid item xs={12} sm={7} md={7} lg={7.5} sx={{ ...styles.fields }}>
-                    <ExperienceIntroduction
-                    />
+                    <ExperienceIntroduction />
                    
                 </Grid>
             </Grid>
