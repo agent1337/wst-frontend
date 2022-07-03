@@ -10,11 +10,11 @@ const data = [
     },
     {
         link: "Settings",
-        src: "/test",
+        src: "/settings",
     },
     {
-        link: "New design",
-        src: "/new",
+        link: "Help",
+        src: "/help",
     },
 ];
 

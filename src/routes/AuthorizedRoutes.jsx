@@ -19,7 +19,7 @@ export default function AuthorizedRoutes() {
                 </PrivateRoute>
                 <PrivateRoute
                     isAuthorized={auth}
-                    path="/set"
+                    path="/resume/create"
                 >
                 </PrivateRoute>
                 <Footer />
