@@ -1,9 +1,11 @@
 import axios from "axios"
 
-const baseURL = `http://localhost:4040/`
+const baseURL = `http://localhost:4040/`;
+export const accessToken = localStorage.getItem("accessToken");
 
 export const axiosInstance = axios.create({
   baseURL,
+  headers: { Authorization: `Bearer ${accessToken}` },
 })
 
 axiosInstance.interceptors.request.use(request => {

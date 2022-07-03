@@ -1,6 +1,8 @@
 body {
   margin: 0;
   box-sizing: border-box;
+  background-color: #202124;
+  height: 100%;
 }
 
 a {

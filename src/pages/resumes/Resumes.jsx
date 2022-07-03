@@ -4,6 +4,7 @@ import { Tabs, Tab, Box } from "@mui/material";
 import API from "../../utils/api";
 import { main } from "../../colors"
 import { styles } from "./resumes.styles";
+import CreateResumeButton from "../../custom/buttons/createResume/CreateResumeButton";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,6 +54,7 @@ export default function Resumes() {
     setValue(newValue);
   };
 
+
   return (
     <Box sx={styles.container}>
       <Box>
@@ -70,6 +72,7 @@ export default function Resumes() {
       </Box>
       <TabPanel value={value} index={0}>
         <Box sx={styles.box}>
+          <CreateResumeButton />
         </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>

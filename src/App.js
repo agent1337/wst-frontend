@@ -3,11 +3,11 @@ import UnauthorizedRoutes from './routes/UnauthorizedRoutes';
 import AuthorizedRoutes from './routes/AuthorizedRoutes';
 
 export default function App() {
-  const auth = false;
+  const auth = null || localStorage.getItem('accessToken');
   
   return (
     <Suspense fallback={<></>}>
-      {!auth 
+      {auth === null
         ? <UnauthorizedRoutes /> 
         : <AuthorizedRoutes />
       }

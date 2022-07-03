@@ -2,7 +2,7 @@ import { Box, Grid } from '@mui/material';
 import React from 'react'
 import AuthSidebar from '../../components/auth/authSidebar/AuthSidebar';
 import SignupForm from '../../components/auth/authForm/SignupForm';
-import Footer from '../../components/footer/Footer';
+import DekstopFooter from '../../components/footer/DekstopFooter';
 import { styles } from './signup.styles';
 
 const Signup = () => {
@@ -13,7 +13,7 @@ const Signup = () => {
                 <AuthSidebar />
                 <SignupForm />
             </Grid>
-            <Footer/>
+            <DekstopFooter/>
         </Box>
     )
 }

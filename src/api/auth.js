@@ -30,11 +30,8 @@ export const gotwitter = (data) => {
     return axiosInstance
         .post(`auth/twitter/signin`, data)
               .then((res) => {
-                console.log(res, 'res')
-    
                 let token = res.data.accessToken;
                 localStorage.setItem("accessToken", token);
-               
               })
               .catch((error) => {
                 console.log(error);
