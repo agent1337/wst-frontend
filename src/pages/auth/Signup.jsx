@@ -2,8 +2,10 @@ import { Box, Grid } from '@mui/material';
 import React from 'react'
 import AuthSidebar from '../../components/auth/authSidebar/AuthSidebar';
 import SignupForm from '../../components/auth/authForm/SignupForm';
-import DekstopFooter from '../../components/footer/DekstopFooter';
+// import DekstopFooter from '../../components/footer/DekstopFooter';
 import { styles } from './signup.styles';
+import Footer from '../../components/footer/Footer';
+// import MobileFooter from '../../components/footer/MobileFooter';
 
 const Signup = () => {
     return (
@@ -13,7 +15,8 @@ const Signup = () => {
                 <AuthSidebar />
                 <SignupForm />
             </Grid>
-            <DekstopFooter/>
+            {/* <DekstopFooter/> */}
+            <Footer />
         </Box>
     )
 }

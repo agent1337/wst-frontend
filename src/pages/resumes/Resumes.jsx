@@ -67,7 +67,7 @@ export default function Resumes() {
           }}
         >
           <Tab sx={styles.tab} label="My Resumes" {...a11yProps(0)} />
-          <Tab sx={styles.tab} label="Saved Resumes" {...a11yProps(1)} />
+          <Tab sx={styles.tab} label="Other’s Resume" {...a11yProps(1)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>

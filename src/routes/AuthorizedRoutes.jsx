@@ -9,19 +9,21 @@ export default function AuthorizedRoutes() {
     const auth = true;
     return (
         <Switch>
-            <Header />
-            <PrivateRoute
-                isAuthorized={auth}
-                path="/resumes"
-            >
-                <Resumes />
-            </PrivateRoute>
-            <PrivateRoute
-                isAuthorized={auth}
-                path="/set"
-            >
-            </PrivateRoute>
-            <Footer />
+            <Box sx={{}}>
+                <Header/>
+                <PrivateRoute
+                    isAuthorized={auth}
+                    path="/resumes"
+                >
+                    <Resumes />
+                </PrivateRoute>
+                <PrivateRoute
+                    isAuthorized={auth}
+                    path="/set"
+                >
+                </PrivateRoute>
+                <Footer />
+            </Box>
         </Switch>
     )
 }

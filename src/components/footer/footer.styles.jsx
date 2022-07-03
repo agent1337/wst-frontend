@@ -1,5 +1,4 @@
-export 
-const styles = {
+export const styles = {
   container: {
     background: "#FCFCFC",
     padding: "20px 0",
@@ -9,6 +8,7 @@ const styles = {
     },
     "@media (max-width: 530px)": {
       display: "none",
+      background: 'pink'
     },
   },
   content: {
@@ -28,12 +28,16 @@ const styles = {
       fontSize: "12px",
     },
   },
+
+
   mobileFooter: {
+    fontSize: '12px',
+    background: 'pink',
     padding: "0 18px",
     background: "#FCFCFC",
-    "@media (min-width: 531px)": {
-      display: "none",
-    },
+    // "@media (min-width: 531px)": {
+    //   display: "none",
+    // },
   },
   box: {
     display: "flex",

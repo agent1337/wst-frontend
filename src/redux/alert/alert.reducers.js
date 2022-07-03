@@ -1,7 +1,4 @@
-const initialState = { 
-    isAuth: false 
-}
 
-export const alertReducer = (state = initialState) => {
-    
+export const alertReducer = (state = []) => {
+    return
 }
