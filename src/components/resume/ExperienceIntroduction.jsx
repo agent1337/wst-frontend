@@ -2,6 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import Textarea from '../../custom/inputs/textarea/Textarea';
 import AutoInput from '../../custom/inputs/autoInput/AutoInput';
+import UploadFile from '../../custom/buttons/uploadButton/UploadFile';
 
 export default function ExperienceIntroduction() {
     return (
@@ -60,6 +61,8 @@ export default function ExperienceIntroduction() {
                 type={"text"}
                 title={"Interests"}
             />
+
+            <UploadFile />
         </Box>
     )
 }

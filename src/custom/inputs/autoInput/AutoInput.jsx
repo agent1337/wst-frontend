@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography } from "@mui/material";
+import AutoOtput from '../../outputs/autoOutput/AutoOtput';
 
-import AutoOtput from '../autoOutput/AutoOtput';
 
 const styles = {
     title: {
@@ -84,7 +84,7 @@ export default function AutoInput({type, value, name, title, setFieldValue }) {
             />
             {data?.map((item, index) => {
                 return (
-                    <AutoOtput 
+                    <AutoOtput
                         key={index}
                         item={item}  
                         handleRemoveItem={handleRemoveItem} 

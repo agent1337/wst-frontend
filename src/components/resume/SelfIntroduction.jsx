@@ -1,11 +1,13 @@
 import { Box } from '@mui/material'
 import React from 'react'
 import { useSelector } from 'react-redux'
+import UploadImage from '../../custom/buttons/uploadButton/UploadImage'
 import TextInput from '../../custom/inputs/textInput/TextInput'
 
 export default function SelfIntroduction() {
     return (
-        <div>
+        <div style={{position: 'relative'}}>
+            <UploadImage />
             <Box sx={{display: 'flex'}}>
                 <TextInput type={"text"} name={'surname'}  />
                 <TextInput type={"text"} name={'name'} />
