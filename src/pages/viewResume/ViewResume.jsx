@@ -49,8 +49,8 @@ export default function ViewResume() {
               </Typography>
               <ActionHeader type={"second"} resumeId={id} />
             </Box>
-            <Pdf targetRef={ref} filename="code-example.pdf" scale={0.62} x={4} y={5}>
-              {({ toPdf }) => <button style={{ position: 'absolute', right: '0', top: '10px', color: 'transparent', padding: '20px' }} onClick={toPdf}>Generate Pdf</button>}
+            <Pdf targetRef={ref} filename="code-example.pdf" scale={0.78} x={4} y={5}>
+              {({ toPdf }) => <button style={{ position: 'absolute', right: '0', top: '0px', padding: '11px 23px', color: 'transparent' }} onClick={toPdf}>Generate Pdf</button>}
             </Pdf>
   
             <Grid container ref={ref}>

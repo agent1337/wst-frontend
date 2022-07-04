@@ -2,7 +2,8 @@ export const styles = {
   section: {
     width: "970px",
     margin: '0 auto',
-    marginBottom: '100px'
+    marginBottom: '100px',
+    position: 'relative'
   },
   selfIntroduction: {
       maxWidth: '332px',
