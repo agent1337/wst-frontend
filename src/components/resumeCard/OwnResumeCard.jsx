@@ -11,7 +11,6 @@ export default function OwnResumeCard({ item, resumesData, setResumesData }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const removeResume = (resumeId) => {
-    console.log(resumeId)
     API.delete(`resumes/` + resumeId)
       .then((res) => {
         console.log(res)
@@ -84,7 +83,7 @@ export default function OwnResumeCard({ item, resumesData, setResumesData }) {
           style={styles.deleteButton}
           onClick={() => setIsOpen(true)}
         />
-        <Link className="link" to={`/resume/${item._id}`}>
+        <Link className="link" to={`/cv/${item._id}`}>
           <Box
             sx={{
               ...styles.card,

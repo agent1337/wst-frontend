@@ -8,9 +8,5 @@ export default function AcceptLine() {
     localStorage.setItem("accessToken", token);
     document.location.href = `/${redirect}`
     
-    return (
-        <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, at.
-        </div>
-    )
+    return <div>Redirect</div>
 }
