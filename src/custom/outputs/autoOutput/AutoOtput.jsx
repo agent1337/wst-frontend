@@ -6,7 +6,7 @@ export default function AutoOtput({ item, handleRemoveItem, index }) {
     return (
         <span
             style={{ ...styles.block, padding: "8px", paddingRight: "40px" }}>
-            {item}
+            {item.title}
             <button
                 style={styles.removeButton}
                 onClick={() => handleRemoveItem(index)}

@@ -9,7 +9,7 @@ export const styles = {
         border: "1px solid #9C9C9C",
         borderRadius: "4px",
         resize: "none",
-        width: "97%",
+        width: 'calc(100% - 25px)',
         height: "100px",
         padding: "10px",
         lineHeight: "20px",

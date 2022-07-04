@@ -7,7 +7,9 @@ export default function TextInput({ name, type, value, placeholder, onChange, on
 
     return (
         <Box>
-            <Typography sx={{ fontSize: '12px' }}> {!isNotRequired && <span style={styles.require}>*</span>}{text}</Typography>
+            <Typography sx={{ fontSize: '12px' }}> 
+                {!isNotRequired && <span style={styles.require}>*</span>}{text}
+            </Typography>
             <input
                 name={name}
                 type={"text" || type}

@@ -23,3 +23,18 @@ button {
   border: none;
   cursor: pointer;
 }
+
+.Toastify__toast {
+  min-width: 80px;
+  max-width: 300px;
+  width: 100%;
+  text-align: center;
+}
+
+.Toastify__close-button{
+  display: none;
+}
+
+.Toastify__progress-bar-theme--dark {
+  background: transparent!important;
+}

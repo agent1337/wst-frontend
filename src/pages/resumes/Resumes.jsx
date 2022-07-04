@@ -5,6 +5,7 @@ import API from "../../utils/api";
 import { main } from "../../colors"
 import { styles } from "./resumes.styles";
 import CreateResumeButton from "../../custom/buttons/createResume/CreateResumeButton";
+import OwnResumeCard from "../../custom/resumeCard/OwnResumeCard";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -35,7 +36,6 @@ function a11yProps(index) {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 }
-
 
 export default function Resumes() {
   const [value, setValue] = useState(0);
@@ -73,6 +73,18 @@ export default function Resumes() {
       <TabPanel value={value} index={0}>
         <Box sx={styles.box}>
           <CreateResumeButton />
+
+          {resumesData &&
+            resumesData.map((item, index) => {
+              return (
+                <OwnResumeCard
+                  item={item}
+                  key={index}
+                  resumesData={resumesData}
+                  setResumesData={setResumesData}
+                />
+              );
+            })}
         </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>
