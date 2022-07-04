@@ -47,6 +47,8 @@ const SignupForm = () => {
             .catch((err) => console.log(err))
     }
 
+    const line = () => {}
+
     return (
         <>
             <Grid item xs={12} sm={12} md={6} sx={{ ...styles.authform }}>
@@ -82,9 +84,12 @@ const SignupForm = () => {
                             Sign-up with Twitter
                         </button>
 
-                        <a href="https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1657226551&redirect_uri=http://localhost:3000/signin&state=wst&scope=profile, openid">
+                        <a
+                            onClick={line}
+                            href="https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1657233949&redirect_uri=http://localhost:4040/auth/line/signin&state=wst&scope=profile, openid"
+                        >
                             <button style={{ ...styles.button, ...styles.lineButton, }}>
-                                Sign-up with LINE
+                                Login with LINE
                             </button>
                         </a>
 

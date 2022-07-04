@@ -1,31 +1,35 @@
 import { Box } from '@mui/material';
-import { Switch, } from 'react-router-dom'
+import { Switch, Redirect } from 'react-router-dom'
 import Footer from '../components/footer/DekstopFooter';
-import Header from '../components/header/Header';
 import CreateResume from '../pages/createResume/CreateResume';
 import Resumes from '../pages/resumes/Resumes';
 import PrivateRoute from './PrivateRoute'
 
-export default function AuthorizedRoutes() {
-    const auth = true;
+const links = ['/sigin', '/acceptline', '/resume', '/forgot-password']
+
+export default function AuthorizedRoutes({ auth }) {
     return (
         <Switch>
-            <Box sx={{}}>
-                <Header/>
-                <PrivateRoute
-                    isAuthorized={auth}
-                    path="/resumes"
-                >
-                    <Resumes />
-                </PrivateRoute>
-                <PrivateRoute
-                    isAuthorized={auth}
-                    path="/resume/create"
-                >
-                    <CreateResume />
-                </PrivateRoute>
-                <Footer />
-            </Box>
+            {auth == null && !links.includes('/' + document.location.pathname.split('/').slice(1, 2).join('/'))
+                ?
+                <Redirect to="/" />
+                :
+                <Box sx={{}}>
+                    <PrivateRoute
+                        isAuthorized={auth}
+                        path="/resumes"
+                    >
+                        <Resumes />
+                    </PrivateRoute>
+                    <PrivateRoute
+                        isAuthorized={auth}
+                        path="/resume/create"
+                    >
+                        <CreateResume />
+                    </PrivateRoute>
+                    <Footer />
+                </Box>
+            }
         </Switch>
     )
 }
