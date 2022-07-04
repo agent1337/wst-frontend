@@ -5,7 +5,7 @@ import API from "../../utils/api";
 import { main } from "../../colors"
 import { styles } from "./resumes.styles";
 import CreateResumeButton from "../../custom/buttons/createResume/CreateResumeButton";
-import OwnResumeCard from "../../custom/resumeCard/OwnResumeCard";
+import OwnResumeCard from "../../components/resumeCard/OwnResumeCard";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
