@@ -32,6 +32,15 @@ export default function ViewResume() {
         .catch((error) => console.log(error));
     }, [])
 
+    useEffect(() => {
+      API.get(`/media/${id}`)
+        .then((response) => {
+          setImage(response.data[0].filePath);
+          setFiles(response.data.splice(1));
+        })
+        .catch((error) => console.log(error));
+    }, [setImage]);
+    
     return (
         <section style={styles.section}>
         {resume &&
@@ -68,7 +77,7 @@ export default function ViewResume() {
                   <img
                     src={
                       image !== undefined &&
-                      `https://storage.cloud.google.com/cv-medias/${image}`
+                      `https://storage.cloud.google.com/wst-files/${image}`
                     }
                     alt={`${image}`}
                     style={{ width: "inherit", height: "inherit" }}

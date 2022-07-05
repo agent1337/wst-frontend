@@ -8,36 +8,6 @@ import ExperienceIntroduction from '../../components/resume/ExperienceIntroducti
 import { ToastContainer, toast } from 'react-toastify';
 import API from '../../utils/api';
 
-const initialSelfValue = {
-    surname: "",
-    name: "",
-    kanaSurname: "",
-    kanaName: "",
-    position: "",
-    nationality: "",
-    gender: "",
-    birthday: "",
-    phone: "",
-    eMail: "",
-    address: "",
-    busStation: "",
-    transport: "",
-}
-
-const initialExperienceValue = {
-    motivation: "",
-    workHistory: [],
-    industries: [],
-    experiences: [],
-    languages: [],
-    certifications: [],
-    awards: [],
-    schools: [],
-    selfPromotion: "",
-    skills: [],
-    interests: [],
-    files: [],
-}
 
 export default function EditResume() {
     let location = useLocation();
@@ -52,7 +22,7 @@ export default function EditResume() {
 
     const [resume, setResume] = useState([])
 
-    const [resumeTitle, setResumeTitle] = useState('resume.resumeTitle');
+    // const [resumeTitle, setResumeTitle] = useState('resume.resumeTitle');
 
     // const [selfIntroState, setIntroState] = useState({
     //     surname: resume && resume.surname,
@@ -69,7 +39,7 @@ export default function EditResume() {
     //     busStation: resume.busStation,
     //     transport: resume.transport,
     // })
-    const [experienceState, setExperienceState] = useState(initialExperienceValue)
+    // const [experienceState, setExperienceState] = useState(initialExperienceValue)
 
     const publish = () => {}
 
@@ -78,26 +48,26 @@ export default function EditResume() {
             <Box sx={styles.block}>
                 <input
                     type="text"
-                    value={resumeTitle}
-                    onChange={(event) => setResumeTitle(event.target.value)}
+                    // value={resumeTitle}
+                    // onChange={(event) => setResumeTitle(event.target.value)}
                     placeholder="resume title"
-                    style={styles.inputResumeTitle}
+                    // style={styles.inputResumeTitle}
                 />
                 <ActionHeader type={'first'} publishResume={publish} />
             </Box>
 
             <Grid container sx={styles.container}>
                 <Grid item xs={12} sm={5} md={5} lg={4.5} sx={{ ...styles.selfIntroduction }}>
-                    <SelfIntroduction resume={resume}
-                        // selfIntroState={selfIntroState}
-                        // setIntroState={setIntroState}
-                    />
+                    {/* <SelfIntroduction resume={resume}
+                        selfIntroState={selfIntroState}
+                        setIntroState={setIntroState}
+                    /> */}
                 </Grid>
                 <Grid item xs={12} sm={7} md={7} lg={7.5} sx={{ ...styles.fields }}>
-                    <ExperienceIntroduction
+                    {/* <ExperienceIntroduction
                         experienceState={experienceState}
                         setExperienceState={setExperienceState}
-                    />
+                    /> */}
                 </Grid>
             </Grid>
             <ToastContainer />

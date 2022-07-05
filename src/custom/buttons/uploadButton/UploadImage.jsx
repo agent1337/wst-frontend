@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Box, Typography } from "@mui/material";
 import { styles } from './uploadButton.styles';
 
-export default function UploadImage() {
+export default function UploadImage({setUploadImage}) {
     const [img, setImg] = useState(null)
 
     const handleChange = (event) => {
+        setUploadImage(event.target.files[0])
         setImg(URL.createObjectURL(event.target.files[0]))
     }
 

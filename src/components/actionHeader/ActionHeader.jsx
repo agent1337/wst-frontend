@@ -25,8 +25,8 @@ export default function ActionHeader({ type, publishResume }) {
             <Box sx={{ display: "flex", }}>
                 {type === 'first' && (
                     <>
-                        <ActionButton text={"Save changes"} func={publishResume} />
-                        <ActionButton text={"Publish"} func={publishResume} />
+                        <ActionButton text={"Save changes"} func={() => publishResume('save')} />
+                        <ActionButton text={"Publish"} func={() => publishResume('publish')} />
                     </>
                 )}
 
