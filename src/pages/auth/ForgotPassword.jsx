@@ -145,7 +145,7 @@ export default function ForgotPassword() {
 
     return (
         <>
-            <Head />
+            {/* <Head /> */}
             <Grid container sx={styles.container}>
                 <Grid sx={styles.content}>
                     {!isSubmit ? (

@@ -13,7 +13,7 @@ const Signin = () => {
             <AuthSidebar />
             <SigninForm />
         </Grid>
-        {/* <DekstopFooter /> */}
+        <DekstopFooter />
     </Box>
     )
 }

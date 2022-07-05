@@ -9,7 +9,7 @@ const AuthSidebar = () => {
 
                 <Box sx={styles.desktop}>
                     <img
-                        src="../../logo/logo.svg"
+                        src="../../logo/whitelogo.png"
                         alt="logo"
                         style={styles.logo}
                     />

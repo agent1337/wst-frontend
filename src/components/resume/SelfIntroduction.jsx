@@ -1,34 +1,83 @@
-import React from 'react'
-import { Box } from '@mui/material'
+import React, { useState } from 'react'
+import { Box, Typography, TextField, Select, MenuItem, } from '@mui/material'
 import UploadImage from '../../custom/buttons/uploadButton/UploadImage'
 import TextInput from '../../custom/inputs/textInput/TextInput'
+import { danger } from '../../colors'
+
+const SelectBirthday = ({ name, value, text, onChange }) => {
+    return (
+        <Box sx={{ marginBottom: '20px', width: "100%" }}>
+            <Typography sx={{ fontSize: '12px' }}>
+                <span style={{ color: `${danger}` }}>*</span>
+                {text}
+            </Typography>
+            <TextField
+                type="date"
+                name={name}
+                defaultValue={value}
+                sx={{ width: "100%" }}
+                onChange={onChange}
+            />
+        </Box>
+    )
+}
+
+const Selector = ({
+    text,
+    data,
+    value,
+    name,
+    onChange
+}) => {
+    return (
+        <>
+            <Typography sx={{ fontSize: '12px' }}>
+                <span style={{ color: `${danger}` }}>*</span>
+                {text}
+            </Typography>
+            <Select
+                value={value}
+                onChange={onChange}
+                displayEmpty
+                name={name}
+                sx={{ width: "100%", marginBottom: '20px' }}
+            >
+                {data.map((item, index) => {
+                    return (
+                        <MenuItem key={index} value={item.text}>
+                            {item.text}
+                        </MenuItem>
+                    );
+                })}
+            </Select>
+        </>
+    );
+};
 
 export default function SelfIntroduction({ resume, selfIntroState, setIntroState, setUploadImage, uploadImage }) {
-    // const [selfIntroState, setIntroState] = useState({
-    //     surname: resume && resume.surname,
-    //     name: resume.name,
-    //     kanaSurname: resume.kanaSurname,
-    //     kanaName: resume.kanaName,
-    //     position: resume.position,
-    //     nationality: resume.nationality,
-    //     gender: resume.gender,
-    //     birthday: resume.birthday,
-    //     phone: resume.phone,
-    //     eMail: resume.eMail,
-    //     address: resume.address,
-    //     busStation: resume.busStation,
-    //     transport: resume.transport,
-    // })
-
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setIntroState({ ...selfIntroState, [name]: value });
     }
-    
+
     const blurHandler = () => {
         console.log("input blurred")
     }
+
+    const [nationality, setNationality] = useState([
+        { text: "日本" },
+        { text: "アイスランド" },
+        { text: "アイルランド" },
+        { text: "アゼルバイジャン" },
+        { text: "アフガニスタン" },
+        { text: "アラブ首長国連邦" },
+        { text: "アルジェリア" },
+        { text: "アルゼンチン" },
+        { text: "アルバニア" },
+        { text: "アルメニア" },
+    ]);
+
+    const gender = [{ text: 'male' }, { text: 'female' }]
 
 
     return (
@@ -78,6 +127,30 @@ export default function SelfIntroduction({ resume, selfIntroState, setIntroState
                 value={selfIntroState.position}
                 onChange={handleInputChange}
                 placeholder={"Ex : Floor Staff"}
+            />
+
+            <Selector
+                name={'nationality'}
+                text={"Nationality"}
+                value={selfIntroState.nationality}
+                onChange={handleInputChange}
+                data={nationality}
+            />
+
+            <Selector
+                name={'gender'}
+                text={"Gender"}
+                value={selfIntroState.gender}
+                onChange={handleInputChange}
+                data={gender}
+            />
+
+
+            <SelectBirthday
+                name={"birthday"}
+                value={selfIntroState.birthday}
+                text={"Birthday"}
+                onChange={handleInputChange}
             />
 
             <TextInput
