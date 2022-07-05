@@ -1,4 +1,14 @@
+import { SET_ALERT } from "./alert.constants";
 
-export const alertReducer = (state = []) => {
-    return
+const initialState = {
+    alert: ""
+}
+
+export const alertReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case SET_ALERT:
+            return {...state, alert: action.payload}
+        default:
+            return state;
+    }
 }

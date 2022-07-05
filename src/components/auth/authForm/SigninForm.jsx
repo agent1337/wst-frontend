@@ -2,32 +2,95 @@ import React, { useState } from 'react'
 import { Grid, Typography, } from "@mui/material";
 import FormText from '../authText/FormText';
 import AuthInput from '../../../custom/inputs/authInput/AuthInput';
-import { styles } from './authForm.styles';
 import SeparatorLine from '../../../custom/separatorLine/SeparatorLine';
 import AuthCheckbox from '../authCheckbox/AuthCheckbox';
 import AuthFooter from '../authFooter/AuthFooter';
 import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
 import { authentication } from '../../context/base';
 import { useHistory } from 'react-router-dom';
-import { signin, gotwitter } from '../../../api/auth';
+import { gotwitter } from '../../../api/auth';
+import { ToastContainer, toast } from 'react-toastify';
+import { styles } from './authForm.styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { signin } from '../../../redux/auth/auth.service';
+import { getProfile, getResumes } from '../../../redux/profile/profile.service';
+
+const toastStyle = {
+    position: "bottom-left",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: false,
+    progress: undefined,
+    theme: 'dark',
+    width: '100px'
+}
 
 const SigninForm = () => {
     const history = useHistory();
+    const dispatch = useDispatch()
+    const isLogined = useSelector(state => state.auth.isLogined)
+    const alert = useSelector(state => state.alert.alert)
+    console.log(alert, 'alert')
 
     const [user, setUser] = useState({
         email: "",
         password: "",
     });
 
+    const [errors, setErrors] = useState({
+        email: false,
+        password: false
+    })
+
     async function onSubmitForm(e) {
         e.preventDefault();
-        const login = await signin(user.email, user.password)
-        if (!login) return
-        history.push("/resumes");
+
+        if (!isFormValid()) {
+            return toast(`Please fill in all the fields`, toastStyle);
+        }
+
+        dispatch(signin(user.email, user.password))
+
+        if(alert !== "") {
+            return toast(alert, toastStyle);
+        }
+
+        if(isLogined) {
+            dispatch(getProfile())
+            dispatch(getResumes())
+            history.push("/resumes")
+        }
+    }
+
+    const isFormValid = () => {
+        let isValid = true;
+        let errorsData = {}
+
+        if (!user.email) {
+            errorsData.email = true;
+            isValid = false;
+        }
+
+        if (!user.password) {
+            errorsData.password = true;
+            isValid = false;
+        }
+
+        setErrors(errorsData);
+        return isValid;
     }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
+        let clonedErrors = Object.assign({}, errors);
+        if (!e.target.value) {
+            clonedErrors[name] = true;
+        } else {
+            clonedErrors[name] = false;
+        }
+        setErrors(clonedErrors);
         setUser({ ...user, [name]: value });
     };
 
@@ -63,6 +126,7 @@ const SigninForm = () => {
                             onChange={handleInputChange}
                             value={user.email}
                             placeholder={"Email"}
+                            errors={errors}
                         />
                         <AuthInput
                             type={"password"}
@@ -70,6 +134,7 @@ const SigninForm = () => {
                             onChange={handleInputChange}
                             value={user.password}
                             placeholder={"Password"}
+                            errors={errors}
                         />
                         <a href="/forgot-password">
                             <Typography sx={styles.forgotPassword}>
@@ -106,6 +171,7 @@ const SigninForm = () => {
                         <AuthFooter type={"dekstop"} />
                     </Grid>
                 </Grid>
+                <ToastContainer />
             </Grid>
             <AuthFooter type={"mobile"} />
         </>

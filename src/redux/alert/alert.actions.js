@@ -1,13 +1,6 @@
-import { alertConstants } from './alert.constants';
+import { SET_ALERT } from "./alert.constants";
 
-export const success = (message) => {
-    return { type: alertConstants.SUCCESS, message };
-}
-
-export const error = (message) => {
-    return { type: alertConstants.ERROR, message };
-}
-
-export const clear = () => {
-    return { type: alertConstants.CLEAR };
-}
+export const setAlert = (payload) => ({
+  type: SET_ALERT,
+  payload,
+})

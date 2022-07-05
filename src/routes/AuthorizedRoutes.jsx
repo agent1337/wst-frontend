@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+import { useSelector } from 'react-redux';
 import { Switch, Redirect } from 'react-router-dom'
 import Footer from '../components/footer/DekstopFooter';
 import CreateResume from '../pages/createResume/CreateResume';
@@ -10,13 +11,15 @@ import PrivateRoute from './PrivateRoute'
 const links = ['/sigin', '/acceptline', '/resume', '/forgot-password']
 
 export default function AuthorizedRoutes({ auth }) {
+    const isLogined = useSelector(state => state.auth.isLogined)
+    
     return (
         <Switch>
             {auth == null && !links.includes('/' + document.location.pathname.split('/').slice(1, 2).join('/'))
                 ?
                 <Redirect to="/" />
                 :
-                <Box sx={{}}>
+                <Box>
                     <PrivateRoute
                         isAuthorized={auth}
                         path="/resumes"

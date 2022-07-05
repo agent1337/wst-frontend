@@ -1,7 +1,9 @@
 import { Box } from "@mui/material"
+import { danger, grey } from "../../../colors";
 import { styles } from "./authInput.styles";
 
-const AuthInput = ({ value, name, placeholder, type, onChange, style }) => {
+const AuthInput = ({ value, name, placeholder, type, onChange, style, errors }) => {
+    console.log(errors)
     return (
         <Box sx={{width: '100%'}}>
             <input
@@ -10,7 +12,7 @@ const AuthInput = ({ value, name, placeholder, type, onChange, style }) => {
                 name={name}
                 placeholder={placeholder}
                 onChange={onChange}
-                style={{...styles.input, style}}
+                style={errors[name] ? {...styles.input, border: `1px solid ${danger}`} : {...styles.input, border: `1px solid ${grey}`}}
             />
         </Box>
 

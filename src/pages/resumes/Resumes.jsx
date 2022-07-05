@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Tabs, Tab, Box } from "@mui/material";
-import API from "../../utils/api";
 import { main } from "../../colors"
 import { styles } from "./resumes.styles";
 import CreateResumeButton from "../../custom/buttons/createResume/CreateResumeButton";
 import OwnResumeCard from "../../components/resumeCard/OwnResumeCard";
+import { useDispatch, useSelector } from "react-redux";
+import { getResumes } from "../../redux/profile/profile.service";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -39,21 +40,11 @@ function a11yProps(index) {
 
 export default function Resumes() {
   const [value, setValue] = useState(0);
-  const [resumesData, setResumesData] = useState([]);
-
-  useEffect(() => {
-    API.get(`resumes`)
-      .then((res) => {
-        let data = res.data;
-        setResumesData(data);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+  const resumes = useSelector(state => state.profile.resumes)
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
 
   return (
     <Box sx={styles.container}>
@@ -74,14 +65,14 @@ export default function Resumes() {
         <Box sx={styles.box}>
           <CreateResumeButton />
 
-          {resumesData &&
-            resumesData.map((item, index) => {
+          {resumes &&
+            resumes.map((item, index) => {
               return (
                 <OwnResumeCard
                   item={item}
                   key={index}
-                  resumesData={resumesData}
-                  setResumesData={setResumesData}
+                  resumesData={resumes}
+                  // setResumesData={setResumesData}
                 />
               );
             })}

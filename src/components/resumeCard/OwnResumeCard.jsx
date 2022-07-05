@@ -11,25 +11,25 @@ export default function OwnResumeCard({ item, resumesData, setResumesData }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const removeResume = (resumeId) => {
-    API.delete(`resumes/` + resumeId)
-      .then((res) => {
-        console.log(res)
-        setIsOpen(false);
-        setResumesData(resumesData.filter((item) => item._id !== resumeId));
-        console.log(res.data.resumeTitle)
-        return toast(`${res.data.resumeTitle} deleted`, {
-          position: "bottom-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: false,
-          progress: undefined,
-          theme: 'dark',
-          width: '100px'
-        });
-      })
-      .catch((error) => console.log(error));
+    // API.delete(`resumes/` + resumeId)
+    //   .then((res) => {
+    //     console.log(res)
+    //     setIsOpen(false);
+    //     setResumesData(resumesData.filter((item) => item._id !== resumeId));
+    //     console.log(res.data.resumeTitle)
+    //     return toast(`${res.data.resumeTitle} deleted`, {
+    //       position: "bottom-left",
+    //       autoClose: 5000,
+    //       hideProgressBar: false,
+    //       closeOnClick: true,
+    //       pauseOnHover: false,
+    //       draggable: false,
+    //       progress: undefined,
+    //       theme: 'dark',
+    //       width: '100px'
+    //     });
+    //   })
+    //   .catch((error) => console.log(error));
   };
 
   return (

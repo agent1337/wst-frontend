@@ -1,3 +1,5 @@
+import { useDispatch } from "react-redux";
+import { setAlert } from "../redux/alert/alert.actions";
 import { axiosInstance } from "./axios"
 
 export const signup = (email, password) => {
@@ -13,27 +15,34 @@ export const signup = (email, password) => {
 }
 
 export const signin = (email, password) => {
-    return axiosInstance
-        .post("auth/signin", {
-            email: email,
-            password: password,
-        })
-        .then(res => {
-            localStorage.setItem("accessToken", res.data.accessToken);
-        })
-        .then(() => {
-            return true
-        })
+    let data = {
+        email: email,
+        password: password
+    }
+
+    // return (dispatch) => {
+        try {
+            return axiosInstance
+                .post("auth/signin", data)
+                .then(res => {
+                    localStorage.setItem("accessToken", res.data.accessToken);
+                })
+        }
+        catch (err) {
+            console.log(err.response.data.message)
+            // useDispatch(setAlert(err.response.data.message))
+        }
+    // }
 }
 
 export const gotwitter = (data) => {
     return axiosInstance
         .post(`auth/twitter/signin`, data)
-              .then((res) => {
-                let token = res.data.accessToken;
-                localStorage.setItem("accessToken", token);
-              })
-              .catch((error) => {
-                console.log(error);
-              });
+        .then((res) => {
+            let token = res.data.accessToken;
+            localStorage.setItem("accessToken", token);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 }

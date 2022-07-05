@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
-import API from '../../utils/api';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { getProfile, getResumes } from "../../redux/profile/profile.service";
 
 const styles = {
     title: {
@@ -11,21 +12,14 @@ const styles = {
 
 export default function Avatar() {
     const history = useHistory();
-    const [userData, setUserData] = useState([]);
+    const dispatch = useDispatch()
+    const email = useSelector(state => state.profile.email)
 
     useEffect(() => {
-        API.get(`/auth/me`)
-            .then((res) => {
-                setUserData(res.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        dispatch(getProfile())
     }, []);
 
-    console.log(userData, "user data");
-
-    let tmp = `${userData.email}`;
+    let tmp = `${email}`;
     let getMail = tmp.split("@");
     let userEmail = getMail[0];
 
