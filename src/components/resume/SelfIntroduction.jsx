@@ -1,9 +1,26 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import { Box } from '@mui/material'
 import UploadImage from '../../custom/buttons/uploadButton/UploadImage'
 import TextInput from '../../custom/inputs/textInput/TextInput'
 
-export default function SelfIntroduction({ selfIntroState, setIntroState, errros, setErrors }) {
+export default function SelfIntroduction({ resume }) {
+    const [selfIntroState, setIntroState] = useState({
+        surname: resume && resume.surname,
+        name: resume.name,
+        kanaSurname: resume.kanaSurname,
+        kanaName: resume.kanaName,
+        position: resume.position,
+        nationality: resume.nationality,
+        gender: resume.gender,
+        birthday: resume.birthday,
+        phone: resume.phone,
+        eMail: resume.eMail,
+        address: resume.address,
+        busStation: resume.busStation,
+        transport: resume.transport,
+    })
+
+    console.log(selfIntroState)
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -20,6 +37,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, errros
     const blurHandler = () => {
         console.log("input blurred")
     }
+
 
     return (
         <div style={{ position: 'relative', padding: '0 16px' }}>

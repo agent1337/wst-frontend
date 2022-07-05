@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 import { Switch, Redirect } from 'react-router-dom'
 import Footer from '../components/footer/DekstopFooter';
 import CreateResume from '../pages/createResume/CreateResume';
+import EditResume from '../pages/editResume/EditResume';
 import Resumes from '../pages/resumes/Resumes';
 import ViewResume from '../pages/viewResume/ViewResume';
 import PrivateRoute from './PrivateRoute'
@@ -23,17 +24,22 @@ export default function AuthorizedRoutes({ auth }) {
                         <Resumes />
                     </PrivateRoute>
                     <PrivateRoute
-                    exact
                         isAuthorized={auth}
                         path="/resume/create"
                     >
                         <CreateResume />
                     </PrivateRoute>
-                    <PrivateRoute 
-                    exact
-                    isAuthorized={auth} path="/cv/:id" >
+                    <PrivateRoute
+                        isAuthorized={auth} 
+                        path="/cv/:id" >
                         <ViewResume />
                     </PrivateRoute>
+                    <PrivateRoute
+                        isAuthorized={auth} 
+                        path="/edit/:id" >
+                        <EditResume />
+                    </PrivateRoute>
+
                     <Footer />
                 </Box>
             }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid } from "@mui/material";
+import { Grid, Box, Button } from "@mui/material";
 import FormText from '../authText/FormText';
 import AuthInput from '../../../custom/inputs/authInput/AuthInput';
 import { styles } from './authForm.styles';
@@ -9,9 +9,23 @@ import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
 import { authentication } from '../../context/base';
 import { useHistory } from 'react-router-dom';
 import { signup, gotwitter } from '../../../api/auth';
+import Popup from '../../modal/Popup';
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '80%',
+    height: '85vh',
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+};
 
 const SignupForm = () => {
     const history = useHistory()
+    const [isOpen, setIsOpen] = useState(false);
 
     const [user, setUser] = useState({
         email: "",
@@ -23,9 +37,12 @@ const SignupForm = () => {
         setUser({ ...user, [name]: value });
     };
 
-    async function onSubmitForm(e) {
-        e.preventDefault();
-        const register = await signup(user.email, user.password)
+    // async function onSubmitForm(e) {
+    //     e.preventDefault();
+    //     login()
+    // }
+    const login = () => {  
+        const register = signup(user.email, user.password)
         if (!register) return
         history.push("/resumes");
     }
@@ -47,7 +64,8 @@ const SignupForm = () => {
             .catch((err) => console.log(err))
     }
 
-    const line = () => {}
+   
+    const line = () => { }
 
     return (
         <>
@@ -55,7 +73,6 @@ const SignupForm = () => {
                 <Grid sx={styles.fieldGrid}>
                     <FormText label={'Get yourself started'} caption={'Sign Up'} />
 
-                    <form name="form" onSubmit={onSubmitForm}>
                         <AuthInput
                             type={"text"}
                             name={"email"}
@@ -71,8 +88,7 @@ const SignupForm = () => {
                             placeholder={"Password"}
                         />
 
-                        <button style={{ ...styles.button, ...styles.login }}>Sign Up</button>
-                    </form>
+                        <button style={{ ...styles.button, ...styles.login }} onClick={() => setIsOpen(true)}>Sign Up</button>
 
                     <Grid sx={styles.content}>
                         <SeparatorLine />
@@ -83,6 +99,16 @@ const SignupForm = () => {
                         >
                             Sign-up with Twitter
                         </button>
+
+                        <Popup handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+                            <Box sx={style}>
+                                <iframe src="https://mailchi.mp/welcomehr/riyoukiyaku" style={{ height: '85%', width: "100%", border: '1px solid #EAEAEA' }} title="policy" ></iframe>
+                                <Box sx={{ margin: '30px 0px', display: 'flex', justifyContent: 'space-between', }}>
+                                    <Button sx={styles.policyDisagree}>Disagree</Button>
+                                    <Button sx={styles.policyAgree} onClick={() => login()}>Agree and Next</Button>
+                                </Box>
+                            </Box>
+                        </Popup>
 
                         <a
                             onClick={line}
