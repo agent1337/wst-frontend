@@ -1,5 +1,6 @@
 import { Switch, Route } from 'react-router-dom'
 import AcceptLine from '../pages/auth/AcceptLine'
+import ForgotPassword from '../pages/auth/ForgotPassword'
 import Signin from '../pages/auth/Signin'
 import Signup from '../pages/auth/Signup'
 
@@ -9,6 +10,7 @@ export default function UnauthorizedRoutes() {
       <Route exact path="/" component={Signup} />
       <Route path="/signin" component={Signin} />
       <Route path="/acceptline" component={AcceptLine} />
+      <Route path="/forgot-password" component={ForgotPassword} />
     </Switch>
   )
 }

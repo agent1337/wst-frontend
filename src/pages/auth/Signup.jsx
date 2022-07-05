@@ -3,7 +3,7 @@ import React from 'react'
 import AuthSidebar from '../../components/auth/authSidebar/AuthSidebar';
 import SignupForm from '../../components/auth/authForm/SignupForm';
 // import DekstopFooter from '../../components/footer/DekstopFooter';
-import { styles } from './signup.styles';
+import { styles } from './index.styles';
 import Footer from '../../components/footer/Footer';
 // import MobileFooter from '../../components/footer/MobileFooter';
 
