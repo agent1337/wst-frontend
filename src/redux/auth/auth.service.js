@@ -1,4 +1,4 @@
-import { SIGN_IN } from "./auth.constants"
+import { RESET_PASSWORD, SIGN_IN } from "./auth.constants"
 import { axiosInstance } from "../../api/axios"
 import { SET_ALERT } from "../alert/alert.constants"
 
@@ -61,6 +61,30 @@ export const gotwitter = (data) => {
                 type: SET_ALERT,
                 payload: err.response.data.message
             })
+        }
+    }
+}
+
+export const forgotPassword = (data) => {
+    return async dispatch => {
+        try {
+            const response = await axiosInstance.put("/auth", data)
+
+            const sendEmail = await axiosInstance.post('/email/html-email', data)
+            
+            dispatch({
+                type: RESET_PASSWORD,
+                payload: true
+            })
+
+            return { response, sendEmail }
+        }
+        catch (err) {
+            console.log(err.response)
+            // dispatch({
+            //     type: SET_ALERT,
+            //     payload: err.response.data.message
+            // })
         }
     }
 }

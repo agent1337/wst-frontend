@@ -10,7 +10,6 @@ import { publishResume } from '../../api/resumes';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
-import API from '../../utils/api';
 import Schedule from '../../components/schedule/Schedule';
 
 const initialSelfValue = {
@@ -71,9 +70,6 @@ export default function CreateResume() {
 
     const publish = async (stat) => {
         console.log(stat, 'sata')
-
-        console.log(experienceState, 'experienceState')
-        console.log(selfIntroState, 'selfIntroState')
         let data = {
             ...experienceState,
             ...selfIntroState,
@@ -82,7 +78,7 @@ export default function CreateResume() {
         }
         console.log(data)
 
-        const createResume = await API.post(`resumes`, data).catch((err) =>
+        const createResume = await axios.post(`resumes`, data).catch((err) =>
             console.log(err)
         );
 
@@ -92,27 +88,6 @@ export default function CreateResume() {
         }
 
         history.push('/resumes')
-
-        // if (!isFormValid()) {
-        //     return toast("error", {
-        //         position: "bottom-left",
-        //         autoClose: 5000,
-        //         hideProgressBar: false,
-        //         closeOnClick: true,
-        //         pauseOnHover: false,
-        //         draggable: false,
-        //         progress: undefined,
-        //         theme: 'dark',
-        //         width: '100px'
-        //     });
-        // }
-
-        // dispatch(publishResume(data))
-
-        // if(dispatch(publishResume(data))) {
-        //     history.push('/resumes')
-        // }
-
     };
 
     const uploadFile = async (uploadImage, resumeId) => {

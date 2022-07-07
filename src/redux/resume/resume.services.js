@@ -4,3 +4,4 @@ export const setResume = (payload) => ({
   type: SET_RESUME,
   payload,
 })
+

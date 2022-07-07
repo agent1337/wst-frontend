@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Box, Grid, Typography } from "@mui/material";
-import API from '../../utils/api';
 import QRcode from 'qrcode';
 import Pdf from "react-to-pdf";
 import moment from "moment";
 import ActionHeader from "../../components/actionHeader/ActionHeader";
 import { styles } from "./viewResume.styles";
 import { grey, main } from "../../colors";
+import axios from "axios";
 
 const ref = React.createRef();
 
@@ -25,7 +25,7 @@ export default function ViewResume() {
     }, [])
 
     useEffect(() => {
-        API.get(`/resumes/${id}`)
+      axios.get(`/resumes/${id}`)
         .then((response) => {
             setResume(response.data)
         })
@@ -33,7 +33,7 @@ export default function ViewResume() {
     }, [])
 
     useEffect(() => {
-      API.get(`/media/${id}`)
+      axios.get(`/media/${id}`)
         .then((response) => {
           setImage(response.data[0].filePath);
           setFiles(response.data.splice(1));

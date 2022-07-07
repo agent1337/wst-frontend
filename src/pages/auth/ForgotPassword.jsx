@@ -4,7 +4,8 @@ import AuthInput from "../../custom/inputs/authInput/AuthInput"
 import SeparatorLine from "../../custom/separatorLine/SeparatorLine";
 import { Link, } from "react-router-dom"
 import { main, text } from "../../colors";
-import API from '../../utils/api';
+import { useDispatch } from "react-redux";
+import { forgotPassword } from "../../redux/auth/auth.service";
 
 const styles = {
     container: {
@@ -118,29 +119,18 @@ const ImageBox = ({ type }) => {
     );
 };
 
-// const FormSendPassword = ({ handleClick }) => {
-//     const [email, setEmail] = useState('')
-//     return (
-
-//     );
-// };
-
 export default function ForgotPassword() {
     const [isSubmit, setIsSubmit] = useState(false);
     const [email, setEmail] = useState('')
+    const dispatch = useDispatch()
+
     const onSubmit = async () => {
         setIsSubmit(!isSubmit);
         let data = {
             email: email
         }
-        API.put('/auth', data)
-        .then(res => {
-            API.post('/email/html-email', data)
-            .then(res => console.log(res, 'res post'))
-            .catch(err => console.log(err, 'err post'))
-        })
-        .catch(err => console.log(err, 'error put'))
-       
+
+        dispatch(forgotPassword(data))
     };
 
     return (

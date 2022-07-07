@@ -6,14 +6,13 @@ import { styles } from './editResume.styles';
 import SelfIntroduction from '../../components/resume/SelfIntroduction';
 import ExperienceIntroduction from '../../components/resume/ExperienceIntroduction';
 import { ToastContainer, toast } from 'react-toastify';
-import API from '../../utils/api';
-
+import axios from "axios";
 
 export default function EditResume() {
     let location = useLocation();
     let id = location.pathname.split("/")[2];
     useEffect(() => {
-        API.get(`/resumes/${id}`)
+        axios.get(`/resumes/${id}`)
             .then((response) => {
                 setResume(response.data)
             })
