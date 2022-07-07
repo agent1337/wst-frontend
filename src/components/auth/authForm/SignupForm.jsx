@@ -1,50 +1,92 @@
 import React, { useState } from 'react'
-import { Grid, Box, Button } from "@mui/material";
+import { Grid, } from "@mui/material";
 import FormText from '../authText/FormText';
 import AuthInput from '../../../custom/inputs/authInput/AuthInput';
-import { styles } from './authForm.styles';
 import SeparatorLine from '../../../custom/separatorLine/SeparatorLine';
 import AuthFooter from '../authFooter/AuthFooter';
 import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
 import { authentication } from '../../context/base';
 import { useHistory } from 'react-router-dom';
-import { signup, gotwitter } from '../../../api/auth';
-import Popup from '../../modal/Popup';
-
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '80%',
-    height: '85vh',
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    p: 4,
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { signup, gotwitter } from '../../../redux/auth/auth.service';
+import { getProfile } from '../../../redux/profile/profile.service';
+import { SET_ALERT } from '../../../redux/alert/alert.constants';
+import { ToastContainer, toast } from 'react-toastify';
+import { toastStyle } from '../../../utils/toastStyle';
+import { styles } from './authForm.styles';
 
 const SignupForm = () => {
-    const history = useHistory()
-    const [isOpen, setIsOpen] = useState(false);
+    const history = useHistory();
+    const dispatch = useDispatch()
+    const isLogined = useSelector(state => state.auth.isLogined)
+    const alert = useSelector(state => state.alert.alert)
 
     const [user, setUser] = useState({
         email: "",
         password: "",
     });
 
+    const [errors, setErrors] = useState({
+        email: false,
+        password: false
+    })
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
+        let clonedErrors = Object.assign({}, errors);
+        if (!e.target.value) {
+            clonedErrors[name] = true;
+        } else {
+            clonedErrors[name] = false;
+        }
+        setErrors(clonedErrors);
         setUser({ ...user, [name]: value });
     };
 
-    // async function onSubmitForm(e) {
-    //     e.preventDefault();
-    //     login()
-    // }
-    const login = () => {  
-        const register = signup(user.email, user.password)
-        if (!register) return
-        history.push("/resumes");
+    const isFormValid = () => {
+        const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        let isValid = true;
+        let errorsData = {}
+
+        if (!user.email || regex.test(user.email) === false) {
+            errorsData.email = true;
+            isValid = false;
+            dispatch({
+                type: SET_ALERT,
+                payload: 'Email is not correct'
+            })
+        }
+
+        if (!user.password || user.password.length < 8) {
+            errorsData.password = true;
+            isValid = false;
+            dispatch({
+                type: SET_ALERT,
+                payload: 'Password is too short'
+            })
+        }
+
+        setErrors(errorsData);
+        return isValid;
+    }
+
+    async function onSubmitForm(e) {
+        e.preventDefault();
+
+        if (!isFormValid()) {
+            return toast(alert, toastStyle);
+        }
+
+        dispatch(signup(user.email, user.password))
+
+        if (alert !== "") {
+            return toast(alert, toastStyle);
+        }
+
+        if (isLogined) {
+            dispatch(getProfile())
+            history.push("/resumes")
+        }
     }
 
     const goWithTwitter = () => {
@@ -56,15 +98,21 @@ const SignupForm = () => {
                     externalId: res.user.uid
                 }
 
-                const twit = gotwitter(data)
-                if (!twit) return
+                dispatch(gotwitter(data))
 
-                history.push("/resumes");
+                if (alert !== "") {
+                    return toast(alert, toastStyle);
+                }
+
+                if (isLogined) {
+                    dispatch(getProfile())
+                    history.push("/resumes")
+                }
             })
             .catch((err) => console.log(err))
     }
 
-   
+
     const line = () => { }
 
     return (
@@ -73,12 +121,14 @@ const SignupForm = () => {
                 <Grid sx={styles.fieldGrid}>
                     <FormText label={'Get yourself started'} caption={'Sign Up'} />
 
+                    <form name="form" onSubmit={onSubmitForm}>
                         <AuthInput
                             type={"text"}
                             name={"email"}
                             onChange={handleInputChange}
                             value={user.email}
                             placeholder={"Email"}
+                            errors={errors}
                         />
                         <AuthInput
                             type={"password"}
@@ -86,9 +136,12 @@ const SignupForm = () => {
                             onChange={handleInputChange}
                             value={user.password}
                             placeholder={"Password"}
+                            errors={errors}
+                            minLength={8}
                         />
 
-                        <button style={{ ...styles.button, ...styles.login }} onClick={() => setIsOpen(true)}>Sign Up</button>
+                        <button style={{ ...styles.button, ...styles.login }}>Sign Up</button>
+                    </form>
 
                     <Grid sx={styles.content}>
                         <SeparatorLine />
@@ -99,16 +152,6 @@ const SignupForm = () => {
                         >
                             Sign-up with Twitter
                         </button>
-
-                        <Popup handleClose={() => setIsOpen(false)} isOpen={isOpen}>
-                            <Box sx={style}>
-                                <iframe src="https://mailchi.mp/welcomehr/riyoukiyaku" style={{ height: '85%', width: "100%", border: '1px solid #EAEAEA' }} title="policy" ></iframe>
-                                <Box sx={{ margin: '30px 0px', display: 'flex', justifyContent: 'space-between', }}>
-                                    <Button sx={styles.policyDisagree}>Disagree</Button>
-                                    <Button sx={styles.policyAgree} onClick={() => login()}>Agree and Next</Button>
-                                </Box>
-                            </Box>
-                        </Popup>
 
                         <a
                             onClick={line}
@@ -122,6 +165,7 @@ const SignupForm = () => {
                         <AuthFooter type={"dekstop"} />
                     </Grid>
                 </Grid>
+                <ToastContainer />
             </Grid>
             <AuthFooter type={"mobile"} />
         </>
@@ -129,8 +173,3 @@ const SignupForm = () => {
 }
 
 export default SignupForm
-
-
-// debounce validation or onBlur
-// server 
-// make with redux 

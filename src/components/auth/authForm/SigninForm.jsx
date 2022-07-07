@@ -8,31 +8,19 @@ import AuthFooter from '../authFooter/AuthFooter';
 import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
 import { authentication } from '../../context/base';
 import { useHistory } from 'react-router-dom';
-import { gotwitter } from '../../../api/auth';
 import { ToastContainer, toast } from 'react-toastify';
-import { styles } from './authForm.styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { signin } from '../../../redux/auth/auth.service';
-import { getProfile, getResumes } from '../../../redux/profile/profile.service';
-
-const toastStyle = {
-    position: "bottom-left",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: false,
-    draggable: false,
-    progress: undefined,
-    theme: 'dark',
-    width: '100px'
-}
+import { signin, gotwitter } from '../../../redux/auth/auth.service';
+import { getProfile, } from '../../../redux/profile/profile.service';
+import { SET_ALERT } from '../../../redux/alert/alert.constants';
+import {toastStyle} from '../../../utils/toastStyle';
+import { styles } from './authForm.styles';
 
 const SigninForm = () => {
     const history = useHistory();
     const dispatch = useDispatch()
     const isLogined = useSelector(state => state.auth.isLogined)
     const alert = useSelector(state => state.alert.alert)
-    console.log(alert, 'alert')
 
     const [user, setUser] = useState({
         email: "",
@@ -47,8 +35,8 @@ const SigninForm = () => {
     async function onSubmitForm(e) {
         e.preventDefault();
 
-        if (!isFormValid()) {
-            return toast(`Please fill in all the fields`, toastStyle);
+        if (!isFormValid(user.email, user.password)) {
+            return toast(alert, toastStyle);
         }
 
         dispatch(signin(user.email, user.password))
@@ -59,23 +47,31 @@ const SigninForm = () => {
 
         if(isLogined) {
             dispatch(getProfile())
-            dispatch(getResumes())
             history.push("/resumes")
         }
     }
 
     const isFormValid = () => {
+        const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
         let isValid = true;
         let errorsData = {}
 
-        if (!user.email) {
+        if (!user.email || regex.test(user.email) === false) {
             errorsData.email = true;
             isValid = false;
+            dispatch({
+                type: SET_ALERT,
+                payload: 'Email is not correct'
+            })
         }
 
-        if (!user.password) {
+        if (!user.password || user.password.length < 8) {
             errorsData.password = true;
             isValid = false;
+            dispatch({
+                type: SET_ALERT,
+                payload: 'Password is too short'
+            })
         }
 
         setErrors(errorsData);
@@ -103,10 +99,16 @@ const SigninForm = () => {
                     externalId: res.user.uid
                 }
 
-                const twit = gotwitter(data)
-                if (!twit) return
+                dispatch(gotwitter(data))
 
-                history.push("/resumes");
+                if (alert !== "") {
+                    return toast(alert, toastStyle);
+                }
+
+                if (isLogined) {
+                    dispatch(getProfile())
+                    history.push("/resumes")
+                }
             })
             .catch((err) => console.log(err))
     }
@@ -135,6 +137,7 @@ const SigninForm = () => {
                             value={user.password}
                             placeholder={"Password"}
                             errors={errors}
+                            minLength={8}
                         />
                         <a href="/forgot-password">
                             <Typography sx={styles.forgotPassword}>
