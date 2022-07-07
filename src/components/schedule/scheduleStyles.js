@@ -3,6 +3,8 @@ import { grey } from '../../colors'
 export const styles = {
   container: {
     width: "100%",
+    position: 'relative',
+    overflow: 'hidden',
     // "@media (max-width: 1100px)": {
     //   display: "none",
     // },
@@ -23,6 +25,7 @@ export const styles = {
     fontSize: "14px",
   },
   schedule: {
+    position: 'relative',
     display: "flex",
     width: "100%",
     padding: "0px 10px 0px 10px",
@@ -41,8 +44,21 @@ export const styles = {
     position: "relative",
     padding: '5px 0',
     borderLeft: `1px solid ${grey}`,
-    
   },
+  pickedBlock: {
+    height: '100%', 
+    width: 'calc(100% + 2px)',
+    margin: '0 -1px',
+    position: 'relative',
+  },
+  removeButton: {
+    position: 'absolute', 
+    top: '10px',
+    right: '-16px', 
+    zIndex: '30', 
+    cursor: 'pointer',
+  },
+
   mobileView: {
     display: "flex",
     width: "100%",
@@ -78,6 +94,6 @@ export const styles = {
     textTransform: "uppercase",
     color: "#323232",
     lineHeight: "16px",
-    margin: "22px 0 9px 0",
+    margin: "40px 0" 
   },
 };
