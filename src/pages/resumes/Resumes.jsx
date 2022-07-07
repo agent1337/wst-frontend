@@ -41,10 +41,15 @@ function a11yProps(index) {
 export default function Resumes() {
   const [value, setValue] = useState(0);
   const resumes = useSelector(state => state.profile.resumes)
+  const dispatch = useDispatch()
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+    dispatch(getResumes())
+  }, [])
 
   return (
     <Box sx={styles.container}>
@@ -72,7 +77,6 @@ export default function Resumes() {
                   item={item}
                   key={index}
                   resumesData={resumes}
-                  // setResumesData={setResumesData}
                 />
               );
             })}

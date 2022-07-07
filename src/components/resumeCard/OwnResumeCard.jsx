@@ -4,37 +4,24 @@ import { Link } from "react-router-dom";
 import { styles } from './resumeCard.styles';
 import Popup from '../modal/Popup';
 import { danger } from '../../colors';
-import API from '../../utils/api';
 import { ToastContainer, toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeSelectedResume } from '../../redux/profile/profile.service';
+import { toastStyle } from '../../utils/toastStyle';
 
-export default function OwnResumeCard({ item, resumesData, setResumesData }) {
+export default function OwnResumeCard({ item, }) {
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
+  const alert = useSelector(state => state.alert.alert)
 
   const removeResume = (resumeId) => {
-    // API.delete(`resumes/` + resumeId)
-    //   .then((res) => {
-    //     console.log(res)
-    //     setIsOpen(false);
-    //     setResumesData(resumesData.filter((item) => item._id !== resumeId));
-    //     console.log(res.data.resumeTitle)
-    //     return toast(`${res.data.resumeTitle} deleted`, {
-    //       position: "bottom-left",
-    //       autoClose: 5000,
-    //       hideProgressBar: false,
-    //       closeOnClick: true,
-    //       pauseOnHover: false,
-    //       draggable: false,
-    //       progress: undefined,
-    //       theme: 'dark',
-    //       width: '100px'
-    //     });
-    //   })
-    //   .catch((error) => console.log(error));
+    dispatch(removeSelectedResume(resumeId))
+    setIsOpen(false);
+    return toast(`${alert}`, toastStyle);
   };
 
   return (
     <>
-
       <Popup handleClose={() => setIsOpen(false)} isOpen={isOpen}>
         <Box>
           <Typography
