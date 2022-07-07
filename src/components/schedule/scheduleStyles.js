@@ -3,9 +3,9 @@ import { grey } from '../../colors'
 export const styles = {
   container: {
     width: "100%",
-    "@media (max-width: 1100px)": {
-      display: "none",
-    },
+    // "@media (max-width: 1100px)": {
+    //   display: "none",
+    // },
   },
   block: {
     width: "100%",
@@ -39,22 +39,16 @@ export const styles = {
     width: "100%",
     borderRadius: "1px",
     position: "relative",
-
-    "&:nth-child(1n)": {
-      borderLeft: `1px solid ${grey}`,
-    },
-
-    "&:nth-child(2n)": {
-      borderLeftStyle: "dashed",
-      borderLeftColor: `${grey}`,
-    },
+    padding: '5px 0',
+    borderLeft: `1px solid ${grey}`,
+    
   },
   mobileView: {
     display: "flex",
     width: "100%",
-    "@media (min-width: 1100px)": {
-      display: "none",
-    },
+    // "@media (min-width: 1100px)": {
+    //   display: "none",
+    // },
   },
   mobileTimes: {
     width: "10%",

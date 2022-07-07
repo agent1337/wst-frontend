@@ -16,6 +16,10 @@ const data = [
         link: "Help",
         src: "/help",
     },
+    {
+        link: 'Schedule',
+        src: '/schedule'
+    }
 ];
 
 const styles = {

@@ -16,8 +16,6 @@ const ScheduleLine = forwardRef(({ start, end, top, left, handleMouseUp, removeL
         setDeleteButton(true)
     }
 
-
-
     return (
         <Box sx={{
             position: 'absolute',
@@ -34,7 +32,6 @@ const ScheduleLine = forwardRef(({ start, end, top, left, handleMouseUp, removeL
             onClick={selectLine}
         >
             {showDeleteButton &&  <button style={{position: 'absolute', right: '-10px'}} onClick={removeLine}>X</button>}
-           
         </Box>
     )
 })
