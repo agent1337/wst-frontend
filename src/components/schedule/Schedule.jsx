@@ -98,7 +98,7 @@ const Schedule = () => {
 
     const clonedSchedules = JSON.parse(JSON.stringify(schedules))
     let findSched = clonedSchedules.find(schedule => schedule.day === toDelete.day).hours;
-    
+
     for (let i = toDelete.start; i <= toDelete.end; i++) {
       findSched[i] = false;
     }
@@ -148,6 +148,8 @@ const Schedule = () => {
                     (progressShift.day === schedule.day && hourIndex <= Math.max(progressShift.end, progressShift.start)
                       && hourIndex >= Math.min(progressShift.start, progressShift.end))
                     ? `${main}` : 'transparent'
+                  console.log(hourIndex, 'hourIndex', progressShift.start, 'progressShift.start', progressShift.end, 'progressShift.end')
+                  
                   return (
                     <div
                       key={hourIndex}
@@ -161,6 +163,8 @@ const Schedule = () => {
                       <div style={{
                         ...styles.pickedBlock,
                         background: activeStyle,
+                        borderTopLeftRadius: '12px',
+                        borderBottomLeftRadius: '12px',
                         opacity: (toDelete.day === schedule.day && hourIndex <= toDelete.end && hourIndex >= toDelete.start) ? '0.5' : '1'
                       }}></div>
 

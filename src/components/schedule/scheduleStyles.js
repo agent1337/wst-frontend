@@ -50,6 +50,7 @@ export const styles = {
     width: 'calc(100% + 2px)',
     margin: '0 -1px',
     position: 'relative',
+    
   },
   removeButton: {
     position: 'absolute', 
