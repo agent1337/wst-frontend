@@ -163,8 +163,6 @@ const Schedule = () => {
                       <div style={{
                         ...styles.pickedBlock,
                         background: activeStyle,
-                        borderTopLeftRadius: '12px',
-                        borderBottomLeftRadius: '12px',
                         opacity: (toDelete.day === schedule.day && hourIndex <= toDelete.end && hourIndex >= toDelete.start) ? '0.5' : '1'
                       }}></div>
 

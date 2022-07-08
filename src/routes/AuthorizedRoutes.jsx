@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Switch, Redirect } from 'react-router-dom'
 import Footer from '../components/footer/DekstopFooter';
 import Schedule from '../components/schedule/Schedule';
+import Sharing from '../components/sharing/Sharing';
 import CreateResume from '../pages/createResume/CreateResume';
 import EditResume from '../pages/editResume/EditResume';
 import Resumes from '../pages/resumes/Resumes';
@@ -51,7 +52,6 @@ export default function AuthorizedRoutes({ auth }) {
                         </Box>
 
                     </PrivateRoute>
-
                     <Footer />
                 </Box>
             }

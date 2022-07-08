@@ -19,6 +19,10 @@ const data = [
     {
         link: 'Schedule',
         src: '/schedule'
+    },
+    {
+        link: 'share',
+        src: '/share'
     }
 ];
 
