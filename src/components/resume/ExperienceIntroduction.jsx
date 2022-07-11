@@ -2,6 +2,7 @@ import React from 'react';
 import Textarea from '../../custom/inputs/textarea/Textarea';
 import AutoInput from '../../custom/inputs/autoInput/AutoInput';
 import UploadFile from '../../custom/buttons/uploadButton/UploadFile';
+import SelectDate from './SelectDate';
 
 export default function ExperienceIntroduction({ experienceState, setExperienceState }) {
     const handleInputChange = (e) => {
@@ -92,6 +93,13 @@ export default function ExperienceIntroduction({ experienceState, setExperienceS
             />
 
             <UploadFile />
+
+            <SelectDate
+                name={"whenStart"}
+                value={experienceState.whenStart}
+                text={"When can I start?"}
+                onChange={handleInputChange}
+            />
         </div>
     )
 }

@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Box, Grid, Typography } from "@mui/material";
 import ActionHeader from "../../components/actionHeader/ActionHeader";
+import Experience from "./components/Experience";
+import DisplaySchedule from "../../components/schedule/DisplaySchedule";
 import { getResume, getUploadedFiles } from "../../redux/profile/profile.service";
 import { useDispatch, useSelector } from 'react-redux';
+import { getAge, getDay } from "../../helpers/dateCalculation";
 import QRcode from 'qrcode';
 import Pdf from "react-to-pdf";
 import moment from "moment";
 import { styles } from "./viewResume.styles";
 import { grey, main } from "../../colors";
-import '../../components/schedule/schedule.styles.css'
-import Experience from "./components/Experience";
-import DisplaySchedule from "../../components/schedule/DisplaySchedule";
 
 const ref = React.createRef();
 
@@ -47,7 +47,6 @@ export default function ViewResume() {
     }
     setTest(arr)
   }, [])
-
 
   // useEffect(() => {
   //   axios.get(`/media/${id}`)
@@ -124,9 +123,15 @@ export default function ViewResume() {
               </Typography>
               <Typography sx={styles.text}>{resume.nationality}</Typography>
               <Typography sx={styles.text}>{resume.gender}</Typography>
-              <Typography sx={styles.text}>
-                {moment(resume.birthday).format("YYYY/DD/MM")}
-              </Typography>
+              <Box sx={{ display: 'flex' }}>
+                <Typography sx={styles.text}>
+                  {moment(resume.birthday).format("YYYY/DD/MM")}
+                </Typography>
+                <Typography sx={{ ...styles.text, marginLeft: '10px' }}>
+                  ({getAge(resume.birthday)})
+                </Typography>
+              </Box>
+
               <Typography sx={styles.text}>{resume.phone}</Typography>
               <Typography sx={styles.text}>{resume.eMail}</Typography>
               <Typography sx={styles.text}>{resume.address}</Typography>
@@ -193,14 +198,21 @@ export default function ViewResume() {
                 </>
               )} */}
               <Typography sx={styles.title}>When can I start?</Typography>
-              <Typography>
-                {moment(resume.whenStart).format("YYYY/DD/MM")}
-              </Typography>
+              <Box sx={{display: 'flex'}}>
+                <Typography sx={{fontWeight: 700}}>
+                  {moment(resume.whenStart).format("YYYY/DD/MM")}
+                </Typography>
+                <Typography sx={{marginLeft: '10px'}}>
+                  ({getDay(resume.whenStart)})
+                </Typography>
+              </Box>
+
+
               <Typography sx={{ ...styles.title, marginTop: "20px" }}>
                 DESIRABLE WORKSHIFT
                 </Typography>
 
-                <DisplaySchedule schedules={schedules}  />
+              <DisplaySchedule schedules={schedules} />
             </Grid>
           </Grid>
         </>

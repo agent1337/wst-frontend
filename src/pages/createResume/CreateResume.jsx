@@ -41,6 +41,7 @@ const initialExperienceValue = {
     skills: [],
     interests: [],
     files: [],
+    whenStart: "",
 }
 
 export default function CreateResume() {

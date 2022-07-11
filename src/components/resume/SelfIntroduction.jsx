@@ -3,24 +3,7 @@ import { Box, Typography, TextField, Select, MenuItem, } from '@mui/material'
 import UploadImage from '../../custom/buttons/uploadButton/UploadImage'
 import TextInput from '../../custom/inputs/textInput/TextInput'
 import { danger } from '../../colors'
-
-const SelectBirthday = ({ name, value, text, onChange }) => {
-    return (
-        <Box sx={{ marginBottom: '20px', width: "100%" }}>
-            <Typography sx={{ fontSize: '12px' }}>
-                <span style={{ color: `${danger}` }}>*</span>
-                {text}
-            </Typography>
-            <TextField
-                type="date"
-                name={name}
-                defaultValue={value}
-                sx={{ width: "100%" }}
-                onChange={onChange}
-            />
-        </Box>
-    )
-}
+import SelectDate from './SelectDate'
 
 const Selector = ({
     text,
@@ -54,7 +37,7 @@ const Selector = ({
     );
 };
 
-export default function SelfIntroduction({ resume, selfIntroState, setIntroState, setUploadImage, uploadImage }) {
+export default function SelfIntroduction({ selfIntroState, setIntroState, setUploadImage, uploadImage }) {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setIntroState({ ...selfIntroState, [name]: value });
@@ -78,7 +61,6 @@ export default function SelfIntroduction({ resume, selfIntroState, setIntroState
     ]);
 
     const gender = [{ text: 'male' }, { text: 'female' }]
-
 
     return (
         <div style={{ position: 'relative', padding: '0 16px' }}>
@@ -145,8 +127,7 @@ export default function SelfIntroduction({ resume, selfIntroState, setIntroState
                 data={gender}
             />
 
-
-            <SelectBirthday
+            <SelectDate
                 name={"birthday"}
                 value={selfIntroState.birthday}
                 text={"Birthday"}
