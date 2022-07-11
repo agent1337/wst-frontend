@@ -15,7 +15,7 @@ export const styles = {
         zIndex: "-1",
     },
     uploadLabelImage: {
-        width: '332px',
+        width: '100%',
         height: "inherit",
         cursor: "pointer",
         display: "inline-flex",

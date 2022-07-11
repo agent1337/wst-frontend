@@ -65,7 +65,7 @@ export default function CreateResume() {
         transport: false,
     })
     const accessToken = localStorage.getItem("accessToken");
-
+    const [workshift, setWorkshift] = useState([])
     const dispatch = useDispatch()
 
     const publish = async (stat) => {
@@ -75,10 +75,11 @@ export default function CreateResume() {
             ...selfIntroState,
             resumeTitle: resumeTitle,
             status: stat,
+            workshift: workshift
         }
-        console.log(data)
 
-        const createResume = await axios.post(`resumes`, data).catch((err) =>
+        console.log(data, 'data')
+        const createResume = await axios.post(`http://localhost:4040/resumes`, data, { headers:{ Authorization: `Bearer ${accessToken}` }},).catch((err) =>
             console.log(err)
         );
 
@@ -124,7 +125,7 @@ export default function CreateResume() {
             </Box>
 
             <Grid container sx={styles.container}>
-                <Grid item xs={12} sm={5} md={5} lg={4.5} sx={{ ...styles.selfIntroduction }}>
+                <Grid item xs={12} sm={5} md={5} lg={4.1} sx={{ ...styles.selfIntroduction }}>
                     <SelfIntroduction
                         selfIntroState={selfIntroState}
                         setIntroState={setIntroState}
@@ -133,13 +134,13 @@ export default function CreateResume() {
                         uploadImage={uploadImage}
                     />
                 </Grid>
-                <Grid item xs={12} sm={7} md={7} lg={7.5} sx={{ ...styles.fields }}>
+                <Grid item xs={12} sm={7} md={7} lg={7.9} sx={{ ...styles.fields }}>
                     <ExperienceIntroduction
                         experienceState={experienceState}
                         setExperienceState={setExperienceState}
                     />
 
-                    <Schedule />
+                    <Schedule setWorkshift={setWorkshift}/>
                 </Grid>
             </Grid>
             <ToastContainer />

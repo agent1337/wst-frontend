@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography } from "@mui/material";
-import { styles } from "./scheduleStyles";
+import { Typography } from "@mui/material";
 import { main } from '../../colors';
+import './schedule.styles.css'
 
 const initial = [
   { day: "Monday", hours: [] },
@@ -15,7 +15,7 @@ const initial = [
 
 const initialProgressShift = { day: '', start: null, end: null }
 
-const Schedule = () => {
+const Schedule = ({setWorkshift}) => {
   let startedTime = 0;
   const [progressShift, setProgressShift] = useState(initialProgressShift)
   const [toDelete, setToDelete] = useState(initialProgressShift)
@@ -70,6 +70,7 @@ const Schedule = () => {
     }
     setSchedules(clonedSchedules)
     setProgressShift(initialProgressShift)
+    setWorkshift(clonedSchedules)
   }
 
   const handleClick = (day, hourIndex) => {
@@ -105,79 +106,84 @@ const Schedule = () => {
 
     setSchedules(clonedSchedules)
     setToDelete(initialProgressShift)
+    setWorkshift(clonedSchedules)
   }
 
   return (
     <>
-      <Typography sx={{ ...styles.fieldTitle, }}>
+      <Typography sx={{
+        textTransform: "uppercase",
+        color: "#323232",
+        lineHeight: "16px",
+        margin: "40px 0"
+      }}>
         DESIRABLE WORKSHIFT
       </Typography>
-      <Box sx={{ ...styles.container }} >
-        <Box sx={styles.block}>
-          <Box sx={styles.times}>
+      <div className="container">
+        <div className="block">
+          <div className="times">
             {times.map((t, timeIndex) => {
               if (timeIndex % 2) {
                 if (timeIndex > 1) {
                   startedTime++;
                 }
                 return (
-                  <Typography sx={styles.time} key={timeIndex}>
+                  <p className="time" key={timeIndex}>
                     {startedTime.toString().padStart(2, "0")}
-                  </Typography>
+                  </p>
                 );
               }
             })}
-          </Box>
-        </Box>
+          </div>
+        </div>
+
 
         {schedules.map((schedule, scheduleIndex) => {
           return (
-            <Box
+            <div
               key={scheduleIndex}
-              sx={{ ...styles.schedule, }}
+              className="schedule"
             >
-              <Box sx={{ width: "15%" }}>
-                <Typography sx={{ paddingTop: "8px" }}>
+              <div style={{ width: '11%' }}>
+                <p style={{ fontSize: '14px', fontFamily: 'Roboto' }}>
                   {schedule.day}
-                </Typography>
-              </Box>
+                </p>
+              </div>
 
-              <Box sx={styles.hoursBlock}>
+              <div className="hoursBlock">
                 {schedule.hours.map((hour, hourIndex) => {
                   let activeStyle = hour ||
                     (progressShift.day === schedule.day && hourIndex <= Math.max(progressShift.end, progressShift.start)
                       && hourIndex >= Math.min(progressShift.start, progressShift.end))
                     ? `${main}` : 'transparent'
-                  console.log(hourIndex, 'hourIndex', progressShift.start, 'progressShift.start', progressShift.end, 'progressShift.end')
-                  
+
                   return (
                     <div
                       key={hourIndex}
-                      style={styles.hourItem}
+                      className="hourItem"
                       onClick={() => handleClick(schedule, hourIndex)}
                       value={hourIndex}
                       onMouseDown={() => handleMouseDown(schedule.day, hourIndex)}
                       onMouseEnter={() => handleMouseMove(hourIndex)}
                       onMouseUp={() => handleMouseUp()}
                     >
-                      <div style={{
-                        ...styles.pickedBlock,
+                      <div className="pickedBlock" style={{
                         background: activeStyle,
                         opacity: (toDelete.day === schedule.day && hourIndex <= toDelete.end && hourIndex >= toDelete.start) ? '0.5' : '1'
                       }}></div>
 
                       {toDelete.day === schedule.day && hourIndex === toDelete.end
-                        ? <button style={styles.removeButton} onClick={(e) => deleteSchedule(e)}><img src="../../action/delete.png" alt="" /></button>
+                        ? <button className="removeButton" onClick={(e) => deleteSchedule(e)}><img src="../../action/delete.png" alt="" /></button>
                         : null
                       }
                     </div>
                   );
                 })}
-              </Box>
-            </Box>
+              </div>
+            </div>
           );
         })}
-      </Box>
+      </div>
 
       {/* <Box sx={styles.mobileView}>
         <Box sx={styles.mobileTimes}>
