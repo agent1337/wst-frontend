@@ -2,8 +2,8 @@ import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Switch, Redirect } from 'react-router-dom'
 import Footer from '../components/footer/DekstopFooter';
+import PdfViewer from '../components/pdfViewer/PdfViewer';
 import Schedule from '../components/schedule/Schedule';
-import Sharing from '../components/sharing/Sharing';
 import CreateResume from '../pages/createResume/CreateResume';
 import EditResume from '../pages/editResume/EditResume';
 import Resumes from '../pages/resumes/Resumes';
@@ -13,8 +13,6 @@ import PrivateRoute from './PrivateRoute'
 const links = ['/sigin', '/acceptline', '/resume', '/forgot-password']
 
 export default function AuthorizedRoutes({ auth }) {
-    const isLogined = useSelector(state => state.auth.isLogined)
-
     return (
         <Switch>
             {auth == null && !links.includes('/' + document.location.pathname.split('/').slice(1, 2).join('/'))
@@ -50,8 +48,16 @@ export default function AuthorizedRoutes({ auth }) {
                         <Box sx={{width: '800px', margin: '20px auto'}}>
                             <Schedule />
                         </Box>
-
                     </PrivateRoute>
+                   
+                    <PrivateRoute
+                        isAuthorized={auth}
+                        path="/pdf" >
+                        <Box sx={{width: '800px', margin: '20px auto'}}>
+                            <PdfViewer />
+                        </Box>
+                    </PrivateRoute>
+                   
                     <Footer />
                 </Box>
             }

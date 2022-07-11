@@ -28,6 +28,11 @@ export default function Sharing() {
             {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
                 <LineIcon round={true}></LineIcon>
             </LineShareButton>
+
+            <TelegramShareButton url={shareUrl}>
+            {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
+                <TelegramIcon round={true}></TelegramIcon>
+            </TelegramShareButton>
         </div>
     )
 }
