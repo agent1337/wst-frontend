@@ -1,8 +1,8 @@
-import { danger, main } from "../../../colors";
+import { danger, main, dark_grey } from "../../../colors";
 
 export const styles = {
     input: {
-        border: "1px solid #9C9C9C",
+        border: `1px solid ${dark_grey}`,
         borderRadius: "5px",
         height: "40px",
         paddingLeft: "10px",

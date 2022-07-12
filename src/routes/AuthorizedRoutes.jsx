@@ -4,6 +4,7 @@ import { Switch, Redirect } from 'react-router-dom'
 import Footer from '../components/footer/DekstopFooter';
 import PdfViewer from '../components/pdfViewer/PdfViewer';
 import Schedule from '../components/schedule/Schedule';
+import Sharing from '../components/sharing/Sharing';
 import CreateResume from '../pages/createResume/CreateResume';
 import EditResume from '../pages/editResume/EditResume';
 import Resumes from '../pages/resumes/Resumes';
@@ -55,6 +56,14 @@ export default function AuthorizedRoutes({ auth }) {
                         path="/pdf" >
                         <Box sx={{width: '800px', margin: '20px auto'}}>
                             <PdfViewer />
+                        </Box>
+                    </PrivateRoute>
+
+                    <PrivateRoute
+                        isAuthorized={auth}
+                        path="/share" >
+                        <Box sx={{width: '800px', margin: '20px auto'}}>
+                            <Sharing />
                         </Box>
                     </PrivateRoute>
                    

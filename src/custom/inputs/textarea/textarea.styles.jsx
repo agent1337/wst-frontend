@@ -1,3 +1,5 @@
+import { dark_grey } from "../../../colors";
+
 export const styles = {
     title: {
         marginTop: "12px",
@@ -6,7 +8,7 @@ export const styles = {
         textTransform: 'uppercase'
     },
     textarea: {
-        border: "1px solid #9C9C9C",
+        border: `1px solid ${dark_grey}`,
         borderRadius: "4px",
         resize: "none",
         width: 'calc(100% - 25px)',

@@ -1,4 +1,4 @@
-import { grey } from "../../../colors";
+import { dark_grey, grey } from "../../../colors";
 
 export const styles = {
     uploadImage: {
@@ -63,7 +63,7 @@ export const styles = {
         textTransform: 'uppercase'
     },
     subtitle: {
-        color: '#9C9C9C', 
+        color: `${dark_grey}`, 
         marginBottom: '8px', 
         fontSize: '12px', 
         lineHeight: '14px',

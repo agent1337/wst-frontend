@@ -1,3 +1,5 @@
+import { dark_grey } from "../../../colors";
+
 export const styles = {
     title: {
         marginTop: "12px",
@@ -6,7 +8,7 @@ export const styles = {
         textTransform: 'uppercase'
     },
     textField: {
-        border: "1px solid #9C9C9C",
+        border: `1px solid ${dark_grey}`,
         borderRadius: "31px",
         minWidth: "92px",
         maxWidth: "100%",
@@ -39,6 +41,6 @@ export const styles = {
       },
       removeIcon: {
         transform: "rotate(45deg)",
-        color: "#9C9C9C",
+        color: `${dark_grey}`,
       },
 }

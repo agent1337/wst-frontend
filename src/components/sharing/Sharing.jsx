@@ -6,33 +6,66 @@ import {
     LineIcon,
     TwitterShareButton,
     TwitterIcon,
-    TelegramShareButton,
-    TelegramIcon
-  } from "react-share";
+
+} from "react-share";
+import { Box, Typography } from '@mui/material';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { ToastContainer, toast } from 'react-toastify';
+import { main } from '../../colors';
+import { styles } from './sharing.styles';
+import {toastStyle} from '../../utils/toastStyle';
 
 export default function Sharing() {
-    const shareUrl = 'https://www.google.com.ua/'
+    const shareUrl = window.location.href
+
+    const copy = () => {
+        navigator.clipboard.writeText(window.location.href)
+        toast('Link Copied', toastStyle)
+    }
     return (
-        <div>
-            <EmailShareButton url={shareUrl}>
-                {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
-                <EmailIcon round={true}></EmailIcon>
-            </EmailShareButton>
+        <Box sx={styles.container}>
+            <Typography sx={{ fontSize: '18px', fontWeight: '400' }}>Share</Typography>
+            <Box sx={styles.inner}>
 
-            <TwitterShareButton url={shareUrl}>
-            {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
-                <TwitterIcon></TwitterIcon>
-            </TwitterShareButton>
+                <Box sx={styles.social} onClick={copy}>
+                    <Box sx={styles.copyContainer}>
+                        <Box sx={styles.copyInner}>
+                            <ContentCopyIcon sx={{ fill: '#ffffff' }} />
+                        </Box>
+                    </Box>
+                    <Typography sx={{...styles.caption, marginTop: '4px'}}>Copy Link</Typography>
+                </Box>
 
-            <LineShareButton url={shareUrl}>
-            {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
-                <LineIcon round={true}></LineIcon>
-            </LineShareButton>
+                <Box sx={styles.social}>
+                    <EmailShareButton url={shareUrl} >
+                        {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
+                        <EmailIcon round={true} bgStyle={{ fill: `${main}` }} />
+                    </EmailShareButton>
+                    <Typography sx={styles.caption}>E-mail</Typography>
+                </Box>
 
-            <TelegramShareButton url={shareUrl}>
-            {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
-                <TelegramIcon round={true}></TelegramIcon>
-            </TelegramShareButton>
-        </div>
+                <Box sx={styles.social}>
+                    <LineShareButton url={shareUrl}>
+                        {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
+                        <LineIcon round={true} />
+                    </LineShareButton>
+                    <Typography sx={styles.caption}>Line</Typography>
+                </Box>
+
+                <Box sx={styles.social}>
+                    <TwitterShareButton url={shareUrl}>
+                        {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
+                        <TwitterIcon round={true} style={{ fill: 'pink' }} />
+                    </TwitterShareButton>
+
+                    <Typography sx={styles.caption}>Twitter</Typography>
+                </Box>
+            </Box>
+
+            <Box sx={styles.buttonBlock}>
+                <button style={styles.btn}>Cancel</button>
+            </Box>
+            <ToastContainer />
+        </Box>
     )
 }

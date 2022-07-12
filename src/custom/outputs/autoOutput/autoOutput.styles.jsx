@@ -1,3 +1,5 @@
+import { dark_grey } from "../../../colors";
+
 export const styles = {
     block: {
         position: "relative",
@@ -21,6 +23,6 @@ export const styles = {
       },
       removeIcon: {
         transform: "rotate(45deg)",
-        color: "#9C9C9C",
+        color: `${dark_grey}`,
       },
 }
