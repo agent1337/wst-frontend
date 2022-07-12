@@ -2,7 +2,7 @@ import { Box } from "@mui/material"
 import { danger, grey } from "../../../colors";
 import { styles } from "./authInput.styles";
 
-const AuthInput = ({ value, name, placeholder, type, onChange, style, errors, minLength }) => {
+const AuthInput = ({ value, name, placeholder, type, onChange, errors, minLength }) => {
     console.log(errors)
     return (
         <Box sx={{width: '100%'}}>

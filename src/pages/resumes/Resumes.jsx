@@ -4,9 +4,10 @@ import { Tabs, Tab, Box } from "@mui/material";
 import { main } from "../../colors"
 import { styles } from "./resumes.styles";
 import CreateResumeButton from "../../custom/buttons/createResume/CreateResumeButton";
-import OwnResumeCard from "../../components/resumeCard/OwnResumeCard";
+import OwnResumeCard from "../../components/resumeCard/ownCardResume/OwnResumeCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getResumes } from "../../redux/profile/profile.service";
+import OtherResumeCard from "../../components/resumeCard/otherCardResume/OtherResumeCard";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -83,7 +84,18 @@ export default function Resumes() {
         </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Box sx={styles.box}></Box>
+        <Box sx={styles.box}>
+        {resumes &&
+            resumes.map((item, index) => {
+              return (
+                <OtherResumeCard
+                  item={item}
+                  key={index}
+                  resumesData={resumes}
+                />
+              );
+            })}
+        </Box>
       </TabPanel>
     </Box>
   );

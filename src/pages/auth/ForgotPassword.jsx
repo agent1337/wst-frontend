@@ -122,6 +122,7 @@ const ImageBox = ({ type }) => {
 export default function ForgotPassword() {
     const [isSubmit, setIsSubmit] = useState(false);
     const [email, setEmail] = useState('')
+
     const dispatch = useDispatch()
 
     const onSubmit = async () => {
@@ -148,14 +149,15 @@ export default function ForgotPassword() {
                                 </Box>
 
                                 <Box sx={{ position: "relative", marginBottom: "25px" }}>
-                                    <AuthInput
-                                        type={"text"}
-                                        name={"email"}
+                                    <input
+                                        name="email"
+                                        type="email"
                                         onChange={e => setEmail(e.target.value)}
                                         value={email}
                                         placeholder={"Email"}
                                         style={{ paddingLeft: '10px' }}
                                     />
+                                   
                                 </Box>
                                 <Button sx={styles.button} onClick={onSubmit}>
                                     Submit

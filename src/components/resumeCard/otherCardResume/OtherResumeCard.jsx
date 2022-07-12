@@ -2,14 +2,15 @@ import React, { useState } from 'react'
 import { Box, Typography, Button, } from "@mui/material";
 import { Link } from "react-router-dom";
 import { styles } from './resumeCard.styles';
-import Popup from '../modal/Popup';
-import { danger } from '../../colors';
+import Popup from '../../modal/Popup';
+import { danger } from '../../../colors';
 import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeSelectedResume } from '../../redux/profile/profile.service';
-import { toastStyle } from '../../utils/toastStyle';
+import { removeSelectedResume } from '../../../redux/profile/profile.service';
+import { toastStyle } from '../../../utils/toastStyle';
+import { main } from '../../../colors'
 
-export default function OwnResumeCard({ item, }) {
+export default function OtherResumeCard({ item, }) {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const alert = useSelector(state => state.alert.alert)
@@ -19,6 +20,7 @@ export default function OwnResumeCard({ item, }) {
     setIsOpen(false);
     return toast(`${alert}`, toastStyle);
   };
+  console.log(item)
 
   return (
     <>
@@ -64,66 +66,40 @@ export default function OwnResumeCard({ item, }) {
 
 
       <Box sx={styles.cardsItem}>
-        <img
-          src="../../action/delete.png"
-          alt="remove"
-          style={styles.deleteButton}
-          onClick={() => setIsOpen(true)}
-        />
-        <Link className="link" to={`/cv/${item._id}`}>
+        <Link className="link" to={`/resume/${item._id}`}>
           <Box
             sx={{
               ...styles.card,
               justifyContent: "space-between",
-              paddingTop: "28px",
-              border: "1px solid #29CC8F",
+              border: "2px solid #29CC8F",
             }}
           >
-            {item.status && (
-              <Box
-                sx={
-                  item.status === "saved" ? { display: "none" } : styles.status
-                }
-              >
-                {item.status}
+            <Box sx={{ height: '91px' }}>
+              <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" style={{ width: '100%', height: '100%' }} alt="" />
+            </Box>
+
+            <Box sx={{padding: '0 8px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '73px'}}>
+              <Box sx={{marginTop: '5px', color: `${main}`, fontSize: '14px', fontWeight: 300}}>
+                <span style={{ paddingRight: '3px' }}>
+                  {item.surname}
+                </span>
+                <span>
+                  {item.name}
+                </span>
               </Box>
-            )}
 
-            <Typography
-              sx={{
-                fontSize: "14px",
-                padding: "0 15px",
-                fontWeight: "400",
-              }}
-            >
-              {item.resumeTitle}
-            </Typography>
-            <Box sx={{ ...styles.detail }}>
-              <Typography sx={styles.text}>
-                <b>Last edit:</b> YYYY/MM/DD {item.lastEdit}
-              </Typography>
-              <Typography sx={styles.text}>
-                <b>Created:</b> YYYY/MM/DD {item.created}
-              </Typography>
 
-              <Box sx={styles.actionBox}>
-                <img
-                  src="../../action/edit.png"
-                  alt="edit"
-                  style={{ cursor: "pointer", marginRight: "10px" }}
-                />
-                <img
-                  src="../../action/copy.png"
-                  alt="copy"
-                  style={{ cursor: "pointer", marginRight: "10px" }}
-                />
-                <img
-                  src="../../../action/download.png"
-                  alt="download"
-                  style={{ cursor: "pointer" }}
-                />
+              <Box sx={{ display: 'flex', alignItems: 'center', paddingBottom: '15px' }}>
+                <Typography sx={styles.text}>
+                  <b>Saved:</b> 2022/11/11 {item.lastEdit}
+                </Typography>
+
+                <Box sx={styles.actionBox}>
+                  ...
+              </Box>
               </Box>
             </Box>
+
           </Box>
         </Link>
         <ToastContainer />

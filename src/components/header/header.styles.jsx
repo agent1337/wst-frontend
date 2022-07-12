@@ -1,5 +1,5 @@
 import { main } from '../../colors';
-
+// transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
 export const styles = {
     header: {
         width: "100%",
@@ -17,9 +17,9 @@ export const styles = {
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
-        "@media (max-width: 960px)": {
-            display: "none",
-        },
+        // "@media (max-width: 960px)": {
+        //     display: "none",
+        // },
     },
     box: {
         display: "flex",

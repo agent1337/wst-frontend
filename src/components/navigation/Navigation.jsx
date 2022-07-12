@@ -16,14 +16,6 @@ const data = [
         link: "Help",
         src: "/help",
     },
-    {
-        link: 'Schedule',
-        src: '/schedule'
-    },
-    {
-        link: 'share',
-        src: '/share'
-    }
 ];
 
 const styles = {
