@@ -1,7 +1,7 @@
 
 import { axiosInstance } from "../../api/axios"
 import { SET_ALERT } from "../alert/alert.constants";
-import { CREATE_RESUME, GET_MEDIA, GET_RESUME, REMOVE_SELECTED_RESUME, SET_PROFILE, SET_RESUMES } from "./profile.constants";
+import { CLONE_SELECTED_RESUME, CREATE_RESUME, GET_MEDIA, GET_RESUME, REMOVE_SELECTED_RESUME, SET_PROFILE, SET_RESUMES } from "./profile.constants";
 
 export const getProfile = () => {
     return async dispatch => {
@@ -95,6 +95,28 @@ export const removeSelectedResume = (resumeId) => {
             dispatch({
                 type: SET_ALERT,
                 payload: `${response.data.resumeTitle} was delete`
+            })
+        }
+        catch (err) {
+            console.log(err.response.data.message)
+        }
+    }
+}
+
+export const cloneResume = (resumeId) => {
+    return async dispatch => {
+        try {
+            const response = await axiosInstance.post(`resumes/copy/` + resumeId)
+
+            console.log(response.data, 'response.data')
+
+            dispatch({
+                type: CLONE_SELECTED_RESUME,
+                payload: response.data
+            })
+            dispatch({
+                type: SET_ALERT,
+                payload: `Created “${response.data.resumeTitle}”`
             })
         }
         catch (err) {

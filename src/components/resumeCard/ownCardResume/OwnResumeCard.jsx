@@ -6,7 +6,7 @@ import Popup from '../../modal/Popup';
 import { danger } from '../../../colors';
 import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeSelectedResume } from '../../../redux/profile/profile.service';
+import { cloneResume, removeSelectedResume } from '../../../redux/profile/profile.service';
 import { toastStyle } from '../../../utils/toastStyle';
 
 export default function OwnResumeCard({ item, }) {
@@ -20,6 +20,11 @@ export default function OwnResumeCard({ item, }) {
     return toast(`${alert}`, toastStyle);
   };
 
+  const copy = (resumeId) => {
+    dispatch(cloneResume(resumeId))
+    return toast(`${alert}`, toastStyle);
+  }
+  
   return (
     <>
       <Popup handleClose={() => setIsOpen(false)} isOpen={isOpen}>
@@ -70,62 +75,61 @@ export default function OwnResumeCard({ item, }) {
           style={styles.deleteButton}
           onClick={() => setIsOpen(true)}
         />
-        <Link className="link" to={`/resumes/${item._id}`}>
-          <Box
-            sx={{
-              ...styles.card,
-              justifyContent: "space-between",
-              paddingTop: "28px",
-              border: "1px solid #29CC8F",
-            }}
-          >
-            {item.status && (
-              <Box
-                sx={
-                  item.status === "saved" ? { display: "none" } : styles.status
-                }
-              >
-                {item.status}
-              </Box>
-            )}
 
-            <Typography
-              sx={{
-                fontSize: "14px",
-                padding: "0 15px",
-                fontWeight: "400",
-              }}
+        <Box
+          sx={{
+            ...styles.card,
+
+          }}
+        >
+          {item.status && (
+            <Box
+              sx={
+                item.status === "save" ? { display: "none" } : styles.status
+              }
             >
-              {item.resumeTitle}
-            </Typography>
-            <Box sx={{ ...styles.detail }}>
-              <Typography sx={styles.text}>
-                <b>Last edit:</b> YYYY/MM/DD {item.lastEdit}
-              </Typography>
-              <Typography sx={styles.text}>
-                <b>Created:</b> YYYY/MM/DD {item.created}
-              </Typography>
-
-              <Box sx={styles.actionBox}>
-                <img
-                  src="../../action/edit.png"
-                  alt="edit"
-                  style={{ cursor: "pointer", marginRight: "10px" }}
-                />
-                <img
-                  src="../../action/copy.png"
-                  alt="copy"
-                  style={{ cursor: "pointer", marginRight: "10px" }}
-                />
-                <img
-                  src="../../../action/download.png"
-                  alt="download"
-                  style={{ cursor: "pointer" }}
-                />
-              </Box>
+              {item.status}
             </Box>
+          )}
+          <Link className="link" to={`/resumes/${item._id}`}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100px' }}>
+
+              <Typography
+                sx={styles.resumeTitle}>
+                {item.resumeTitle}
+              </Typography>
+              <Box sx={{ ...styles.detail }}>
+                <Typography sx={styles.text}>
+                  <b>Last edit:</b> YYYY/MM/DD {item.lastEdit}
+                </Typography>
+                <Typography sx={styles.text}>
+                  <b>Created:</b> YYYY/MM/DD {item.created}
+                </Typography>
+              </Box>
+
+            </Box>
+
+          </Link>
+          <Box sx={styles.actionBox}>
+            <img
+              src="../../action/edit.png"
+              alt="edit"
+              style={{ cursor: "pointer", marginRight: "10px" }}
+            />
+            <img
+              src="../../action/copy.png"
+              alt="copy"
+              style={{ cursor: "pointer", marginRight: "10px" }}
+              onClick={() => copy(item._id)}
+            />
+            <img
+              src="../../../action/download.png"
+              alt="download"
+              style={{ cursor: "pointer" }}
+            />
           </Box>
-        </Link>
+
+        </Box>
         <ToastContainer />
       </Box>
     </>

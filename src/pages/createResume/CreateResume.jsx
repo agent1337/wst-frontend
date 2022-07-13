@@ -79,8 +79,7 @@ export default function CreateResume() {
             workshift: workshift
         }
 
-        console.log(data, 'data')
-        const createResume = await axios.post(`http://localhost:4040/resumes`, data, { headers:{ Authorization: `Bearer ${accessToken}` }},).catch((err) =>
+        const createResume = await axios.post(`http://localhost:4040/resumes`, data, { headers: { Authorization: `Bearer ${accessToken}` } },).catch((err) =>
             console.log(err)
         );
 
@@ -141,7 +140,7 @@ export default function CreateResume() {
                         setExperienceState={setExperienceState}
                     />
 
-                    <Schedule setWorkshift={setWorkshift}/>
+                    <Schedule setWorkshift={setWorkshift} />
                 </Grid>
             </Grid>
             <ToastContainer />
