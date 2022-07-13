@@ -59,6 +59,7 @@ export default function ViewResume() {
 
   return (
     <section style={styles.section}>
+      {resume.userId}
       {resume &&
         <>
           <Box

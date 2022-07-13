@@ -13,13 +13,13 @@ const styles = {
 export default function Avatar() {
     const history = useHistory();
     const dispatch = useDispatch()
-    const email = useSelector(state => state.profile.email)
+    const user = useSelector(state => state.profile.user)
 
     useEffect(() => {
         dispatch(getProfile())
     }, []);
 
-    let tmp = `${email}`;
+    let tmp = `${user.email}`;
     let getMail = tmp.split("@");
     let userEmail = getMail[0];
 

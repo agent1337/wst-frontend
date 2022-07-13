@@ -7,7 +7,7 @@ export const getProfile = () => {
     return async dispatch => {
         try {
             const response = await axiosInstance.get("auth/me")
-
+        
             dispatch({
                 type: SET_PROFILE,
                 payload: response.data

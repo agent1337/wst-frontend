@@ -9,7 +9,7 @@ import {
 } from "./profile.constants";
 
 const initialState = {
-    email: '',
+    user: [],
     resumes: [],
     resumeData: [],
     media: [],
@@ -24,7 +24,7 @@ export const profileReducer = (state = initialState, action) => {
                 resumes: [...state.resumes, action.payload]
             }
         case SET_PROFILE:
-            return { ...state, email: action.payload.email }
+            return {...state, user: action.payload }
         case SET_RESUMES:
             return { ...state, resumes: action.payload }
         case GET_RESUME:
