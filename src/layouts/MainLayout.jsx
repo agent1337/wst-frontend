@@ -5,13 +5,13 @@ import Footer from '../components/footer/Footer'
 import { Box } from '@mui/material';
 
 const MainLayout = props => {
-    return props ? (
-      <div className="container">
-        <Header />
-        {props.children}
-        <Footer />
-      </div>
-    ) : <Redirect to="/" />
-  }
+  return props ? (
+    <Box>
+      <Header />
+      {props.children}
+      <Footer />
+    </Box>
+  ) : <Redirect to="/" />
+}
 
 export default MainLayout

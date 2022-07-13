@@ -4,10 +4,10 @@ import Footer from '../components/footer/Footer'
 import { Box } from '@mui/material';
 
 const ResumeLayout = props => (
-    <div className="app-wrapper">
+    <Box>
         <Header />
         {props.children}
         <Footer />
-    </div>)
+    </Box>)
 
 export default ResumeLayout
