@@ -11,6 +11,7 @@ import EditResume from './pages/editResume/EditResume';
 import AuthLayout from './layouts/AuthLayout';
 import ResumeLayout from './layouts/ResumeLayout';
 import MainLayout from './layouts/MainLayout';
+import PageNotFound from './pages/auth/PageNotFound';
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => {
   return (
@@ -47,6 +48,7 @@ export default function App() {
         <AppRoute path="/create" layout={MainLayout} component={CreateResume} props={user} />
         <AppRoute path="/edit/:id" layout={MainLayout} component={EditResume} props={user} />
 
+        <Route path='*' exact={true} component={PageNotFound} />
       </Switch>
     </BrowserRouter>
   )
