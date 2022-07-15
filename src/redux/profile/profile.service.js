@@ -11,6 +11,7 @@ import {
     GET_OWN_RESUMES_DATA, 
     GET_OTHER_RESUME_DATA,
     SAVE_TO_MY_LIST,
+    GET_OTHER_RESUME,
 } from "./profile.constants";
 
 export const getProfile = () => {
@@ -84,7 +85,7 @@ export const getOtherResume = (id) => {
             const response = await axiosInstance.get(`/resumes/other/${id}`)
 
             dispatch({
-                type: GET_OWN_RESUME,
+                type: GET_OTHER_RESUME,
                 payload: response.data
             })
         }

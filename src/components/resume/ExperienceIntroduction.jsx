@@ -74,7 +74,7 @@ export default function ExperienceIntroduction({ experienceState, setExperienceS
                 name={"selfPromotion"}
                 title={"Self promotion"}
                 placeholder={"Why I’m the best fit for this job..."}
-                value={experienceState.motivation}
+                value={experienceState.selfPromotion}
                 onChange={handleInputChange}
             />
 
@@ -82,14 +82,14 @@ export default function ExperienceIntroduction({ experienceState, setExperienceS
                 name={"skills"}
                 type={"text"}
                 title={"Skills I want to Learn"}
-                value={experienceState.motivation}
+                value={experienceState.skills}
             />
 
             <AutoInput
                 name={"interests"}
                 type={"text"}
                 title={"Industries I am Interested in"}
-                value={experienceState.motivation}
+                value={experienceState.interests}
             />
 
             <UploadFile />

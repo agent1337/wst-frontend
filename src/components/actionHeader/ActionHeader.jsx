@@ -14,8 +14,8 @@ export default function ActionHeader({ type, publishResume, resumeId }) {
         history.push("/resumes")
     }
 
-    const openEditResume = () => {
-
+    const openEditResume = (resumeId) => {
+        history.push(`/edit/${resumeId}`)
     }
 
     const generate = () => { }
@@ -32,7 +32,7 @@ export default function ActionHeader({ type, publishResume, resumeId }) {
 
                 {type === 'second' && (
                     <>
-                        <ActionButton text={"Edit"} func={openEditResume} />
+                        <ActionButton text={"Edit"} func={() => openEditResume(resumeId)} />
                         <ActionButton text={"Download PDF"} func={generate} />
                         <ActionButton text={"Share"} func={() => alert('share')} />
                     </>

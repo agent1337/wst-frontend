@@ -20,13 +20,14 @@ export default function ViewResume() {
   const user = useSelector(state => state.profile.user)
 
   let location = useLocation();
-  let id = location.pathname.split("/")[2];
+  let arr = location.pathname.split("/")
+  let id = arr[arr.length - 1];
 
   const [code, setCode] = useState('')
   const [image, setImage] = useState(null)
   const [files, setFiles] = useState(null)
 
-  const resume = useSelector(state => state.profile.resumeData)
+  const resume = useSelector(state => state.profile.currentResume)
   const workshift = resume.workshift
   const [schedules, setTest] = useState([])
 
@@ -48,7 +49,7 @@ export default function ViewResume() {
       }
     }
     setTest(arr)
-  }, [])
+  }, [workshift])
 
   // useEffect(() => {
   //   axios.get(`/media/${id}`)
@@ -58,12 +59,11 @@ export default function ViewResume() {
   //     })
   //     .catch((error) => console.log(error));
   // }, [setImage]);
+  
   const type = user._id !== resume.userId ? 'third' : 'second'
 
   return (
     <section style={styles.section}>
-      <Typography sx={user._id !== resume.userId ? { color: 'pink' } : { color: 'black' }}>{resume.userId}</Typography>
-
       {resume &&
         <>
           <Box

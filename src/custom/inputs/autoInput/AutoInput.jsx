@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Typography } from "@mui/material";
 import AutoOtput from '../../outputs/autoOutput/AutoOtput';
 import { styles } from './autoInput.styles';
 
 export default function AutoInput({type, value, name, title }) {
-    const [data, setData] = useState(value || [])
+    const [data, setData] = useState([])
     const [text, setText] = useState('')
+
+    useEffect(() => {
+       setData(value)
+    }, [value])
 
     const handleKeyPress = (event) => {
         if(text === "") return
@@ -18,7 +22,7 @@ export default function AutoInput({type, value, name, title }) {
         }
     }
 
-    const handleRemoveItem = (index, item) => {
+    const handleRemoveItem = (index) => {
         setData(data.filter((el, id) => id !== index));
     };
 

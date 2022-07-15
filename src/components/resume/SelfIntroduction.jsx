@@ -38,6 +38,7 @@ const Selector = ({
 };
 
 export default function SelfIntroduction({ selfIntroState, setIntroState, setUploadImage, uploadImage }) {
+    console.log(selfIntroState, 'selfIntroState')
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setIntroState({ ...selfIntroState, [name]: value });

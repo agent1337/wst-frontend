@@ -15,7 +15,7 @@ const initialState = {
     user: [],
     resumes: [],
     othersResumes: [],
-    resumeData: [],
+    currentResume: {},
     media: [],
     loading: false
 }
@@ -34,7 +34,9 @@ export const profileReducer = (state = initialState, action) => {
         case GET_OTHER_RESUME_DATA:
             return { ...state, othersResumes: action.payload }
         case GET_OWN_RESUME:
-            return { ...state, resumeData: action.payload }
+            return { ...state, currentResume: action.payload }
+        case GET_OTHER_RESUME:
+            return { ...state, currentResume: action.payload }
         case SAVE_TO_MY_LIST:
             return {
                 ...state,

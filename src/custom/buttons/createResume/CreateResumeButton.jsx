@@ -5,7 +5,7 @@ import { styles } from './createResumeButton.styles';
 
 export default function CreateResumeButton() {
     return (
-        <a href="/resume/create">
+        <a href="/create">
             <Box sx={{ ...styles.cardsItem }}>
                 <Box sx={{ ...styles.card, ...styles.createButton }}>
                     <Box sx={{ ...styles.content }}>

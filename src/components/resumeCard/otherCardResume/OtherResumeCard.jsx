@@ -20,7 +20,6 @@ export default function OtherResumeCard({ item, }) {
     setIsOpen(false);
     return toast(`${alert}`, toastStyle);
   };
-  console.log(item)
 
   return (
     <>
@@ -66,7 +65,7 @@ export default function OtherResumeCard({ item, }) {
 
 
       <Box sx={styles.cardsItem}>
-        <Link className="link" to={`/resumes/${item._id}`}>
+        <Link className="link" to={`/resumes/others/${item._id}`}>
           <Box
             sx={{
               ...styles.card,
