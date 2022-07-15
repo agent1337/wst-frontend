@@ -23,6 +23,7 @@ const initialState = {
 export const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case CREATE_RESUME:
+            console.log(action.payload, 'action.payload in create')
             return {
                 ...state,
                 resumes: [...state.resumes, action.payload]
@@ -47,10 +48,10 @@ export const profileReducer = (state = initialState, action) => {
             return { ...state, media: action.payload }
 
         case REMOVE_SELECTED_RESUME:
+            const newList = state.resumes.filter(resume =>
+                resume.id !== action.payload)
             return {
-                ...state, resumes: state.resumes.filter(resume =>
-                    resume.id !== action.payload
-                )
+                ...state, newList
             }
         case CLONE_SELECTED_RESUME:
             return {

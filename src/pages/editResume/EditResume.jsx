@@ -19,7 +19,21 @@ export default function EditResume() {
     const [schedules, setTest] = useState([])
     const [selfIntroState, setIntroState] = useState({})
     const [experienceState, setExperienceState] = useState({})
-
+    const [errors, setErrors] = useState({
+        surname: false,
+        name: false,
+        kanaSurname: true,
+        kanaName: true,
+        nationality: true,
+        gender: true,
+        birthday: true,
+        phone: true,
+        eMail: true,
+        address: true,
+        busStation: true,
+        transport: true,
+    })
+    
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -91,12 +105,14 @@ export default function EditResume() {
                     <SelfIntroduction resume={resume}
                         selfIntroState={selfIntroState}
                         setIntroState={setIntroState}
+                        errors={errors}
                     />
                 </Grid>
                 <Grid item xs={12} sm={7} md={7} lg={7.5} sx={{ ...styles.fields }}>
                     <ExperienceIntroduction
                         experienceState={experienceState}
                         setExperienceState={setExperienceState}
+                        errors={errors}
                     />
                 </Grid>
             </Grid>

@@ -5,12 +5,13 @@ import { styles } from './createResume.styles';
 import ActionHeader from '../../components/actionHeader/ActionHeader';
 import SelfIntroduction from '../../components/resume/SelfIntroduction';
 import ExperienceIntroduction from '../../components/resume/ExperienceIntroduction';
-import { useDispatch } from 'react-redux';
-import { publishResume } from '../../api/resumes';
+import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
+import { toastStyle } from '../../utils/toastStyle';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import Schedule from '../../components/schedule/Schedule';
+import { setAlert } from '../../redux/alert/alert.actions';
 
 const initialSelfValue = {
     surname: "",
@@ -46,31 +47,43 @@ const initialExperienceValue = {
 
 export default function CreateResume() {
     const history = useHistory()
+    const dispatch = useDispatch()
+    const alert = useSelector(state => state.alert.alert)
+    const accessToken = localStorage.getItem("accessToken")
     const [resumeTitle, setResumeTitle] = useState("Untitled Resume")
     const [uploadImage, setUploadImage] = useState(null)
     const [multipleFiles, setMultipleFiles] = useState([])
     const [selfIntroState, setIntroState] = useState(initialSelfValue)
     const [experienceState, setExperienceState] = useState(initialExperienceValue)
+    const [formErrors, setFormErrors] = useState({ surname: '', name: '' })
     const [errors, setErrors] = useState({
         surname: false,
         name: false,
-        kanaSurname: false,
-        kanaName: false,
-        nationality: false,
-        gender: false,
-        birthday: false,
-        phone: false,
-        eMail: false,
-        address: false,
-        busStation: false,
-        transport: false,
+        kanaSurname: true,
+        kanaName: true,
+        nationality: true,
+        gender: true,
+        birthday: true,
+        phone: true,
+        eMail: true,
+        address: true,
+        busStation: true,
+        transport: true,
     })
-    const accessToken = localStorage.getItem("accessToken");
     const [workshift, setWorkshift] = useState([])
-    const dispatch = useDispatch()
+
+
+    const validate = (values) => {
+        if (values.name === "" || values.surname === "") {
+            dispatch(setAlert('Please fill the highlighted fields'))
+        }
+
+        if (alert) {
+            return toast(alert, toastStyle);
+        }
+    }
 
     const publish = async (stat) => {
-        console.log(stat, 'sata')
         let data = {
             ...experienceState,
             ...selfIntroState,
@@ -79,9 +92,14 @@ export default function CreateResume() {
             workshift: workshift
         }
 
-        const createResume = await axios.post(`http://localhost:4040/resumes`, data, { headers: { Authorization: `Bearer ${accessToken}` } },).catch((err) =>
-            console.log(err)
-        );
+        const createResume = await axios.post(`http://localhost:4040/resumes`, data, { headers: { Authorization: `Bearer ${accessToken}` } },)
+            .catch((error) => {
+                dispatch(setAlert(error))
+                console.log(alert, 'alert')
+                if (alert) {
+                    return toast(alert, toastStyle);
+                }
+            });
 
         uploadFile(uploadImage, createResume.data._id);
         for (let i = 0; i < multipleFiles.length; i++) {
@@ -89,6 +107,7 @@ export default function CreateResume() {
         }
 
         history.push('/resumes')
+
     };
 
     const uploadFile = async (uploadImage, resumeId) => {
@@ -143,6 +162,18 @@ export default function CreateResume() {
                     <Schedule setWorkshift={setWorkshift} />
                 </Grid>
             </Grid>
+
+            <div className='formErrors'>
+                {Object.keys(formErrors).map((fieldName, i) => {
+                    if (formErrors[fieldName].length > 0) {
+                        return (
+                            <p key={i}>{fieldName} {formErrors[fieldName]}</p>
+                        )
+                    } else {
+                        return '';
+                    }
+                })}
+            </div>
             <ToastContainer />
         </section>
 

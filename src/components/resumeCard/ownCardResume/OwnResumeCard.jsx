@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { styles } from './resumeCard.styles';
 import Popup from '../../modal/Popup';
 import { danger } from '../../../colors';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { cloneResume, removeSelectedResume } from '../../../redux/profile/profile.service';
 import { toastStyle } from '../../../utils/toastStyle';
@@ -129,7 +129,6 @@ export default function OwnResumeCard({ item, }) {
           </Box>
 
         </Box>
-        <ToastContainer />
       </Box>
     </>
   )

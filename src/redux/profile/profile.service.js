@@ -1,5 +1,6 @@
 
 import { axiosInstance } from "../../api/axios"
+import { setAlert } from "../alert/alert.actions";
 import { SET_ALERT } from "../alert/alert.constants";
 import { 
     CLONE_SELECTED_RESUME, 
@@ -122,7 +123,7 @@ export const createResume = (data) => {
               })
         }
         catch (error) {
-            console.log(error.response.data.message)
+            dispatch(setAlert(error.response.data.message))
         }
     }
 }

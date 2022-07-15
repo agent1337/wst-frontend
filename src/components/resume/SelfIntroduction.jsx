@@ -1,9 +1,15 @@
 import React, { useState } from 'react'
-import { Box, Typography, TextField, Select, MenuItem, } from '@mui/material'
+import { Box, Typography, Select, MenuItem, } from '@mui/material'
 import UploadImage from '../../custom/buttons/uploadButton/UploadImage'
 import TextInput from '../../custom/inputs/textInput/TextInput'
 import { danger } from '../../colors'
 import SelectDate from './SelectDate'
+import { toast } from 'react-toastify';
+import { toastStyle } from '../../utils/toastStyle'
+import { useDispatch, useSelector } from 'react-redux'
+import { setInputError } from '../../redux/alert/alert.actions'
+
+const gender = [{ text: 'male' }, { text: 'female' }]
 
 const Selector = ({
     text,
@@ -37,15 +43,27 @@ const Selector = ({
     );
 };
 
-export default function SelfIntroduction({ selfIntroState, setIntroState, setUploadImage, uploadImage }) {
-    console.log(selfIntroState, 'selfIntroState')
+export default function SelfIntroduction({ selfIntroState, setIntroState, setUploadImage, uploadImage, errors }) {
+    const dispatch = useDispatch()
+    const isError = useSelector(state => state.alert.error)
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setIntroState({ ...selfIntroState, [name]: value });
     }
 
     const blurHandler = () => {
-        console.log("input blurred")
+        console.log(selfIntroState, selfIntroState.kanaName, selfIntroState.kanaSurname)
+        let a = /([\u3040-\u30ff]*)/g
+       
+        if(!a.test(selfIntroState.kanaSurname)) {
+           alert('error use kana')
+           dispatch(setInputError(true))
+        } 
+        if(!a.test(selfIntroState.kanaName)) {
+            alert('error use kana')
+            dispatch(setInputError(true))
+         }
     }
 
     const [nationality, setNationality] = useState([
@@ -59,21 +77,20 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
         { text: "アルゼンチン" },
         { text: "アルバニア" },
         { text: "アルメニア" },
-    ]);
-
-    const gender = [{ text: 'male' }, { text: 'female' }]
+    ]); 
 
     return (
         <div style={{ position: 'relative', padding: '0 16px' }}>
             <UploadImage setUploadImage={setUploadImage} uploadImage={uploadImage} />
 
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between'}}>
                 <TextInput
                     name={'surname'}
                     text={"Surname"}
                     value={selfIntroState.surname}
                     onChange={handleInputChange}
                     setIntroState={setIntroState}
+                    errors={errors.name}
                 />
 
                 <TextInput
@@ -81,6 +98,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                     text={"Name"}
                     value={selfIntroState.name}
                     onChange={handleInputChange}
+                    errors={errors.name}
                 />
             </Box>
 
@@ -91,7 +109,8 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                     value={selfIntroState.kanaSurname}
                     onChange={handleInputChange}
                     placeholder={"Ex : タナカ"}
-                    onBlur={blurHandler}
+                    onBlur={blurHandler} 
+                    errors={errors.name}
                 />
 
                 <TextInput
@@ -101,7 +120,9 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                     onChange={handleInputChange}
                     placeholder={"Ex : タロウ"}
                     onBlur={blurHandler}
+                    errors={errors.name}
                 />
+                {isError && <p style={{border: '1px solid red'}}>error</p>}
             </Box>
 
             <TextInput
@@ -110,6 +131,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                 value={selfIntroState.position}
                 onChange={handleInputChange}
                 placeholder={"Ex : Floor Staff"}
+                errors={errors.name}
             />
 
             <Selector
@@ -118,6 +140,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                 value={selfIntroState.nationality}
                 onChange={handleInputChange}
                 data={nationality}
+                errors={errors.name}
             />
 
             <Selector
@@ -126,6 +149,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                 value={selfIntroState.gender}
                 onChange={handleInputChange}
                 data={gender}
+                errors={errors.name}
             />
 
             <SelectDate
@@ -133,6 +157,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                 value={selfIntroState.birthday}
                 text={"Birthday"}
                 onChange={handleInputChange}
+                errors={errors.name}
             />
 
             <TextInput
@@ -141,6 +166,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                 value={selfIntroState.phone}
                 onChange={handleInputChange}
                 placeholder={"Ex : 080-0000-0000"}
+                errors={errors.name}
             />
 
             <TextInput
@@ -150,6 +176,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                 value={selfIntroState.eMail}
                 onChange={handleInputChange}
                 placeholder={"Ex : name@example.com"}
+                errors={errors.name}
             />
 
             <TextInput
@@ -157,6 +184,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                 text={"Address"}
                 value={selfIntroState.address}
                 onChange={handleInputChange}
+                errors={errors.name}
             />
 
             <TextInput
@@ -164,6 +192,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                 text={"Closest Train/Bus Station"}
                 value={selfIntroState.busStation}
                 onChange={handleInputChange}
+                errors={errors.name}
             />
 
             <TextInput
@@ -171,6 +200,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                 text={"Transport"}
                 value={selfIntroState.transport}
                 onChange={handleInputChange}
+                errors={errors.name}
             />
         </div>
     )
