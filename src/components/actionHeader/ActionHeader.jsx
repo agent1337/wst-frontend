@@ -1,24 +1,24 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Box, } from "@mui/material";
 import ActionButton from '../../custom/buttons/actionButton/ActionButton';
+import { useDispatch,  } from 'react-redux';
+import { saveToMyList } from '../../redux/profile/profile.service';
 
-export default function ActionHeader({ type, publishResume }) {
+export default function ActionHeader({ type, publishResume, resumeId }) {
+    const dispatch = useDispatch()
+    const history = useHistory();
+
+    const saveCVtoMyList = (resumeId) => {
+        dispatch(saveToMyList(resumeId))
+        history.push("/resumes")
+    }
 
     const openEditResume = () => {
 
     }
 
-    const generate = () => {
-        
-    }
-
-    const editResume = () => {
-        
-    }
-
-    const publishEditResume = () => {
-        
-    }
+    const generate = () => { }
 
     return (
         <section>
@@ -32,15 +32,17 @@ export default function ActionHeader({ type, publishResume }) {
 
                 {type === 'second' && (
                     <>
-                        <ActionButton text={"EDIT"} func={openEditResume} />
-                        <ActionButton text={"GENERATE"} func={generate} />
+                        <ActionButton text={"Edit"} func={openEditResume} />
+                        <ActionButton text={"Download PDF"} func={generate} />
+                        <ActionButton text={"Share"} func={() => alert('share')} />
                     </>
                 )}
 
                 {type === 'third' && (
                     <>
-                        <ActionButton text={"Save changes"} func={editResume} />
-                        <ActionButton text={"Publish"} func={publishEditResume} />
+                        <ActionButton text={"Save to list"} func={() => saveCVtoMyList(resumeId)} />
+                        <ActionButton text={"Download PDF"} func={() => alert('download')} />
+                        <ActionButton text={"Share"} func={() => alert('share')} />
                     </>
                 )}
             </Box>

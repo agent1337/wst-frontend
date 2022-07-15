@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { getProfile, getResumes } from "../../redux/profile/profile.service";
+import { getProfile, getOwnResumeData } from "../../redux/profile/profile.service";
 
 const styles = {
     title: {

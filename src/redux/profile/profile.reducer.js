@@ -1,16 +1,20 @@
 import {
     CREATE_RESUME,
     GET_MEDIA,
-    GET_RESUME,
+    GET_OWN_RESUME,
     CLONE_SELECTED_RESUME,
     REMOVE_SELECTED_RESUME,
     SET_PROFILE,
-    SET_RESUMES
+    GET_OWN_RESUMES_DATA,
+    GET_OTHER_RESUME_DATA,
+    GET_OTHER_RESUME,
+    SAVE_TO_MY_LIST
 } from "./profile.constants";
 
 const initialState = {
     user: [],
     resumes: [],
+    othersResumes: [],
     resumeData: [],
     media: [],
     loading: false
@@ -24,11 +28,18 @@ export const profileReducer = (state = initialState, action) => {
                 resumes: [...state.resumes, action.payload]
             }
         case SET_PROFILE:
-            return {...state, user: action.payload }
-        case SET_RESUMES:
+            return { ...state, user: action.payload }
+        case GET_OWN_RESUMES_DATA:
             return { ...state, resumes: action.payload }
-        case GET_RESUME:
+        case GET_OTHER_RESUME_DATA:
+            return { ...state, othersResumes: action.payload }
+        case GET_OWN_RESUME:
             return { ...state, resumeData: action.payload }
+        case SAVE_TO_MY_LIST:
+            return {
+                ...state,
+                othersResumes: [...state.othersResumes, action.payload]
+            }
         case GET_MEDIA:
             console.log(action.payload, 'actionv ')
             return { ...state, media: action.payload }

@@ -4,7 +4,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import ActionHeader from "../../components/actionHeader/ActionHeader";
 import Experience from "./components/Experience";
 import DisplaySchedule from "../../components/schedule/DisplaySchedule";
-import { getResume, getUploadedFiles } from "../../redux/profile/profile.service";
+import { getOtherResume, getOwnResume, getUploadedFiles } from "../../redux/profile/profile.service";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAge, getDay } from "../../helpers/dateCalculation";
 import QRcode from 'qrcode';
@@ -17,6 +17,7 @@ const ref = React.createRef();
 
 export default function ViewResume() {
   const dispatch = useDispatch()
+  const user = useSelector(state => state.profile.user)
 
   let location = useLocation();
   let id = location.pathname.split("/")[2];
@@ -30,7 +31,8 @@ export default function ViewResume() {
   const [schedules, setTest] = useState([])
 
   useEffect(() => {
-    dispatch(getResume(id))
+    dispatch(getOwnResume(id))
+    dispatch(getOtherResume(id))
     dispatch(getUploadedFiles(id))
   }, [])
 
@@ -56,10 +58,12 @@ export default function ViewResume() {
   //     })
   //     .catch((error) => console.log(error));
   // }, [setImage]);
+  const type = user._id !== resume.userId ? 'third' : 'second'
 
   return (
     <section style={styles.section}>
-      {resume.userId}
+      <Typography sx={user._id !== resume.userId ? { color: 'pink' } : { color: 'black' }}>{resume.userId}</Typography>
+
       {resume &&
         <>
           <Box
@@ -71,9 +75,9 @@ export default function ViewResume() {
             }}
           >
             <Typography>
-              {resume.resumeTitle}
+              {user._id === resume.userId && resume.resumeTitle}
             </Typography>
-            <ActionHeader type={"second"} resumeId={id} />
+            <ActionHeader type={type} resumeId={id} />
           </Box>
           <Pdf targetRef={ref} filename="code-example.pdf" scale={0.78} x={4} y={5}>
             {({ toPdf }) => <button style={{ position: 'absolute', right: '0', top: '0px', padding: '11px 23px', color: 'transparent' }} onClick={toPdf}>Generate Pdf</button>}
@@ -199,11 +203,11 @@ export default function ViewResume() {
                 </>
               )} */}
               <Typography sx={styles.title}>When can I start?</Typography>
-              <Box sx={{display: 'flex'}}>
-                <Typography sx={{fontWeight: 700}}>
+              <Box sx={{ display: 'flex' }}>
+                <Typography sx={{ fontWeight: 700 }}>
                   {moment(resume.whenStart).format("YYYY/DD/MM")}
                 </Typography>
-                <Typography sx={{marginLeft: '10px'}}>
+                <Typography sx={{ marginLeft: '10px' }}>
                   ({getDay(resume.whenStart)})
                 </Typography>
               </Box>

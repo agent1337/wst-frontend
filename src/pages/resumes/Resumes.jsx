@@ -6,7 +6,7 @@ import { styles } from "./resumes.styles";
 import CreateResumeButton from "../../custom/buttons/createResume/CreateResumeButton";
 import OwnResumeCard from "../../components/resumeCard/ownCardResume/OwnResumeCard";
 import { useDispatch, useSelector } from "react-redux";
-import { getResumes } from "../../redux/profile/profile.service";
+import { getOtherResumeData, getOwnResumeData } from "../../redux/profile/profile.service";
 import OtherResumeCard from "../../components/resumeCard/otherCardResume/OtherResumeCard";
 
 function TabPanel(props) {
@@ -42,6 +42,7 @@ function a11yProps(index) {
 export default function Resumes() {
   const [value, setValue] = useState(0);
   const resumes = useSelector(state => state.profile.resumes)
+  const othersResumes = useSelector(state => state.profile.othersResumes)
   const dispatch = useDispatch()
 
   const handleChange = (event, newValue) => {
@@ -49,9 +50,11 @@ export default function Resumes() {
   };
 
   useEffect(() => {
-    dispatch(getResumes())
+    dispatch(getOwnResumeData())
+    dispatch(getOtherResumeData())
   }, [])
 
+  console.log(othersResumes, 'othersResumes')
   return (
     <Box sx={styles.container}>
       <Box>
@@ -85,8 +88,8 @@ export default function Resumes() {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Box sx={styles.box}>
-        {resumes &&
-            resumes.map((item, index) => {
+        {othersResumes &&
+            othersResumes.map((item, index) => {
               return (
                 <OtherResumeCard
                   item={item}

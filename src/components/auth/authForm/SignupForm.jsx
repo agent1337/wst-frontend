@@ -9,7 +9,7 @@ import { authentication } from '../../context/base';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signup, gotwitter } from '../../../redux/auth/auth.service';
-import { getProfile, getResumes } from '../../../redux/profile/profile.service';
+import { getProfile, getOwnResumeData } from '../../../redux/profile/profile.service';
 import { SET_ALERT } from '../../../redux/alert/alert.constants';
 import { ToastContainer, toast } from 'react-toastify';
 import { toastStyle } from '../../../utils/toastStyle';
@@ -85,7 +85,7 @@ const SignupForm = () => {
 
         if (isLogined) {
             dispatch(getProfile())
-            dispatch(getResumes())
+            dispatch(getOwnResumeData())
             history.push("/resumes")
         }
     }

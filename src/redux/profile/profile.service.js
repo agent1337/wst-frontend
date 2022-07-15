@@ -1,7 +1,17 @@
 
 import { axiosInstance } from "../../api/axios"
 import { SET_ALERT } from "../alert/alert.constants";
-import { CLONE_SELECTED_RESUME, CREATE_RESUME, GET_MEDIA, GET_RESUME, REMOVE_SELECTED_RESUME, SET_PROFILE, SET_RESUMES } from "./profile.constants";
+import { 
+    CLONE_SELECTED_RESUME, 
+    CREATE_RESUME, 
+    GET_MEDIA, 
+    GET_OWN_RESUME, 
+    REMOVE_SELECTED_RESUME, 
+    SET_PROFILE, 
+    GET_OWN_RESUMES_DATA, 
+    GET_OTHER_RESUME_DATA,
+    SAVE_TO_MY_LIST,
+} from "./profile.constants";
 
 export const getProfile = () => {
     return async dispatch => {
@@ -13,39 +23,73 @@ export const getProfile = () => {
                 payload: response.data
             })
         }
-        catch (err) {
-            console.log(err.response.data.message)
+        catch (error) {
+            console.log(error.response.data.message)
         }
     }
 }
 
-export const getResumes = () => {
+export const getOwnResumeData = () => {
     return async dispatch => {
         try {
-            const response = await axiosInstance.get("resumes")
+            const response = await axiosInstance.get("resumes/own")
 
             dispatch({
-                type: SET_RESUMES,
+                type: GET_OWN_RESUMES_DATA,
                 payload: response.data
             })
         }
-        catch (err) {
-            console.log(err.response.data.message)
+        catch (error) {
+            console.log(error.response.data.message)
         }
     }
 }
 
-export const getResume = (id) => {
+
+export const getOtherResumeData = () => {
     return async dispatch => {
         try {
-            const response = await axiosInstance.get(`/resumes/${id}`)
+            const response = await axiosInstance.get("resumes/others")
+
             dispatch({
-                type: GET_RESUME,
+                type: GET_OTHER_RESUME_DATA,
                 payload: response.data
             })
         }
-        catch (err) {
-            console.log(err.response.data.message)
+        catch (error) {
+            console.log(error.response.data.message)
+        }
+    }
+}
+
+export const getOwnResume = (id) => {
+    return async dispatch => {
+        try {
+            const response = await axiosInstance.get(`/resumes/own/${id}`)
+
+            dispatch({
+                type: GET_OWN_RESUME,
+                payload: response.data
+            })
+        }
+        catch (error) {
+            console.log(error.response.data.message)
+        }
+    }
+}
+
+export const getOtherResume = (id) => {
+    return async dispatch => {
+        try {
+            const response = await axiosInstance.get(`/resumes/other/${id}`)
+
+            dispatch({
+                type: GET_OWN_RESUME,
+                payload: response.data
+            })
+        }
+        catch (error) {
+            console.log(error.response.data.message)
         }
     }
 }
@@ -54,13 +98,14 @@ export const getUploadedFiles = (id) => {
     return async dispatch => {
         try {
             const response = await axiosInstance.get(`/media/${id}`)
+
             dispatch({
                 type: GET_MEDIA,
                 payload: response.data
             })
         }
-        catch (err) {
-            console.log(err.response.data.message)
+        catch (error) {
+            console.log(error.response.data.message)
         }
     }
 }
@@ -76,7 +121,23 @@ export const createResume = (data) => {
               })
         }
         catch (error) {
-            
+            console.log(error.response.data.message)
+        }
+    }
+}
+
+export const saveToMyList = (id) => {
+    return async dispatch => {
+        try {
+            const response = await axiosInstance.post(`resumes/save/${id}`)
+
+            dispatch ({
+                type: SAVE_TO_MY_LIST,
+                payload: response.data
+            })
+        }
+        catch (error) {
+            console.log(error.response.data.message)
         }
     }
 }
@@ -86,19 +147,18 @@ export const removeSelectedResume = (resumeId) => {
         try {
             const response = await axiosInstance.delete(`resumes/` + resumeId)
 
-            console.log(response.data, 'response.data')
-
             dispatch({
                 type: REMOVE_SELECTED_RESUME,
                 payload: response.data
             })
+
             dispatch({
                 type: SET_ALERT,
                 payload: `${response.data.resumeTitle} was delete`
             })
         }
-        catch (err) {
-            console.log(err.response.data.message)
+        catch (error) {
+            console.log(error.response.data.message)
         }
     }
 }
@@ -108,19 +168,18 @@ export const cloneResume = (resumeId) => {
         try {
             const response = await axiosInstance.post(`resumes/copy/` + resumeId)
 
-            console.log(response.data, 'response.data')
-
             dispatch({
                 type: CLONE_SELECTED_RESUME,
                 payload: response.data
             })
+
             dispatch({
                 type: SET_ALERT,
                 payload: `Created “${response.data.resumeTitle}”`
             })
         }
-        catch (err) {
-            console.log(err.response.data.message)
+        catch (error) {
+            console.log(error.response.data.message)
         }
     }
 }

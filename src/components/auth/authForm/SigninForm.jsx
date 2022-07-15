@@ -11,7 +11,7 @@ import { useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { signin, gotwitter } from '../../../redux/auth/auth.service';
-import { getProfile, getResumes, } from '../../../redux/profile/profile.service';
+import { getProfile, getOwnResumeData, } from '../../../redux/profile/profile.service';
 import { SET_ALERT } from '../../../redux/alert/alert.constants';
 import {toastStyle} from '../../../utils/toastStyle';
 import { styles } from './authForm.styles';
@@ -47,7 +47,7 @@ const SigninForm = () => {
 
         if(isLogined) {
             dispatch(getProfile())
-            dispatch(getResumes())
+            dispatch(getOwnResumeData())
             history.push("/resumes")
         }
     }

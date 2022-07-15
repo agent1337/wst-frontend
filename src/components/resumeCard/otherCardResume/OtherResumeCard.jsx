@@ -66,7 +66,7 @@ export default function OtherResumeCard({ item, }) {
 
 
       <Box sx={styles.cardsItem}>
-        <Link className="link" to={`/resume/${item._id}`}>
+        <Link className="link" to={`/resumes/${item._id}`}>
           <Box
             sx={{
               ...styles.card,
