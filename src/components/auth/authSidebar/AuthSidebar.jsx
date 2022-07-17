@@ -9,14 +9,14 @@ const AuthSidebar = () => {
 
                 <Box sx={styles.desktop}>
                     <img
-                        src="../../logo/whitelogo.png"
+                        src="../../logo/white-logo.svg"
                         alt="logo"
                         style={styles.logo}
                     />
                 </Box>
 
-                <Box sx={styles.mobile}>
-                    <img src="../../logos/logo.png" alt="logo" />
+                <Box sx={styles.mobileBox}>
+                    <img src="../../logo/logo.svg" alt="logo" style={styles.mobileLogo} />
                 </Box>
 
                 <Box sx={styles.text}>

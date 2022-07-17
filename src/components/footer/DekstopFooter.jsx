@@ -6,9 +6,9 @@ const DekstopFooter = () => {
     <Box sx={styles.container}>
       <Box sx={styles.content}>
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <img src="../../footer/Bitmap.png" alt="" />
+          <img src="../../Bitmap.png" alt="" />
           <Typography sx={{ fontSize: "12px" }}>日本語</Typography>
-          <img src="../../footer/Shape.png" alt="" />
+          <img src="../../Shape.png" alt="" />
         </Box>
         <Typography sx={{ fontSize: "12px" }}>
           WorkStyleTech株式会社

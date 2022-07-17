@@ -28,7 +28,7 @@ export const styles = {
     },
   },
   text: {
-    marginTop: "13px",
+    // marginTop: "13px",
     marginLeft: "10px",
     fontWeight: "500",
     fontSize: "18px",
@@ -93,9 +93,15 @@ export const styles = {
       display: "none",
     },
   },
-  mobile: {
+  mobileBox: {
+    height: '34px',
+    width: '56px',
     "@media (min-width: 900px)": {
       display: "none",
     },
   },
+  mobileLogo: {
+    width: '100%',
+    height: '100%'
+  }
 }; 

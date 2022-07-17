@@ -10,7 +10,7 @@ const MainLayout = props => {
     <Box>
       <Header />
       {props.children}
-      {/* <Footer /> */}
+      <Footer />
       <ToastContainer/>
     </Box>
   ) : <Redirect to="/" />

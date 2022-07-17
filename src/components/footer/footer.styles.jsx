@@ -1,10 +1,13 @@
+import { text } from "../../colors";
+
 export const styles = {
   container: {
     background: "#FCFCFC",
+    color: `${text}`,
     padding: "20px 0",
     "@media (max-width: 1120px)": {
       padding: "12px 0",
-      height: "75px",
+      height: "50px",
     },
     "@media (max-width: 530px)": {
       display: "none",
@@ -20,16 +23,16 @@ export const styles = {
     position: "relative",
   },
   copyright: {
+    fontFamily: 'Arial',
+    fontSize: '10px',
     "@media (max-width: 1120px)": {
       position: "absolute",
-      top: "40px",
+      top: "35px",
       width: "100%",
       textAlign: "center",
-      fontSize: "12px",
+      fontSize: "10px",
     },
   },
-
-
   mobileFooter: {
     fontSize: '12px',
     padding: "0 18px",

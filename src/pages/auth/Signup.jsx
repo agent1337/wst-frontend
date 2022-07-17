@@ -16,7 +16,6 @@ const Signup = () => {
                 <SignupForm />
             </Grid>
             <DekstopFooter/>
-            {/* <Footer /> */}
         </Box>
     )
 }
