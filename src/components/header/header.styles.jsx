@@ -3,7 +3,6 @@ import { main } from '../../colors';
 export const styles = {
     header: {
         width: "100%",
-       
         marginBottom: "46px",
         position: "relative",
         "@media (min-width: 799px)": {
@@ -11,7 +10,6 @@ export const styles = {
             display: "flex",
             justifyContent: "space-between",
             boxShadow: "0px 3px 4px rgb(42 204 143 / 27%)",
-           
         },
     },
     mobile: {
@@ -25,7 +23,6 @@ export const styles = {
         },
     },
     content: {
-       
         maxWidth: "1160px",
         width: '100%',
         margin: "0 auto",
@@ -33,6 +30,10 @@ export const styles = {
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
+        "@media (max-width: 1180px)": {
+            maxWidth: '100%',
+            padding: '0 20px'
+        },
         "@media (max-width: 949px)": {
             display: "none",
         },

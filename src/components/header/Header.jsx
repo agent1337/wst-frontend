@@ -3,15 +3,14 @@ import { Box, Button } from '@mui/material';
 import Navigation from '../navigation/Navigation';
 import PartTimeLogo from '../logo/PartTimeLogo';
 import Avatar from '../avatar/Avatar';
-import { styles } from './header.styles';
 import MenuIcon from '@mui/icons-material/Menu';
-import { main } from '../../colors';
+import { styles } from './header.styles';
 
 export default function Header() {
     const [isShow, setIsShow] = useState(false)
 
     return (
-        <section style={styles.header}>
+        <Box sx={styles.header}>
             <Box sx={styles.mobile}>
                 <Box>
                     <img src="../../logo/logo.svg" alt="logo" />
@@ -35,6 +34,6 @@ export default function Header() {
                     <Button sx={styles.createButton}>Create New Resume</Button>
                 </Box>
             </Box>
-        </section>
+        </Box>
     )
 }

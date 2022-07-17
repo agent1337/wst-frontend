@@ -1,7 +1,8 @@
 import React from 'react';
 import { Box, Typography } from "@mui/material";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import { main, white, text } from '../../colors';
+import { main, text } from '../../colors';
+import { styles } from './navigation.styles';
 
 const dekstop = [
     {
@@ -41,31 +42,6 @@ const mobile = [
     },
 ]
 
-const styles = {
-    navigation: {
-        display: "flex",
-    },
-    mobile: {
-        display: 'none',
-        "@media (max-width: 949px)": {
-            display: 'block',
-            position: 'absolute',
-            background: `${white}`,
-            width: 'calc(100% - 100px)',
-            zIndex: 4,
-            boxShadow: '0px 0px 8px  rgba(0, 0, 0, 0.16)',
-            borderRadius: '2px',
-            padding: '20px 50px',
-        },
-    },
-    dekstop: {
-        display: "flex",
-        "@media (max-width: 949px)": {
-            display: 'none',
-        }
-    }
-};
-
 export default function Navigation({ setIsShow, isShow }) {
     let location = useLocation();
     let history = useHistory()
@@ -87,7 +63,6 @@ export default function Navigation({ setIsShow, isShow }) {
                                     setIsShow(!isShow)
                                 }}
                             >
-
                                 {link.link}
                             </Typography>
                         </Link>
