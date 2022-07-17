@@ -1,14 +1,35 @@
 .container {
-    width   : 100%;
+    width   : calc(100% - 34px);
     position: relative;
-    padding: 0 17px;
+    padding : 0 17px;
+}
 
+@media screen and (max-width: 800px) {
+    .content {
+        display        : flex;
+        width          : 90%;
+        justify-content: space-evenly;
+    }
+    .container {
+        display: flex;
+    }
+    .times {
+        flex-direction: column;
+        width         : 10%;
+        text-align    : center;
+        margin-top    : 35px;
+    }
+    .schedule {
+        border-right: 1px solid red;
+        width       : 20%;
+        padding     : 0 5px;
+        text-align  : center;
+    }
 }
 
 .block {
     width        : 100%;
     border-bottom: 1px solid #D6D6D6;
-    
 }
 
 .times {

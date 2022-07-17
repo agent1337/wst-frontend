@@ -1,47 +1,14 @@
 import React, { useState } from 'react'
-import { Box, Typography, Select, MenuItem, } from '@mui/material'
+import { Box } from '@mui/material'
 import UploadImage from '../../custom/buttons/uploadButton/UploadImage'
 import TextInput from '../../custom/inputs/textInput/TextInput'
-import { danger } from '../../colors'
 import SelectDate from './SelectDate'
-import { toast } from 'react-toastify';
-import { toastStyle } from '../../utils/toastStyle'
 import { useDispatch, useSelector } from 'react-redux'
 import { setInputError } from '../../redux/alert/alert.actions'
+import {styles} from './index.styles'
+import Selector from './Selector'
 
 const gender = [{ text: 'male' }, { text: 'female' }]
-
-const Selector = ({
-    text,
-    data,
-    value,
-    name,
-    onChange
-}) => {
-    return (
-        <>
-            <Typography sx={{ fontSize: '12px' }}>
-                <span style={{ color: `${danger}` }}>*</span>
-                {text}
-            </Typography>
-            <Select
-                value={value}
-                onChange={onChange}
-                displayEmpty
-                name={name}
-                sx={{ width: "100%", marginBottom: '20px' }}
-            >
-                {data.map((item, index) => {
-                    return (
-                        <MenuItem key={index} value={item.text}>
-                            {item.text}
-                        </MenuItem>
-                    );
-                })}
-            </Select>
-        </>
-    );
-};
 
 export default function SelfIntroduction({ selfIntroState, setIntroState, setUploadImage, uploadImage, errors }) {
     const dispatch = useDispatch()
@@ -80,10 +47,10 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
     ]);
 
     return (
-        <div style={{ position: 'relative', padding: '0 16px' }}>
+        <div style={styles.block}>
             <UploadImage setUploadImage={setUploadImage} uploadImage={uploadImage} />
 
-            <Box>
+            <Box sx={styles.innerBlock}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <TextInput
                         name={'surname'}
@@ -92,7 +59,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                         onChange={handleInputChange}
                         setIntroState={setIntroState}
                         errors={errors.name}
-                        half={"48%"}
+                        half={"49%"}
                     />
 
                     <TextInput
@@ -101,7 +68,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                         value={selfIntroState.name}
                         onChange={handleInputChange}
                         errors={errors.name}
-                        half={"48%"}
+                        half={"49%"}
                     />
                 </Box>
 
@@ -114,7 +81,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                         placeholder={"Ex : タナカ"}
                         onBlur={blurHandler}
                         errors={errors.name}
-                        half={"48%"}
+                        half={"49%"}
                     />
 
                     <TextInput
@@ -125,7 +92,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                         placeholder={"Ex : タロウ"}
                         onBlur={blurHandler}
                         errors={errors.name}
-                        half={"48%"}
+                        half={"49%"}
                     />
                     {isError && <p style={{ border: '1px solid red' }}>error</p>}
                 </Box>

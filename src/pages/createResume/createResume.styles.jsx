@@ -1,54 +1,89 @@
+import { main, dark_warning, white } from "../../colors";
+
 export const styles = {
-    // section: {
-    //     boxSizing: 'border-box',
-    //     width: "970px",
-    //     margin: '0 auto',
-    //     marginBottom: '100px',
-    //     position: 'relative',
-    //     "@media (max-width: 1024px)": {
-    //         width: "96%",
-    //         margin: '0 auto',
-    //     },
-    // },
+    section: {
+        maxWidth: '970px',
+        margin: '0 auto',
+        "@media (max-width: 970px)": {
+            maxWidth: 'auto',
+            padding: '0 20px'
+        },
+        "@media (max-width: 800px)": {
+            padding: '0'
+        }
+    },
     block: {
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center',
+        alignItems: 'end',
         marginBottom: '10px',
-        "@media (max-width: 1024px)": {
-            margin: '0 12px',
-            paddingBottom: '10px'
+    },
+    container: {
+        display: 'flex',
+        border: '1px solid #ccc',
+        "@media (max-width: 800px)": {
+            flexDirection: 'column',
+            border: 'none'
         },
     },
-    // inputResumeTitle: {
-    //     border: 'none'
-    // },
-    // container: {
-    //     border: '1px solid #ccc',
-    //     display: 'flex',
-    //     "@media (max-width: 1024px)": {
-    //         margin: '0 12px'
-    //     },
-    //     "@media (max-width: 800px)": {
-    //         flexDirection: 'column'
-    //      },
-    // },
-    // selfIntroduction: {
-    //     paddingTop: '13px',
-    //     maxWidth: '334px',
-    //     borderRight: '1px solid #ccc',
-    //     "@media (max-width: 800px)": {
-    //         maxWidth: '100%'
-    //      },
-       
-    // },
-    // fields: {
-    //     width: '635px',
-    //     "@media (max-width: 1024px)": {
-    //         width: "calc(100% - 334px)",
-    //     },
-    //     "@media (max-width: 800px)": {
-    //         maxWidth: '100%'
-    //      },
-    // }
+    selfIntroduction: {
+        "@media (min-width: 801px)": {
+            paddingTop: '13px',
+            maxWidth: '300px',
+            width: '100%',
+            borderRight: '1px solid #ccc',
+            padding: '0 16px'
+        },
+    },
+    fields: {
+        width: '100%',
+    },
+    titleInput: {
+        display: 'flex',
+        alignItems: 'center',
+        cursor: 'pointer'
+    },
+    inputResumeTitle: {
+        width: '150px',
+        border: 'none',
+        fontWeight: '400',
+        fontSize: '19px',
+        outline: 'none'
+    },
+    mobileAction: {
+        display: 'none',
+        "@media (max-width: 800px)": {
+            marginTop: '50px',
+            display: 'flex',
+            flexDirection: 'column',
+            position: 'relative',
+            height: '220px'
+        },
+    },
+    btn: {
+        width: 'calc(100% - 32px)',
+        fontWeight: '500',
+        fontSize: '14px',
+        lineHeight: '16px',
+        padding: '10px 0',
+        margin: '10px auto'
+    },
+    save: {
+        color: `${white}`,
+        background: `${main}`,
+        marginBottom: '20px',
+    },
+    publish: {
+        color: `${main}`,
+        border: `1px solid ${main}`,
+    },
+    goTop: {
+        position: 'absolute',
+        bottom: '30px',
+        right: '16px',
+        width: '48px',
+        height: '48px',
+        borderRadius: '50%',
+        background: `${dark_warning}`
+    }
 }

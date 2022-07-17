@@ -3,6 +3,7 @@ export const white = "#FFFFFF";
 export const text = "#323232";
 export const danger = "#F68C8D";
 export const warning = "#FFBE81";
+export const dark_warning = "#ED9B43";
 export const grey = "#CCCCCC";
 export const dark_grey = "#9C9C9C";
 export const black = "#000000";

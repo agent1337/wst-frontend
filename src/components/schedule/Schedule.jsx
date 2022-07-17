@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Typography } from "@mui/material";
-import { main } from '../../colors';
+import { Typography, div } from "@mui/material";
+import { main, grey } from '../../colors';
 import './schedule.styles.css'
 
 const initial = [
@@ -15,7 +15,7 @@ const initial = [
 
 const initialProgressShift = { day: '', start: null, end: null }
 
-const Schedule = ({setWorkshift}) => {
+const Schedule = ({ setWorkshift }) => {
   let startedTime = 0;
   const [progressShift, setProgressShift] = useState(initialProgressShift)
   const [toDelete, setToDelete] = useState(initialProgressShift)
@@ -110,8 +110,8 @@ const Schedule = ({setWorkshift}) => {
   }
 
   return (
-    <>
-      <Typography sx={{
+    <section style={{ padding: '0 16px' }}>
+      <Typography style={{
         textTransform: "uppercase",
         color: "#323232",
         lineHeight: "16px",
@@ -137,102 +137,56 @@ const Schedule = ({setWorkshift}) => {
           </div>
         </div>
 
-
-        {schedules.map((schedule, scheduleIndex) => {
-          return (
-            <div
-              key={scheduleIndex}
-              className="schedule"
-            >
-              <div style={{ width: '11%' }}>
-                <p style={{ fontSize: '14px', fontFamily: 'Roboto' }}>
-                  {schedule.day}
-                </p>
-              </div>
-
-              <div className="hoursBlock">
-                {schedule.hours.map((hour, hourIndex) => {
-                  let activeStyle = hour ||
-                    (progressShift.day === schedule.day && hourIndex <= Math.max(progressShift.end, progressShift.start)
-                      && hourIndex >= Math.min(progressShift.start, progressShift.end))
-                    ? `${main}` : 'transparent'
-
-                  return (
-                    <div
-                      key={hourIndex}
-                      className="hourItem"
-                      onClick={() => handleClick(schedule, hourIndex)}
-                      value={hourIndex}
-                      onMouseDown={() => handleMouseDown(schedule.day, hourIndex)}
-                      onMouseEnter={() => handleMouseMove(hourIndex)}
-                      onMouseUp={() => handleMouseUp()}
-                    >
-                      <div className="pickedBlock" style={{
-                        background: activeStyle,
-                        opacity: (toDelete.day === schedule.day && hourIndex <= toDelete.end && hourIndex >= toDelete.start) ? '0.5' : '1'
-                      }}></div>
-
-                      {toDelete.day === schedule.day && hourIndex === toDelete.end
-                        ? <button className="removeButton" onClick={(e) => deleteSchedule(e)}><img src="../../action/delete.png" alt="" /></button>
-                        : null
-                      }
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* <Box sx={styles.mobileView}>
-        <Box sx={styles.mobileTimes}>
-          <Box>
-            {times.map((t, timeIndex) => {
-              return (
-                <Typography sx={styles.time} key={timeIndex}>
-                  {t}
-                </Typography>
-              );
-            })}
-          </Box>
-        </Box>
-        <Box sx={styles.schedulesContent}>
+        <div className="content">
           {schedules.map((schedule, scheduleIndex) => {
-            let day = schedule.day.substr(0, 3);
             return (
-              <Box key={scheduleIndex} sx={styles.mobileSchedule}>
-                <Box sx={{ marginBottom: "8px" }}>
-                  <Typography>{day}</Typography>
-                </Box>
+              <div
+                key={scheduleIndex}
+                className="schedule"
+              >
+                <div style={{ width: '11%' }}>
+                  <p style={{ fontSize: '14px', fontFamily: 'Roboto' }}>
+                    {schedule.day}
+                  </p>
+                </div>
 
-                <Box>
+                <div className="hoursBlock">
                   {schedule.hours.map((hour, hourIndex) => {
+                    let activeStyle = hour ||
+                      (progressShift.day === schedule.day && hourIndex <= Math.max(progressShift.end, progressShift.start)
+                        && hourIndex >= Math.min(progressShift.start, progressShift.end))
+                      ? `${main}` : 'transparent'
+
                     return (
-                      <Box
+                      <div
                         key={hourIndex}
-                        sx={styles.hourItemMob}
-                        style={
-                          hour
-                            ? { background: "#29CC8F", color: "transparent" }
-                            : {
-                                background: "transparent",
-                                color: "transparent",
-                              }
-                        }
-                        onClick={() => handleClick(scheduleIndex, hourIndex)}
+                        className="hourItem"
+                        onClick={() => handleClick(schedule, hourIndex)}
+                        value={hourIndex}
+                        onMouseDown={() => handleMouseDown(schedule.day, hourIndex)}
+                        onMouseEnter={() => handleMouseMove(hourIndex)}
+                        onMouseUp={() => handleMouseUp()}
                       >
-                        {hour}12
-                      </Box>
+                        <div className="pickedBlock" style={{
+                          background: activeStyle,
+                          opacity: (toDelete.day === schedule.day && hourIndex <= toDelete.end && hourIndex >= toDelete.start) ? '0.5' : '1'
+                        }}></div>
+
+                        {toDelete.day === schedule.day && hourIndex === toDelete.end
+                          ? <button className="removeButton" onClick={(e) => deleteSchedule(e)}><img src="../../action/delete.png" alt="" /></button>
+                          : null
+                        }
+                      </div>
                     );
                   })}
-                </Box>
-              </Box>
+                </div>
+              </div>
             );
           })}
-        </Box>
-      </Box> */}
-    </>
+        </div>
+      </div>
+
+    </section>
   );
 };
 

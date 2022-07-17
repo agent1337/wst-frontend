@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Box, Grid } from '@mui/material';
-import { styles } from './createResume.styles';
+import { Box, Button } from '@mui/material';
 import ActionHeader from '../../components/actionHeader/ActionHeader';
 import SelfIntroduction from '../../components/resume/SelfIntroduction';
 import ExperienceIntroduction from '../../components/resume/ExperienceIntroduction';
@@ -12,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import Schedule from '../../components/schedule/Schedule';
 import { setAlert } from '../../redux/alert/alert.actions';
+import { styles } from './createResume.styles';
 
 const initialSelfValue = {
     surname: "",
@@ -131,15 +131,18 @@ export default function CreateResume() {
     };
 
     return (
-        <section style={styles.section}>
+        <Box sx={styles.section}>
             <Box sx={styles.block}>
-                <input
-                    type="text"
-                    value={resumeTitle}
-                    onChange={(event) => setResumeTitle(event.target.value)}
-                    placeholder="resume title"
-                    style={styles.inputResumeTitle}
-                />
+                <Box sx={styles.titleInput}>
+                    <input
+                        type="text"
+                        value={resumeTitle}
+                        onChange={(event) => setResumeTitle(event.target.value)}
+                        placeholder="resume title"
+                        style={{ ...styles.inputResumeTitle, }}
+                    />
+                    <img src="../../action/edit.png" alt="" />
+                </Box>
                 <ActionHeader type={'first'} publishResume={publish} />
             </Box>
 
@@ -159,7 +162,13 @@ export default function CreateResume() {
                         setExperienceState={setExperienceState}
                     />
 
-                    <Schedule setWorkshift={setWorkshift} />
+                    {/* <Schedule setWorkshift={setWorkshift} /> */}
+
+                    <Box sx={styles.mobileAction}>
+                        <button style={{...styles.btn, ...styles.save}}>Save Changes</button>
+                        <button style={{...styles.btn, ...styles.publish}}>Publish</button>
+                        <button style={styles.goTop}>go</button>
+                    </Box>
                 </Box>
             </Box>
 
@@ -175,7 +184,7 @@ export default function CreateResume() {
                 })}
             </div> */}
             <ToastContainer />
-        </section>
+        </Box>
 
     )
 }

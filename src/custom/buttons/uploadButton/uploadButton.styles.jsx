@@ -7,7 +7,11 @@ export const styles = {
         display: "block",
         textAlign: "center",
         marginBottom: "30px",
-        position: 'relative'
+        position: 'relative',
+        "@media (min-width: 801px)": {
+            paddingTop: '13px',
+            
+        },
     },
     uploadInput: {
         opacity: "0",
