@@ -4,7 +4,7 @@ import { styles } from './textarea.styles';
 
 export default function Textarea({name, value, placeholder, title, onChange}) {
     return (
-        <Box sx={{ marginBottom: '23px' }}>
+        <Box sx={{ marginBottom: '14px' }}>
             <Typography sx={styles.title}>{title}</Typography>
             <textarea
                 style={styles.textarea}
