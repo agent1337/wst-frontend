@@ -143,8 +143,8 @@ export default function CreateResume() {
                 <ActionHeader type={'first'} publishResume={publish} />
             </Box>
 
-            <Grid container sx={styles.container}>
-                <Grid item xs={12} sm={5} md={5} lg={4.1} sx={{ ...styles.selfIntroduction }}>
+            <Box sx={styles.container}>
+                <Box sx={{ ...styles.selfIntroduction }}>
                     <SelfIntroduction
                         selfIntroState={selfIntroState}
                         setIntroState={setIntroState}
@@ -152,18 +152,18 @@ export default function CreateResume() {
                         setUploadImage={setUploadImage}
                         uploadImage={uploadImage}
                     />
-                </Grid>
-                <Grid item xs={12} sm={7} md={7} lg={7.9} sx={{ ...styles.fields }}>
+                </Box>
+                <Box sx={{ ...styles.fields }}>
                     <ExperienceIntroduction
                         experienceState={experienceState}
                         setExperienceState={setExperienceState}
                     />
 
                     <Schedule setWorkshift={setWorkshift} />
-                </Grid>
-            </Grid>
+                </Box>
+            </Box>
 
-            <div className='formErrors'>
+            {/* <div className='formErrors'>
                 {Object.keys(formErrors).map((fieldName, i) => {
                     if (formErrors[fieldName].length > 0) {
                         return (
@@ -173,7 +173,7 @@ export default function CreateResume() {
                         return '';
                     }
                 })}
-            </div>
+            </div> */}
             <ToastContainer />
         </section>
 

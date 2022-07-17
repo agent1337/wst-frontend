@@ -2,10 +2,11 @@ import React from 'react';
 import { Box, Typography } from "@mui/material";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { styles } from './createResumeButton.styles';
+import { Link } from 'react-router-dom';
 
 export default function CreateResumeButton() {
     return (
-        <a href="/create">
+        <Link to="/create">
             <Box sx={{ ...styles.cardsItem }}>
                 <Box sx={{ ...styles.card, ...styles.createButton }}>
                     <Box sx={{ ...styles.content }}>
@@ -15,6 +16,6 @@ export default function CreateResumeButton() {
                     <img src="../../book.png" alt="resume" style={styles.image} />
                 </Box>
             </Box>
-        </a>
+        </Link>
     )
 }

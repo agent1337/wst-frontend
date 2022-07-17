@@ -1,15 +1,31 @@
 import { main } from '../../colors';
-// transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+
 export const styles = {
     header: {
         width: "100%",
-        display: "flex",
-        justifyContent: "space-between",
-        boxShadow: "0px 3px 4px rgb(42 204 143 / 27%)",
+       
         marginBottom: "46px",
         position: "relative",
+        "@media (min-width: 799px)": {
+            height: '120px',
+            display: "flex",
+            justifyContent: "space-between",
+            boxShadow: "0px 3px 4px rgb(42 204 143 / 27%)",
+           
+        },
+    },
+    mobile: {
+        padding: '20px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        boxShadow: "0px 3px 4px rgb(42 204 143 / 27%)",
+        "@media (min-width: 950px)": {
+            display: "none",
+        },
     },
     content: {
+       
         maxWidth: "1160px",
         width: '100%',
         margin: "0 auto",
@@ -17,9 +33,9 @@ export const styles = {
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
-        // "@media (max-width: 960px)": {
-        //     display: "none",
-        // },
+        "@media (max-width: 949px)": {
+            display: "none",
+        },
     },
     box: {
         display: "flex",
@@ -38,5 +54,11 @@ export const styles = {
         "&:hover": {
             background: `${main}`,
         },
+    },
+    burgerMenu: {
+        color: `${main}`,
+        width: '28px',
+        height: '28px',
+        cursor: 'pointer'
     }
 }

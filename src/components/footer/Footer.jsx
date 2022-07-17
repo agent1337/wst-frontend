@@ -45,8 +45,8 @@ const Footer = () => {
 
 const styles = {
     container: {
-        background: "pink",
         color: `${text}`,
+        background: "#FCFCFC",
         padding: "2px 0",
         "@media (max-width: 1120px)": {
             paddingBottom: '22px'

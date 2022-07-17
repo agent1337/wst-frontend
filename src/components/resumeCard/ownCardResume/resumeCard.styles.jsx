@@ -5,14 +5,13 @@ export const styles = {
     padding: "0.50rem 0rem",
     marginBottom: "1rem",
     marginRight: "24px",
-    height: "164px",
-    "@media (max-width: 450px)": {
-      margin: "0 auto",
+    "@media (max-width: 425px)": {
+      margin: '0px'
     },
   },
   card: {
     position: "relative",
-    width: "132px",
+    width: "134px",
     height: "137px",
     backgroundColor: "#ffffff",
     borderRadius: "0.25rem",
@@ -20,7 +19,7 @@ export const styles = {
     flexDirection: "column",
     overflow: "hidden",
     justifyContent: "space-between",
-    paddingTop: "28px",
+    paddingTop: "26px",
     border: "1px solid #29CC8F",
     cursor: 'pointer'
   },
@@ -41,7 +40,7 @@ export const styles = {
     position: "absolute",
     right: "15px",
     top: "16px",
-    zIndex: "100",
+    zIndex: "3",
     width: "12px",
     height: "16px",
     color: "#F68C8D",

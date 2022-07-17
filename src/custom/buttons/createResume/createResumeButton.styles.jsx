@@ -7,14 +7,14 @@ export const styles = {
     padding: "0.50rem 0rem",
     marginBottom: "1rem",
     marginRight: "24px",
-    "@media (max-width: 450px)": {
-      margin: "0 auto",
+    "@media (max-width: 425px)": {
+      margin: '0px'
     },
   },
   card: {
     position: "relative",
-    width: "132px",
-    height: "164px",
+    width: "134px",
+    height: "162px",
     backgroundColor: "#ffffff",
     borderRadius: "0.25rem",
     display: "flex",
@@ -25,9 +25,9 @@ export const styles = {
     border: `1px dashed ${grey}`,
     textAlign: "center",
     position: "relative",
-    "@media (max-width: 34rem)": {
-      margin: "0 auto",
-    },
+    // "@media (max-width: 34rem)": {
+    //   margin: "0 auto",
+    // },
   },
   content: {
     position: "absolute",

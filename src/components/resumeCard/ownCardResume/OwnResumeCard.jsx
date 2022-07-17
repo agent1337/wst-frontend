@@ -91,7 +91,7 @@ export default function OwnResumeCard({ item, }) {
               {item.status}
             </Box>
           )}
-          <Link className="link" to={`/resumes/${item._id}`}>
+          <Link to={`/resumes/${item._id}`}>
             <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100px' }}>
               <Typography
                 sx={styles.resumeTitle}>

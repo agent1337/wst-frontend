@@ -11,7 +11,6 @@ export const styles = {
     },
     "@media (max-width: 530px)": {
       display: "none",
-      background: 'pink'
     },
   },
   content: {
