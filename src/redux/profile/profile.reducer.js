@@ -8,7 +8,8 @@ import {
     GET_OWN_RESUMES_DATA,
     GET_OTHER_RESUME_DATA,
     GET_OTHER_RESUME,
-    SAVE_TO_MY_LIST
+    SAVE_TO_MY_LIST,
+    GET_NATIONALITY
 } from "./profile.constants";
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
     othersResumes: [],
     currentResume: {},
     media: [],
+    nationality: [],
     loading: false
 }
 
@@ -46,7 +48,8 @@ export const profileReducer = (state = initialState, action) => {
         case GET_MEDIA:
             console.log(action.payload, 'actionv ')
             return { ...state, media: action.payload }
-
+        case GET_NATIONALITY:
+            return { ...state, nationality: action.payload }
         case REMOVE_SELECTED_RESUME:
             const newList = state.resumes.filter(resume =>
                 resume.id !== action.payload)

@@ -13,6 +13,7 @@ import {
     GET_OTHER_RESUME_DATA,
     SAVE_TO_MY_LIST,
     GET_OTHER_RESUME,
+    GET_NATIONALITY,
 } from "./profile.constants";
 
 export const getProfile = () => {
@@ -108,6 +109,22 @@ export const getUploadedFiles = (id) => {
         }
         catch (error) {
             console.log(error.response.data.message)
+        }
+    }
+}
+
+export const getNationality = () => {
+    return async dispatch => {
+        try {
+            const response = await axiosInstance.get("nationality")
+        
+            dispatch({
+                type: GET_NATIONALITY,
+                payload: response.data
+            })
+        }
+        catch (error) {
+            dispatch(setAlert(error.response.data.message))
         }
     }
 }

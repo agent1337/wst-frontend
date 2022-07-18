@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Box, Button } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { Box } from '@mui/material';
 import ActionHeader from '../../components/actionHeader/ActionHeader';
 import SelfIntroduction from '../../components/resume/SelfIntroduction';
 import ExperienceIntroduction from '../../components/resume/ExperienceIntroduction';
-import { useDispatch, useSelector } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
-import { toastStyle } from '../../utils/toastStyle';
-import 'react-toastify/dist/ReactToastify.css';
-import axios from "axios";
 import Schedule from '../../components/schedule/Schedule';
+import axios from "axios";
+import { toast } from 'react-toastify';
 import { setAlert } from '../../redux/alert/alert.actions';
+import { toastStyle } from '../../utils/toastStyle';
 import { styles } from './createResume.styles';
 
 const initialSelfValue = {
@@ -55,35 +54,27 @@ export default function CreateResume() {
     const [multipleFiles, setMultipleFiles] = useState([])
     const [selfIntroState, setIntroState] = useState(initialSelfValue)
     const [experienceState, setExperienceState] = useState(initialExperienceValue)
-    const [formErrors, setFormErrors] = useState({ surname: '', name: '' })
     const [errors, setErrors] = useState({
         surname: false,
         name: false,
-        kanaSurname: true,
-        kanaName: true,
-        nationality: true,
-        gender: true,
-        birthday: true,
-        phone: true,
-        eMail: true,
-        address: true,
-        busStation: true,
-        transport: true,
+        kanaSurname: false,
+        kanaName: false,
+        nationality: false,
+        gender: false,
+        birthday: false,
+        phone: false,
+        eMail: false,
+        address: false,
+        busStation: false,
+        transport: false,
     })
     const [workshift, setWorkshift] = useState([])
 
-
-    const validate = (values) => {
-        if (values.name === "" || values.surname === "") {
-            dispatch(setAlert('Please fill the highlighted fields'))
-        }
-
-        if (alert) {
-            return toast(alert, toastStyle);
-        }
-    }
-
     const publish = async (stat) => {
+        if (!isFormValid()) {
+            return toast('Please fill the highlighted fields', toastStyle);
+        }
+
         let data = {
             ...experienceState,
             ...selfIntroState,
@@ -130,6 +121,26 @@ export default function CreateResume() {
             .catch((err) => console.log(err));
     };
 
+    const isFormValid = () => {
+        let isValid = true;
+        let errorsData = {};
+
+        if (!initialSelfValue.surname) {
+            errorsData.name = true;
+            isValid = false;
+        }
+
+        if (!initialSelfValue.name) {
+            errorsData.name = true;
+            isValid = false;
+        }
+
+        setErrors(errorsData);
+
+        return isValid;
+    }
+
+
     return (
         <Box sx={styles.section}>
             <Box sx={styles.block}>
@@ -152,6 +163,7 @@ export default function CreateResume() {
                         selfIntroState={selfIntroState}
                         setIntroState={setIntroState}
                         errors={errors}
+                        setErrors={setErrors}
                         setUploadImage={setUploadImage}
                         uploadImage={uploadImage}
                     />
@@ -162,28 +174,16 @@ export default function CreateResume() {
                         setExperienceState={setExperienceState}
                     />
 
-                    {/* <Schedule setWorkshift={setWorkshift} /> */}
+                    <Schedule setWorkshift={setWorkshift} />
 
                     <Box sx={styles.mobileAction}>
-                        <button style={{...styles.btn, ...styles.save}}>Save Changes</button>
-                        <button style={{...styles.btn, ...styles.publish}}>Publish</button>
+                        <button style={{ ...styles.btn, ...styles.save }}>Save Changes</button>
+                        <button style={{ ...styles.btn, ...styles.publish }}>Publish</button>
                         <button style={styles.goTop}>go</button>
                     </Box>
                 </Box>
             </Box>
 
-            {/* <div className='formErrors'>
-                {Object.keys(formErrors).map((fieldName, i) => {
-                    if (formErrors[fieldName].length > 0) {
-                        return (
-                            <p key={i}>{fieldName} {formErrors[fieldName]}</p>
-                        )
-                    } else {
-                        return '';
-                    }
-                })}
-            </div> */}
-            <ToastContainer />
         </Box>
 
     )

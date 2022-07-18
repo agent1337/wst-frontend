@@ -1,50 +1,58 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { Box } from '@mui/material'
 import UploadImage from '../../custom/buttons/uploadButton/UploadImage'
 import TextInput from '../../custom/inputs/textInput/TextInput'
 import SelectDate from './SelectDate'
 import { useDispatch, useSelector } from 'react-redux'
-import { setInputError } from '../../redux/alert/alert.actions'
-import {styles} from './index.styles'
+import { setAlert, setInputError } from '../../redux/alert/alert.actions'
 import Selector from './Selector'
+import { toast } from 'react-toastify';
+import { toastStyle } from '../../utils/toastStyle';
+import { styles } from './index.styles'
+import { getNationality } from '../../redux/profile/profile.service'
 
 const gender = [{ text: 'male' }, { text: 'female' }]
 
-export default function SelfIntroduction({ selfIntroState, setIntroState, setUploadImage, uploadImage, errors }) {
+export default function SelfIntroduction({ selfIntroState, setIntroState, setUploadImage, uploadImage, errors, setErrors }) {
     const dispatch = useDispatch()
+    const nationality = useSelector(state => state.profile.nationality)
     const isError = useSelector(state => state.alert.error)
+    const alert = useSelector(state => state.alert.alert)
+
+    useEffect(() => {
+       dispatch(getNationality())
+    }, [])
 
     const handleInputChange = (e) => {
+        let clonedErrors = Object.assign({}, errors);
+        if (!e.target.value) {
+            clonedErrors.name = true;
+        } else {
+            clonedErrors.name = false;
+        }
+
         const { name, value } = e.target;
         setIntroState({ ...selfIntroState, [name]: value });
+        setErrors(clonedErrors);
     }
 
     const blurHandler = () => {
-        console.log(selfIntroState, selfIntroState.kanaName, selfIntroState.kanaSurname)
-        let a = /([\u3040-\u30ff]*)/g
+        let reg = /^[ァ-ン]+$/
+        let clonedErrors = Object.assign({}, errors);
 
-        if (!a.test(selfIntroState.kanaSurname)) {
-            alert('error use kana')
-            dispatch(setInputError(true))
+        if (!reg.test(selfIntroState.kanaName)) {
+            dispatch(setAlert('USE KANA'))
+            clonedErrors.kanaName = true
+        } else {
+            clonedErrors.kanaName = false
         }
-        if (!a.test(selfIntroState.kanaName)) {
-            alert('error use kana')
-            dispatch(setInputError(true))
+
+        if (alert) {
+            return toast(alert, toastStyle);
         }
+
+        setErrors(clonedErrors);
     }
-
-    const [nationality, setNationality] = useState([
-        { text: "日本" },
-        { text: "アイスランド" },
-        { text: "アイルランド" },
-        { text: "アゼルバイジャン" },
-        { text: "アフガニスタン" },
-        { text: "アラブ首長国連邦" },
-        { text: "アルジェリア" },
-        { text: "アルゼンチン" },
-        { text: "アルバニア" },
-        { text: "アルメニア" },
-    ]);
 
     return (
         <div style={styles.block}>
@@ -58,7 +66,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                         value={selfIntroState.surname}
                         onChange={handleInputChange}
                         setIntroState={setIntroState}
-                        errors={errors.name}
+                        errors={errors}
                         half={"49%"}
                     />
 
@@ -67,7 +75,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                         text={"Name"}
                         value={selfIntroState.name}
                         onChange={handleInputChange}
-                        errors={errors.name}
+                        errors={errors}
                         half={"49%"}
                     />
                 </Box>
@@ -80,7 +88,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                         onChange={handleInputChange}
                         placeholder={"Ex : タナカ"}
                         onBlur={blurHandler}
-                        errors={errors.name}
+                        errors={errors}
                         half={"49%"}
                     />
 
@@ -91,7 +99,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                         onChange={handleInputChange}
                         placeholder={"Ex : タロウ"}
                         onBlur={blurHandler}
-                        errors={errors.name}
+                        errors={errors}
                         half={"49%"}
                     />
                     {isError && <p style={{ border: '1px solid red' }}>error</p>}
@@ -103,7 +111,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                     value={selfIntroState.position}
                     onChange={handleInputChange}
                     placeholder={"Ex : Floor Staff"}
-                    errors={errors.name}
+                    errors={errors}
                 />
 
                 <Selector
@@ -112,10 +120,10 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                     value={selfIntroState.nationality}
                     onChange={handleInputChange}
                     data={nationality}
-                    errors={errors.name}
+                    errors={errors}
                 />
 
-                <Selector
+                {/* <Selector
                     name={'gender'}
                     text={"Gender"}
                     value={selfIntroState.gender}
@@ -173,7 +181,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                     value={selfIntroState.transport}
                     onChange={handleInputChange}
                     errors={errors.name}
-                />
+                /> */}
             </Box>
 
         </div>
