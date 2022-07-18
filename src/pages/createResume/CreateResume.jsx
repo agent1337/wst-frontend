@@ -71,9 +71,9 @@ export default function CreateResume() {
     const [workshift, setWorkshift] = useState([])
 
     const publish = async (stat) => {
-        // if (!isFormValid()) {
-        //     return toast('Please fill the highlighted fields', toastStyle);
-        // }
+        if (!isFormValid()) {
+            return toast('Please fill the highlighted fields', toastStyle);
+        }
         let data = {
             ...experienceState,
             ...selfIntroState,

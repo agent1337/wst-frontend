@@ -1,7 +1,6 @@
 import React from 'react'
 import { Box, } from "@mui/material";
 import './uploadedFile.styles.css'
-import FileViewer from 'react-file-viewer';
 
 export default function UploadedFile({ file }) {
 
@@ -23,10 +22,6 @@ export default function UploadedFile({ file }) {
                     <button className="button">Delete</button>
                 </div>
             </div>
-            {/* <FileViewer
-                fileType={type}
-                filePath={file}
-            /> */}
 
         </Box>
     )
