@@ -123,7 +123,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                     errors={errors}
                 />
 
-                {/* <Selector
+                <Selector
                     name={'gender'}
                     text={"Gender"}
                     value={selfIntroState.gender}
@@ -181,7 +181,7 @@ export default function SelfIntroduction({ selfIntroState, setIntroState, setUpl
                     value={selfIntroState.transport}
                     onChange={handleInputChange}
                     errors={errors.name}
-                /> */}
+                />
             </Box>
 
         </div>

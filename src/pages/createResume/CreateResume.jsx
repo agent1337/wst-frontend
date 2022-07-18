@@ -45,8 +45,8 @@ const initialExperienceValue = {
 }
 
 export default function CreateResume() {
-    const history = useHistory()
     const dispatch = useDispatch()
+    const history = useHistory()
     const alert = useSelector(state => state.alert.alert)
     const accessToken = localStorage.getItem("accessToken")
     const [resumeTitle, setResumeTitle] = useState("Untitled Resume")
@@ -179,7 +179,7 @@ export default function CreateResume() {
                     <Box sx={styles.mobileAction}>
                         <button style={{ ...styles.btn, ...styles.save }}>Save Changes</button>
                         <button style={{ ...styles.btn, ...styles.publish }}>Publish</button>
-                        <button style={styles.goTop}>go</button>
+                        <button style={styles.goTop} onClick={() =>  window.scrollTo({top: 0, behavior: "smooth"})}>go</button>
                     </Box>
                 </Box>
             </Box>

@@ -4,7 +4,7 @@ import { Box, Grid } from '@mui/material';
 import ActionHeader from '../../components/actionHeader/ActionHeader';
 import SelfIntroduction from '../../components/resume/SelfIntroduction';
 import ExperienceIntroduction from '../../components/resume/ExperienceIntroduction';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { getOtherResume, getOwnResume, getUploadedFiles } from "../../redux/profile/profile.service";
 import { useDispatch, useSelector } from 'react-redux';
 import QRcode from 'qrcode';
@@ -13,9 +13,10 @@ import { styles } from './editResume.styles';
 export default function EditResume() {
     let location = useLocation();
     let id = location.pathname.split("/")[2];
-    const [code, setCode] = useState('')
     const resume = useSelector(state => state.profile.currentResume)
     const workshift = resume.workshift
+    const [resumeTitle, setResumeTitle] = useState(resume.resumeTitle)
+    const [code, setCode] = useState('')
     const [schedules, setTest] = useState([])
     const [selfIntroState, setIntroState] = useState({})
     const [experienceState, setExperienceState] = useState({})
@@ -33,7 +34,7 @@ export default function EditResume() {
         busStation: true,
         transport: true,
     })
-    
+
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -88,35 +89,44 @@ export default function EditResume() {
     const publish = () => { }
 
     return (
-        <section style={styles.section}>
+        <Box style={styles.section}>
             <Box sx={styles.block}>
-                <input
-                    type="text"
-                    value={resume.resumeTitle}
-                    // onChange={(event) => setResumeTitle(event.target.value)}
-                    placeholder="resume title"
-                // style={styles.inputResumeTitle}
-                />
+                <Box sx={styles.titleInput}>
+                    <input
+                        type="text"
+                        value={resumeTitle}
+                        onChange={(event) => setResumeTitle(event.target.value)}
+                        placeholder="resume title"
+                        style={{ ...styles.inputResumeTitle, }}
+                    />
+                    <img src="../../action/edit.png" alt="" />
+                </Box>
                 <ActionHeader type={'first'} publishResume={publish} />
             </Box>
 
-            <Grid container sx={styles.container}>
-                <Grid item xs={12} sm={5} md={5} lg={4.5} sx={{ ...styles.selfIntroduction }}>
+            <Box sx={styles.container}>
+                <Box sx={{ ...styles.selfIntroduction }}>
                     <SelfIntroduction resume={resume}
                         selfIntroState={selfIntroState}
                         setIntroState={setIntroState}
                         errors={errors}
                     />
-                </Grid>
-                <Grid item xs={12} sm={7} md={7} lg={7.5} sx={{ ...styles.fields }}>
+                </Box>
+                <Box sx={{ ...styles.fields }}>
                     <ExperienceIntroduction
                         experienceState={experienceState}
                         setExperienceState={setExperienceState}
                         errors={errors}
                     />
-                </Grid>
-            </Grid>
-            <ToastContainer />
-        </section>
+                    {/* <Schedule setWorkshift={setWorkshift} /> */}
+
+                    <Box sx={styles.mobileAction}>
+                        <button style={{ ...styles.btn, ...styles.save }}>Save Changes</button>
+                        <button style={{ ...styles.btn, ...styles.publish }}>Publish</button>
+                        <button style={styles.goTop} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>go</button>
+                    </Box>
+                </Box>
+            </Box>
+        </Box>
     )
 }

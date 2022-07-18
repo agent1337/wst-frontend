@@ -18,7 +18,7 @@ export default function Selector({
         <Select
             value={value}
             onChange={onChange}
-            displayEmpty
+            defaultValue={value}
             name={name}
             sx={{ width: "100%", marginBottom: '20px' }}
         >
