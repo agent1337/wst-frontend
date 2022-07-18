@@ -1,45 +1,83 @@
+import { dark_warning, grey } from "../../colors";
+
 export const styles = {
   section: {
-    width: "970px",
+    maxWidth: '970px',
     margin: '0 auto',
-    marginBottom: '100px',
-    position: 'relative'
+    "@media (max-width: 970px)": {
+      maxWidth: 'auto',
+      padding: '0 20px'
+    },
+    "@media (max-width: 800px)": {
+      padding: '0'
+    }
+  },
+  block: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "end",
+    marginBottom: "15px",
+  },
+  imageBox: {
+    position: 'relative',
+    width: "100%",
+    height: "400px",
+    background: `${grey}`,
+    marginBottom: "30px",
+    "@media (min-width: 800px)": {
+      marginTop: '13px'
+    },
+  },
+  infoBlock: {
+    width: 'calc(100% - 80px)',
+    position: 'absolute',
+    bottom: '0px',
+    background: 'rgba(0, 0, 0, 0.5)',
+    "@media (min-width: 800px)": {
+     display: 'none'
+    },
+  },
+  container: {
+    display: 'flex',
+    position: 'relative',
+    border: '1px solid #ccc',
+    "@media (max-width: 800px)": {
+      flexDirection: 'column',
+      border: 'none'
+    },
   },
   selfIntroduction: {
-      maxWidth: '332px',
+    "@media (min-width: 801px)": {
+      paddingTop: '13px',
+      maxWidth: '300px',
       width: '100%',
-      borderRight: '1px solid #ccc'
-  },
-  introduction: {
-    border: "1px solid #C4C4C4",
-    padding: "20px",
-    borderRight: "none",
-    "@media (max-width: 900px)": {
-      paddingBottom: "15px",
-    },
-    "@media (max-width: 700px)": {
-      maxWidth: "100%",
-      flexBasis: "100%",
-      borderRight: "1px solid #C4C4C4",
-      borderBottom: "0px",
-    },
-    "@media (max-width: 500px)": {
-      border: "none",
-      padding: "0px",
+      borderRight: '1px solid #ccc',
+      padding: '0 16px'
     },
   },
   fields: {
-    border: "1px solid #C4C4C4",
-    padding: "20px",
-    "@media (max-width: 700px)": {
-      maxWidth: "100%",
-      flexBasis: "100%",
-    },
-    "@media (max-width: 500px)": {
-      border: "none",
-      padding: "0px",
-    },
+    width: 'calc(100% - 16px)',
+    padding: '0 16px'
   },
+  qrBox: {
+    width: "150px",
+    height: "150px",
+    display: "block",
+    margin: "62px auto",
+    "@media (max-width: 800px)": {
+      position: 'absolute',
+      top: '16px',
+      right: '16px',
+      width: '30px',
+      height: '30px',
+      margin: '0',
+     },
+  },
+  qrCode: {
+    width: "100%",
+    height: "100%",
+  },
+
   title: {
     marginBottom: "12px",
   },
@@ -99,4 +137,13 @@ export const styles = {
     marginRight: "20px",
     marginBottom: "20px",
   },
+  goTop: {
+    position: 'absolute',
+    bottom: '30px',
+    right: '16px',
+    width: '48px',
+    height: '48px',
+    borderRadius: '50%',
+    background: `${dark_warning}`
+  }
 };
