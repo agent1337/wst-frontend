@@ -3,9 +3,9 @@ import { Box, Typography } from "@mui/material";
 import { styles } from './textInput.styles';
 import { danger, grey } from '../../../colors';
 
-export default function TextInput({ name, type, value, placeholder, onChange, onBlur, helperText, errors, text, half }) {
+export default function TextInput({ name, type, value, placeholder, onChange, helperText, text, half, errors }) {
     let isNotRequired = name === "position";
-    let isError = errors.name ? `1px solid ${danger}` : `1px solid ${grey}`
+    let isError = errors ? `1px solid ${danger}` : `1px solid ${grey}`
    
     return (
         <Box sx={half ? { width: half } : { width: '100%' }}>
@@ -18,7 +18,6 @@ export default function TextInput({ name, type, value, placeholder, onChange, on
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder || null}
-                onBlur={onBlur}
                 helperText={helperText}
                 style={{
                     ...styles.input,

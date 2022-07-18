@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Box, Grid } from '@mui/material';
+import { Box, } from '@mui/material';
 import ActionHeader from '../../components/actionHeader/ActionHeader';
 import SelfIntroduction from '../../components/resume/SelfIntroduction';
 import ExperienceIntroduction from '../../components/resume/ExperienceIntroduction';

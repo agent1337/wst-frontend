@@ -43,7 +43,6 @@ export default function AutoInput({type, value, name, title }) {
                 }}
             />
             {data?.map((item, index) => {
-                console.log(item)
                 return (
                     <AutoOtput
                         key={index}

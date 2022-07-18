@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Typography, div } from "@mui/material";
-import { main, grey } from '../../colors';
+import { Typography, } from "@mui/material";
+import { main,  } from '../../colors';
 import './schedule.styles.css'
 
 const initial = [

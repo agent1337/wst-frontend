@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 import ActionHeader from "../../components/actionHeader/ActionHeader";
 import Experience from "./components/Experience";
 import DisplaySchedule from "../../components/schedule/DisplaySchedule";
-import { getOtherResume, getOwnResume, getUploadedFiles } from "../../redux/profile/profile.service";
+import { getOwnResume, getUploadedFiles } from "../../redux/profile/profile.service";
 import { useDispatch, useSelector } from "react-redux";
 import { getAge, getDay } from "../../helpers/dateCalculation";
 import QRcode from "qrcode";
@@ -69,8 +69,7 @@ export default function ViewResume() {
 
   useEffect(() => {
     dispatch(getOwnResume(id))
-    // dispatch(getOtherResume(id))
-    // dispatch(getUploadedFiles(id))
+    dispatch(getUploadedFiles(id))
   }, [])
 
   useEffect(() => {
@@ -217,7 +216,7 @@ export default function ViewResume() {
 
               <Experience data={resume.interests} title={"Industries I am Interested in"} />
 
-              {/* {files?.length > 0 && (
+              {files?.length > 0 && (
                 <>
                   <Typography sx={styles.title}>Files</Typography>
                   {files?.map((file, index) => {
@@ -227,8 +226,8 @@ export default function ViewResume() {
                     //  <UploadedFile key={index} file={file} />
                   })}
                 </>
-              )} */}
-              {/* <Typography sx={styles.title}>When can I start?</Typography>
+              )}
+              <Typography sx={styles.title}>When can I start?</Typography>
               <Box sx={{ display: "flex" }}>
                 <Typography sx={{ fontWeight: 700 }}>
                   {moment(resume.whenStart).format("YYYY/DD/MM")}
@@ -241,9 +240,9 @@ export default function ViewResume() {
 
               <Typography sx={{ ...styles.title, marginTop: "20px" }}>
                 DESIRABLE WORKSHIFT
-                </Typography> */}
+                </Typography>
 
-              {/* <DisplaySchedule schedules={schedules} /> */}
+              <DisplaySchedule schedules={schedules} />
             </Box>
           </Box>
         </>
