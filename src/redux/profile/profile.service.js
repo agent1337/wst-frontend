@@ -107,7 +107,7 @@ export const getUploadedFiles = (id) => {
             })
         }
         catch (error) {
-            console.log(error.response.data.message)
+            dispatch(showToast(error.response.data.message))
         }
     }
 }

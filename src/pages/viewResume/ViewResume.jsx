@@ -12,13 +12,12 @@ import Pdf from "react-to-pdf";
 import moment from "moment";
 import { styles } from "./viewResume.styles";
 import { white, main } from "../../colors";
-import { axiosInstance } from "../../api/axios";
 
 const ref = React.createRef();
 
 const InfoBlock = ({ resume }) => {
   return (
-    <Box sx={{...styles.infoBlock, padding: '10px 40px'}}>
+    <Box sx={{ ...styles.infoBlock, padding: '10px 40px' }}>
       <Box>
         <Typography
           sx={{
@@ -43,10 +42,10 @@ const InfoBlock = ({ resume }) => {
           color: `${white}`,
         }}>{resume.position}</Typography>
       </Box>
-      <Box sx={{display: 'flex', justifyContent: 'space-between', padding: '11px 0'}}>
-        <button style={{width: '32px', height: '32px'}}><img style={{width: '100%', height: '100%'}} src="../../action/edit.png" alt=""/></button>
-        <button style={{width: '32px', height: '32px'}}><img style={{width: '100%', height: '100%'}} src="../../action/download.png" alt=""/></button>
-        <button style={{width: '32px', height: '32px'}}><img style={{width: '100%', height: '100%'}} src="../../action/send.png" alt=""/></button>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: '11px 0' }}>
+        <button style={{ width: '32px', height: '32px' }}><img style={{ width: '100%', height: '100%' }} src="../../action/edit.png" alt="" /></button>
+        <button style={{ width: '32px', height: '32px' }}><img style={{ width: '100%', height: '100%' }} src="../../action/download.png" alt="" /></button>
+        <button style={{ width: '32px', height: '32px' }}><img style={{ width: '100%', height: '100%' }} src="../../action/send.png" alt="" /></button>
       </Box>
     </Box>
   )
@@ -62,8 +61,9 @@ export default function ViewResume() {
 
   const [code, setCode] = useState("")
   const [image, setImage] = useState(null)
-  const [files, setFiles] = useState(null)
+  const [files, setFiles] = useState([] || null)
   const resume = useSelector(state => state.profile.currentResume)
+  const media = useSelector(state => state.profile.media)
   const workshift = resume.workshift
   const [schedules, setTest] = useState([])
 
@@ -86,14 +86,11 @@ export default function ViewResume() {
     setTest(arr)
   }, [workshift])
 
-  useEffect(() => {
-    axiosInstance.get(`/media/${id}`)
-      .then((response) => {
-        setImage(response.data[0].filePath);
-        setFiles(response.data.splice(1));
-      })
-      .catch((error) => console.log(error));
-  }, [setImage, setFiles, id]);
+  useEffect(() =>  {
+    dispatch(getUploadedFiles(id))
+    setImage(media[0].filePath);
+    setFiles(media.splice(1));
+  }, [dispatch])
 
   const type = user._id !== resume.userId ? "third" : "second"
 

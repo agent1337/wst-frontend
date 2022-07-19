@@ -1,4 +1,4 @@
-import { RESET_PASSWORD, SIGN_IN } from "./auth.constants"
+import { RESET_PASSWORD, SIGN_IN, LOGOUT } from "./auth.constants"
 import { axiosInstance } from "../../api/axios"
 import { showToast } from "../alert/alert.actions"
 
@@ -10,7 +10,7 @@ export const signup = (email, password) => {
 
             dispatch({
                 type: SIGN_IN,
-                payload: true
+                payload: response.data.accessToken
             })
         }
         catch (error) {
@@ -28,7 +28,7 @@ export const signin = (email, password) => {
 
             dispatch({
                 type: SIGN_IN,
-                payload: true
+                payload: response.data.accessToken
             })
         }
         catch (error) {
@@ -45,7 +45,7 @@ export const gotwitter = (data) => {
 
             dispatch({
                 type: SIGN_IN,
-                payload: true
+                payload: response.data.accessToken
             })
         }
         catch (error) {
@@ -71,5 +71,13 @@ export const forgotPassword = (data) => {
         catch (error) {
             dispatch(showToast(error.response.data.message))
         }
+    }
+}
+
+export const logout = () => {
+    return async dispatch => {
+        dispatch({
+            type: LOGOUT,
+        })
     }
 }

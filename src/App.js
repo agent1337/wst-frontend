@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import Signup from './pages/auth/Signup';
 import Signin from './pages/auth/Signin';
@@ -13,11 +13,13 @@ import ResumeLayout from './layouts/ResumeLayout';
 import MainLayout from './layouts/MainLayout';
 import PageNotFound from './pages/auth/PageNotFound';
 import Test from './pages/Test';
+import { useDispatch, useSelector } from 'react-redux';
+import { SIGN_IN } from './redux/auth/auth.constants';
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => {
   return (
     <Route {...rest} render={props => (
-      <Layout {...props}>
+      <Layout {...rest} {...props}>
         <Component {...props} {...rest} />
       </Layout>
     )} />
@@ -25,7 +27,13 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => {
 }
 
 export default function App() {
-  const [user] = useState(localStorage.getItem('accessToken'));
+  const dispatch = useDispatch()
+  const token = useSelector(state => state.auth.token)
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken')
+    dispatch({ type: SIGN_IN, payload: accessToken })
+  }, [])
 
   return (
     <BrowserRouter>
@@ -34,20 +42,16 @@ export default function App() {
         <AppRoute path="/resumes/:id" layout={ResumeLayout} component={ViewResume} />
         <AppRoute path="/resumes/others/:id" layout={ResumeLayout} component={ViewResume} />
 
-        {user === null
-          &&
-          <>
-            <AppRoute exact path="/" layout={AuthLayout} component={Signup} />
-            <AppRoute path="/signin" layout={AuthLayout} component={Signin} />
-            <AppRoute path="/acceptline" layout={AuthLayout} component={AcceptLine} />
-            <AppRoute path="/forgot-password" layout={AuthLayout} component={ForgotPassword} />
-          </>
-        }
 
-        <AppRoute exact path="/resumes" layout={MainLayout} component={Resumes} props={user} />
-        <AppRoute path="/create" layout={MainLayout} component={CreateResume} props={user} />
-        <AppRoute path="/edit/:id" layout={MainLayout} component={EditResume} props={user} />
-        <AppRoute path="/test" layout={MainLayout} component={Test} props={user} />
+        <AppRoute exact path="/" layout={AuthLayout} component={Signup} />
+        <AppRoute path="/signin" layout={AuthLayout} component={Signin} />
+        <AppRoute path="/acceptline" layout={AuthLayout} component={AcceptLine} />
+        <AppRoute path="/forgot-password" layout={AuthLayout} component={ForgotPassword} />
+
+        <AppRoute exact path="/resumes" layout={MainLayout} component={Resumes} token={token} />
+        <AppRoute path="/create" layout={MainLayout} component={CreateResume} token={token} />
+        <AppRoute path="/edit/:id" layout={MainLayout} component={EditResume} token={token} />
+        <AppRoute path="/test" layout={MainLayout} component={Test} token={token} />
 
         <Route path='*' exact={true} component={PageNotFound} />
       </Switch>

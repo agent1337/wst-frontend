@@ -3,6 +3,7 @@ import { Box, Typography } from "@mui/material";
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../../redux/profile/profile.service";
+import { LOGOUT } from "../../redux/auth/auth.constants";
 
 const styles = {
     title: {
@@ -24,8 +25,8 @@ export default function Avatar() {
     let userEmail = getMail[0];
 
     const logout = () => {
+        dispatch({type: LOGOUT})
         window.localStorage.removeItem("accessToken");
-        window.localStorage.removeItem("user");
         history.push("/signin");
     }
 

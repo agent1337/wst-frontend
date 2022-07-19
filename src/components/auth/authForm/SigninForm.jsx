@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid, Typography, } from "@mui/material";
 import FormText from '../authText/FormText';
 import AuthInput from '../../../custom/inputs/authInput/AuthInput';
@@ -10,19 +10,23 @@ import { authentication } from '../../context/base';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signin, gotwitter } from '../../../redux/auth/auth.service';
-import { getProfile, getOwnResumeData, } from '../../../redux/profile/profile.service';
 import { showToast } from '../../../redux/alert/alert.actions';
 import { styles } from './authForm.styles';
 
 const SigninForm = () => {
     const history = useHistory();
     const dispatch = useDispatch()
-    const isLogined = useSelector(state => state.auth.isLogined)
-
+    const token = useSelector(state => state.auth.token)
     const [user, setUser] = useState({
         email: "",
         password: "",
     });
+
+    useEffect(() => {
+        if (token) {
+            history.push("/resumes")
+        }
+    }, [token])
 
     const [errors, setErrors] = useState({
         email: false,
@@ -34,13 +38,7 @@ const SigninForm = () => {
 
         if (!isFormValid(user.email, user.password)) return
 
-        dispatch(signin(user.email, user.password))
-
-        if(isLogined) {
-            dispatch(getProfile())
-            dispatch(getOwnResumeData())
-            history.push("/resumes")
-        }
+        await dispatch(signin(user.email, user.password))
     }
 
     const isFormValid = () => {
@@ -86,16 +84,11 @@ const SigninForm = () => {
                 }
 
                 dispatch(gotwitter(data))
-
-                if (isLogined) {
-                    dispatch(getProfile())
-                    history.push("/resumes")
-                }
             })
             .catch((err) => console.log(err))
     }
 
-    const line = () => {}
+    const line = () => { }
 
     return (
         <>

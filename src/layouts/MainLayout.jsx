@@ -6,13 +6,14 @@ import Footer from '../components/footer/Footer'
 import Toast from '../custom/toast/Toast';
 import { useSelector } from 'react-redux';
 
-const MainLayout = props => {
+const MainLayout = ({ children }) => {
   const notify = useSelector(state => state.alert.list)
+  const {token, loading} = useSelector(state => state.auth)
 
-  return props ? (
+  return token && !loading ? (
     <Box>
       <Header />
-      {props.children}
+      {children}
       <Footer />
       <Toast toastlist={notify} />
     </Box>

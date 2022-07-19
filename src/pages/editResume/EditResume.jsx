@@ -39,7 +39,6 @@ export default function EditResume() {
 
     useEffect(() => {
         dispatch(getOwnResume(id))
-        dispatch(getOtherResume(id))
         dispatch(getUploadedFiles(id))
         QRcode.toDataURL(document.location.href).then(setCode)
 
@@ -91,7 +90,7 @@ export default function EditResume() {
     return (
         <Box style={styles.section}>
             <Box sx={styles.block}>
-                <Box sx={styles.titleInput}>
+                {/* <Box sx={styles.titleInput}>
                     <input
                         type="text"
                         value={resumeTitle}
@@ -118,14 +117,14 @@ export default function EditResume() {
                         setExperienceState={setExperienceState}
                         errors={errors}
                     />
-                    {/* <Schedule setWorkshift={setWorkshift} /> */}
+                    <Schedule setWorkshift={setWorkshift} />
 
                     <Box sx={styles.mobileAction}>
                         <button style={{ ...styles.btn, ...styles.save }}>Save Changes</button>
                         <button style={{ ...styles.btn, ...styles.publish }}>Publish</button>
                         <button style={styles.goTop} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>go</button>
                     </Box>
-                </Box>
+                </Box> */}
             </Box>
         </Box>
     )
