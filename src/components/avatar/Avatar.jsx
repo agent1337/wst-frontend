@@ -25,7 +25,7 @@ export default function Avatar() {
     let userEmail = getMail[0];
 
     const logout = () => {
-        dispatch({type: LOGOUT})
+        dispatch({ type: LOGOUT })
         window.localStorage.removeItem("accessToken");
         history.push("/signin");
     }
@@ -37,7 +37,10 @@ export default function Avatar() {
                     Welcome,
           {userEmail ? userEmail : null}
                 </Typography>
-                <img src="../../auth/Icon.png" alt="" onClick={logout} />
+                <button onClick={() => logout()}>
+                    <img src="../../auth/Icon.png" alt="icon" />
+                </button>
+
             </Box>
         </Box>
     )

@@ -60,7 +60,7 @@ export default function ViewResume() {
   let id = arr[arr.length - 1];
 
   const [code, setCode] = useState("")
-  const [image, setImage] = useState(null)
+  const [image, setImage] = useState([] || null)
   const [files, setFiles] = useState([] || null)
   const resume = useSelector(state => state.profile.currentResume)
   const media = useSelector(state => state.profile.media)
@@ -213,7 +213,7 @@ export default function ViewResume() {
 
               <Experience data={resume.interests} title={"Industries I am Interested in"} />
 
-              {files?.length > 0 && (
+              {files && files?.length > 0 && (
                 <>
                   <Typography sx={styles.title}>Files</Typography>
                   {files?.map((file, index) => {

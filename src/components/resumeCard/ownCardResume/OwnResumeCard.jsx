@@ -32,7 +32,7 @@ export default function OwnResumeCard({ item, }) {
           <Typography
             sx={{ fontSize: "14px", lineHeight: "20px", fontWeight: 400 }}
           >
-            "{item.resumeTitle}" will be permanently deleted.
+            `&quot;`{item.resumeTitle}`&quot;` will be permanently deleted.
           </Typography>
           <Box
             sx={{ display: "flex", justifyContent: "end", marginTop: "30px" }}
@@ -64,13 +64,12 @@ export default function OwnResumeCard({ item, }) {
 
 
       <Box sx={styles.cardsItem}>
-        <img
-          src="../../action/delete.png"
-          alt="remove"
-          style={styles.deleteButton}
-          onClick={() => setIsOpen(true)}
-        />
-
+        <button onClick={() => setIsOpen(true)} style={styles.deleteButton}>
+          <img
+            src="../../action/delete.png"
+            alt="remove"
+          />
+        </button>
         <Box
           sx={{
             ...styles.card,
@@ -110,12 +109,15 @@ export default function OwnResumeCard({ item, }) {
               alt="edit"
               style={{ cursor: "pointer", marginRight: "10px" }}
             />
-            <img
-              src="../../action/copy.png"
-              alt="copy"
+            <button
               style={{ cursor: "pointer", marginRight: "10px" }}
-              onClick={() => copy(item._id)}
-            />
+              onClick={() => copy(item._id)}>
+              <img
+                src="../../action/copy.png"
+                alt="copy"
+              />
+            </button>
+
             <img
               src="../../../action/download.png"
               alt="download"

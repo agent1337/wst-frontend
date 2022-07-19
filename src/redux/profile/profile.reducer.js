@@ -49,9 +49,8 @@ export const profileReducer = (state = initialState, action) => {
         case GET_NATIONALITY:
             return { ...state, nationality: action.payload }
         case REMOVE_SELECTED_RESUME:
-            const newList = state.resumes.filter(resume =>resume.id !== action.payload)
             return {
-                ...state, resumes: newList
+                ...state, resumes: state.resumes.filter(resume =>resume.id !== action.payload)
             }
         case CLONE_SELECTED_RESUME:
             return {

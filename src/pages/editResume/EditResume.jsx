@@ -4,11 +4,10 @@ import { Box, } from '@mui/material';
 import ActionHeader from '../../components/actionHeader/ActionHeader';
 import SelfIntroduction from '../../components/resume/SelfIntroduction';
 import ExperienceIntroduction from '../../components/resume/ExperienceIntroduction';
-import { toast } from 'react-toastify';
-import { getOtherResume, getOwnResume, getUploadedFiles } from "../../redux/profile/profile.service";
+import { getOwnResume, getUploadedFiles } from "../../redux/profile/profile.service";
 import { useDispatch, useSelector } from 'react-redux';
-import QRcode from 'qrcode';
 import { styles } from './editResume.styles';
+import Schedule from "../../components/schedule/Schedule";
 
 export default function EditResume() {
     let location = useLocation();
@@ -16,31 +15,15 @@ export default function EditResume() {
     const resume = useSelector(state => state.profile.currentResume)
     const workshift = resume.workshift
     const [resumeTitle, setResumeTitle] = useState(resume.resumeTitle)
-    const [code, setCode] = useState('')
-    const [schedules, setTest] = useState([])
+    const [schedules, setWorkshift] = useState([])
     const [selfIntroState, setIntroState] = useState({})
     const [experienceState, setExperienceState] = useState({})
-    const [errors, setErrors] = useState({
-        surname: false,
-        name: false,
-        kanaSurname: true,
-        kanaName: true,
-        nationality: true,
-        gender: true,
-        birthday: true,
-        phone: true,
-        eMail: true,
-        address: true,
-        busStation: true,
-        transport: true,
-    })
 
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getOwnResume(id))
         dispatch(getUploadedFiles(id))
-        QRcode.toDataURL(document.location.href).then(setCode)
 
         let arr = []
         for (const key in workshift) {
@@ -48,7 +31,7 @@ export default function EditResume() {
                 arr.push(workshift[key][i])
             }
         }
-        setTest(arr)
+        setWorkshift(arr)
     }, [])
 
     useEffect(() => {
@@ -90,7 +73,7 @@ export default function EditResume() {
     return (
         <Box style={styles.section}>
             <Box sx={styles.block}>
-                {/* <Box sx={styles.titleInput}>
+                <Box sx={styles.titleInput}>
                     <input
                         type="text"
                         value={resumeTitle}
@@ -108,23 +91,21 @@ export default function EditResume() {
                     <SelfIntroduction resume={resume}
                         selfIntroState={selfIntroState}
                         setIntroState={setIntroState}
-                        errors={errors}
                     />
                 </Box>
                 <Box sx={{ ...styles.fields }}>
                     <ExperienceIntroduction
                         experienceState={experienceState}
                         setExperienceState={setExperienceState}
-                        errors={errors}
                     />
-                    <Schedule setWorkshift={setWorkshift} />
+                    <Schedule schedules={schedules} setWorkshift={setWorkshift} />
 
                     <Box sx={styles.mobileAction}>
                         <button style={{ ...styles.btn, ...styles.save }}>Save Changes</button>
                         <button style={{ ...styles.btn, ...styles.publish }}>Publish</button>
                         <button style={styles.goTop} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>go</button>
                     </Box>
-                </Box> */}
+                </Box>
             </Box>
         </Box>
     )

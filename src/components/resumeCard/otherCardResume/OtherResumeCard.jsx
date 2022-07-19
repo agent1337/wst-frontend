@@ -33,7 +33,7 @@ export default function OtherResumeCard({ item, }) {
           <Typography
             sx={{ fontSize: "14px", lineHeight: "20px", fontWeight: 400 }}
           >
-            "{item.resumeTitle}" will be permanently deleted.
+            `&quot;`{item.resumeTitle}`&quot;` will be permanently deleted.
           </Typography>
           <Box
             sx={{ display: "flex", justifyContent: "end", marginTop: "30px" }}
