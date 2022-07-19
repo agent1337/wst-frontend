@@ -10,16 +10,13 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signup, gotwitter } from '../../../redux/auth/auth.service';
 import { getProfile, getOwnResumeData } from '../../../redux/profile/profile.service';
-import { SET_ALERT } from '../../../redux/alert/alert.constants';
-import { ToastContainer, toast } from 'react-toastify';
-import { toastStyle } from '../../../utils/toastStyle';
+import { showToast } from '../../../redux/alert/alert.actions';
 import { styles } from './authForm.styles';
 
 const SignupForm = () => {
     const history = useHistory();
     const dispatch = useDispatch()
     const isLogined = useSelector(state => state.auth.isLogined)
-    const alert = useSelector(state => state.alert.alert)
 
     const [user, setUser] = useState({
         email: "",
@@ -30,6 +27,22 @@ const SignupForm = () => {
         email: false,
         password: false
     })
+
+    async function onSubmitForm(e) {
+        e.preventDefault();
+
+        if (!isFormValid()) {
+            return
+        }
+
+        dispatch(signup(user.email, user.password))
+
+        if (isLogined) {
+            dispatch(getProfile())
+            dispatch(getOwnResumeData())
+            history.push("/resumes")
+        }
+    }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -44,52 +57,27 @@ const SignupForm = () => {
     };
 
     const isFormValid = () => {
-        const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        const regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
         let isValid = true;
         let errorsData = {}
 
         if (!user.email || regex.test(user.email) === false) {
             errorsData.email = true;
             isValid = false;
-            dispatch({
-                type: SET_ALERT,
-                payload: 'Email is not correct'
-            })
+            dispatch(showToast('Email is not correct'))
         }
 
         if (!user.password || user.password.length < 8) {
             errorsData.password = true;
             isValid = false;
-            dispatch({
-                type: SET_ALERT,
-                payload: 'Password is too short'
-            })
+            dispatch(showToast('Password is too short'))
         }
 
         setErrors(errorsData);
         return isValid;
     }
 
-    async function onSubmitForm(e) {
-        e.preventDefault();
-
-        if (!isFormValid()) {
-            return toast(alert, toastStyle);
-        }
-
-        dispatch(signup(user.email, user.password))
-
-        if (alert !== "") {
-            return toast(alert, toastStyle);
-        }
-
-        if (isLogined) {
-            dispatch(getProfile())
-            dispatch(getOwnResumeData())
-            history.push("/resumes")
-        }
-    }
-
+    
     const goWithTwitter = () => {
         const provider = new TwitterAuthProvider();
         signInWithPopup(authentication, provider)
@@ -100,10 +88,6 @@ const SignupForm = () => {
                 }
 
                 dispatch(gotwitter(data))
-
-                if (alert !== "") {
-                    return toast(alert, toastStyle);
-                }
 
                 if (isLogined) {
                     dispatch(getProfile())
@@ -166,7 +150,6 @@ const SignupForm = () => {
                         <AuthFooter type={"dekstop"} />
                     </Grid>
                 </Grid>
-                <ToastContainer />
             </Grid>
             <AuthFooter type={"mobile"} />
         </>

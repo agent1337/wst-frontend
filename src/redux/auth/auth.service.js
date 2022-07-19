@@ -1,6 +1,6 @@
 import { RESET_PASSWORD, SIGN_IN } from "./auth.constants"
 import { axiosInstance } from "../../api/axios"
-import { SET_ALERT } from "../alert/alert.constants"
+import { showToast } from "../alert/alert.actions"
 
 export const signup = (email, password) => {
     return async dispatch => {
@@ -13,12 +13,9 @@ export const signup = (email, password) => {
                 payload: true
             })
         }
-        catch (err) {
-            console.log(err)
-            dispatch({
-                type: SET_ALERT,
-                payload: err.response.data.message
-            })
+        catch (error) {
+            console.log(error)
+            dispatch(showToast(error.response.data.message))
         }
     }
 }
@@ -34,12 +31,8 @@ export const signin = (email, password) => {
                 payload: true
             })
         }
-        catch (err) {
-            console.log(err.response.data.message)
-            dispatch({
-                type: SET_ALERT,
-                payload: err.response.data.message
-            })
+        catch (error) {
+            dispatch(showToast(error.response.data.message))
         }
     }
 }
@@ -55,12 +48,8 @@ export const gotwitter = (data) => {
                 payload: true
             })
         }
-        catch (err) {
-            console.log(err.response.data.message)
-            dispatch({
-                type: SET_ALERT,
-                payload: err.response.data.message
-            })
+        catch (error) {
+            dispatch(showToast(error.response.data.message))
         }
     }
 }
@@ -71,7 +60,7 @@ export const forgotPassword = (data) => {
             const response = await axiosInstance.put("/auth", data)
 
             const sendEmail = await axiosInstance.post('/email/html-email', data)
-            
+
             dispatch({
                 type: RESET_PASSWORD,
                 payload: true
@@ -79,8 +68,8 @@ export const forgotPassword = (data) => {
 
             return { response, sendEmail }
         }
-        catch (err) {
-            console.log(err.response)
+        catch (error) {
+            dispatch(showToast(error.response.data.message))
         }
     }
 }

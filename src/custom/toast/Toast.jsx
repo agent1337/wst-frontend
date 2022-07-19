@@ -16,7 +16,7 @@ export default function Toast({ toastlist, }) {
         return () => {
             clearTimeout(interval);
         }
-    }, [toastlist]);
+    }, [toastlist, dispatch]);
 
     return (
         <div className="toastContainer">

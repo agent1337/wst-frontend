@@ -1,6 +1,6 @@
 
 import { axiosInstance } from "../../api/axios"
-import { setAlert, showToast } from "../alert/alert.actions";
+import {  showToast } from "../alert/alert.actions";
 import {
     CLONE_SELECTED_RESUME,
     CREATE_RESUME,
@@ -123,7 +123,7 @@ export const getNationality = () => {
             })
         }
         catch (error) {
-            dispatch(setAlert(error.response.data.message))
+            dispatch(showToast(error.response.data.message))
         }
     }
 }
@@ -133,7 +133,7 @@ export const createResume = (data, accessToken, uploadImage, multipleFiles) => {
         try {
             const response = await axiosInstance.post('resumes', data, { headers: { Authorization: `Bearer ${accessToken}` } })
                 .catch((error) => {
-                    dispatch(showToast(error))
+                    dispatch(showToast(error.response.data.message))
                 });
 
             dispatch(uploadFiles(uploadImage, response.data._id, accessToken))
@@ -147,7 +147,7 @@ export const createResume = (data, accessToken, uploadImage, multipleFiles) => {
             })
         }
         catch (error) {
-            dispatch(setAlert(error.response.data.message))
+            dispatch(showToast(error.response.data.message))
         }
     }
 }

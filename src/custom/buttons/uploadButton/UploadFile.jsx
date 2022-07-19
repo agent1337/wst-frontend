@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Box, Typography } from "@mui/material";
 import { styles } from './uploadButton.styles';
 import AddIcon from "@mui/icons-material/Add";
@@ -7,7 +7,6 @@ import UploadedFile from '../../outputs/uploadedFile/UploadedFile';
 export default function UploadFile({multipleFiles, setMultipleFiles}) {
     const upload = (e) => {
         const data = [];
-        console.log(e.target.files)
         for (let i = 0; i < e.target.files.length; i++) {
             data.push(e.target.files[i]);
         }

@@ -8,19 +8,16 @@ import AuthFooter from '../authFooter/AuthFooter';
 import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
 import { authentication } from '../../context/base';
 import { useHistory } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { signin, gotwitter } from '../../../redux/auth/auth.service';
 import { getProfile, getOwnResumeData, } from '../../../redux/profile/profile.service';
-import { SET_ALERT } from '../../../redux/alert/alert.constants';
-import {toastStyle} from '../../../utils/toastStyle';
+import { showToast } from '../../../redux/alert/alert.actions';
 import { styles } from './authForm.styles';
 
 const SigninForm = () => {
     const history = useHistory();
     const dispatch = useDispatch()
     const isLogined = useSelector(state => state.auth.isLogined)
-    const alert = useSelector(state => state.alert.alert)
 
     const [user, setUser] = useState({
         email: "",
@@ -35,15 +32,9 @@ const SigninForm = () => {
     async function onSubmitForm(e) {
         e.preventDefault();
 
-        if (!isFormValid(user.email, user.password)) {
-            return toast(alert, toastStyle);
-        }
+        if (!isFormValid(user.email, user.password)) return
 
         dispatch(signin(user.email, user.password))
-
-        if(alert !== "") {
-            return toast(alert, toastStyle);
-        }
 
         if(isLogined) {
             dispatch(getProfile())
@@ -53,26 +44,20 @@ const SigninForm = () => {
     }
 
     const isFormValid = () => {
-        const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        const regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
         let isValid = true;
         let errorsData = {}
 
         if (!user.email || regex.test(user.email) === false) {
             errorsData.email = true;
             isValid = false;
-            dispatch({
-                type: SET_ALERT,
-                payload: 'Email is not correct'
-            })
+            dispatch(showToast('Email is not correct'))
         }
 
         if (!user.password || user.password.length < 8) {
             errorsData.password = true;
             isValid = false;
-            dispatch({
-                type: SET_ALERT,
-                payload: 'Password is too short'
-            })
+            dispatch(showToast('Password is too short'))
         }
 
         setErrors(errorsData);
@@ -101,10 +86,6 @@ const SigninForm = () => {
                 }
 
                 dispatch(gotwitter(data))
-
-                if (alert !== "") {
-                    return toast(alert, toastStyle);
-                }
 
                 if (isLogined) {
                     dispatch(getProfile())
@@ -175,7 +156,6 @@ const SigninForm = () => {
                         <AuthFooter type={"dekstop"} />
                     </Grid>
                 </Grid>
-                <ToastContainer />
             </Grid>
             <AuthFooter type={"mobile"} />
         </>

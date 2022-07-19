@@ -10,7 +10,6 @@ import {
     GET_OTHER_RESUME,
     SAVE_TO_MY_LIST,
     GET_NATIONALITY,
-    UPLOAD_FILE
 } from "./profile.constants";
 
 const initialState = {
@@ -26,13 +25,10 @@ const initialState = {
 export const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case CREATE_RESUME:
-            console.log(action.payload, 'action.payload in create')
             return {
                 ...state,
                 resumes: [...state.resumes, action.payload]
             }
-        case UPLOAD_FILE: 
-
         case SET_PROFILE:
             return { ...state, user: action.payload }
         case GET_OWN_RESUMES_DATA:
@@ -49,7 +45,6 @@ export const profileReducer = (state = initialState, action) => {
                 othersResumes: [...state.othersResumes, action.payload]
             }
         case GET_MEDIA:
-            console.log(action.payload, 'actionv ')
             return { ...state, media: action.payload }
         case GET_NATIONALITY:
             return { ...state, nationality: action.payload }

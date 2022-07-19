@@ -51,7 +51,7 @@ export default function Resumes() {
   useEffect(() => {
     dispatch(getOwnResumeData())
     dispatch(getOtherResumeData())
-  }, [resumes, othersResumes])
+  }, [resumes, othersResumes, dispatch])
 
   return (
     <Box sx={styles.container}>

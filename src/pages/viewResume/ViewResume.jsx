@@ -70,7 +70,7 @@ export default function ViewResume() {
   useEffect(() => {
     dispatch(getOwnResume(id))
     dispatch(getUploadedFiles(id))
-  }, [])
+  }, [dispatch, id])
 
   useEffect(() => {
     QRcode.toDataURL(document.location.href).then(setCode)
@@ -93,7 +93,7 @@ export default function ViewResume() {
         setFiles(response.data.splice(1));
       })
       .catch((error) => console.log(error));
-  }, [setImage, setFiles]);
+  }, [setImage, setFiles, id]);
 
   const type = user._id !== resume.userId ? "third" : "second"
 

@@ -16,7 +16,7 @@ export default function SelfIntroduction({ setUploadImage, uploadImage, values, 
 
     useEffect(() => {
        dispatch(getNationality())
-    }, [])
+    }, [dispatch, nationality])
 
     return (
         <div style={styles.block}>
