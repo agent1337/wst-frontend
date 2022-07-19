@@ -11,6 +11,7 @@ import { showToast } from '../../redux/alert/alert.actions';
 import { styles } from './createResume.styles';
 import { initialExperienceValue, formValidation } from '../../helpers/initialValues';
 import { axiosInstance } from "../../api/axios"
+import { createResume } from '../../redux/profile/profile.service';
 
 export default function CreateResume() {
     const dispatch = useDispatch()
@@ -37,15 +38,8 @@ export default function CreateResume() {
                             status: stat,
                             workshift: workshift
                         }
-                        const createResume = axiosInstance.post(`resumes`, data, { headers: { Authorization: `Bearer ${accessToken}` } },)
-                            .catch((error) => {
-                                dispatch(showToast(error))
-                            });
-
-                        uploadFile(uploadImage, createResume.data._id);
-                        for (let i = 0; i < multipleFiles.length; i++) {
-                            uploadFile(multipleFiles[i], createResume.data._id);
-                        }
+                   
+                        dispatch(createResume(data, accessToken, uploadImage, multipleFiles))
 
                         history.push('/resumes')
                     } else {
@@ -56,26 +50,6 @@ export default function CreateResume() {
                     dispatch(showToast(e))
                 });
         }
-    };
-
-    const uploadFile = async (uploadImage, resumeId) => {
-        const formData = new FormData();
-        formData.append("image", uploadImage);
-        formData.append("resumeId", resumeId);
-
-        await axiosInstance
-            .post("media", formData, {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                    "Content-Type": "multipart/form-data",
-                    Accept: "application/json",
-                    type: "formData",
-                },
-            })
-            .then((res) => {
-                history.push("/resumes");
-            })
-            .catch((err) => console.log(err));
     };
 
     return (

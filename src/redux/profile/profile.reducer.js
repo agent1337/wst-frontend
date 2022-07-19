@@ -9,7 +9,8 @@ import {
     GET_OTHER_RESUME_DATA,
     GET_OTHER_RESUME,
     SAVE_TO_MY_LIST,
-    GET_NATIONALITY
+    GET_NATIONALITY,
+    UPLOAD_FILE
 } from "./profile.constants";
 
 const initialState = {
@@ -30,6 +31,8 @@ export const profileReducer = (state = initialState, action) => {
                 ...state,
                 resumes: [...state.resumes, action.payload]
             }
+        case UPLOAD_FILE: 
+        
         case SET_PROFILE:
             return { ...state, user: action.payload }
         case GET_OWN_RESUMES_DATA:

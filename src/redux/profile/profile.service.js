@@ -1,15 +1,15 @@
 
 import { axiosInstance } from "../../api/axios"
-import { setAlert } from "../alert/alert.actions";
+import { setAlert, showToast } from "../alert/alert.actions";
 import { SET_ALERT } from "../alert/alert.constants";
-import { 
-    CLONE_SELECTED_RESUME, 
-    CREATE_RESUME, 
-    GET_MEDIA, 
-    GET_OWN_RESUME, 
-    REMOVE_SELECTED_RESUME, 
-    SET_PROFILE, 
-    GET_OWN_RESUMES_DATA, 
+import {
+    CLONE_SELECTED_RESUME,
+    CREATE_RESUME,
+    GET_MEDIA,
+    GET_OWN_RESUME,
+    REMOVE_SELECTED_RESUME,
+    SET_PROFILE,
+    GET_OWN_RESUMES_DATA,
     GET_OTHER_RESUME_DATA,
     SAVE_TO_MY_LIST,
     GET_OTHER_RESUME,
@@ -20,7 +20,7 @@ export const getProfile = () => {
     return async dispatch => {
         try {
             const response = await axiosInstance.get("auth/me")
-        
+
             dispatch({
                 type: SET_PROFILE,
                 payload: response.data
@@ -117,7 +117,7 @@ export const getNationality = () => {
     return async dispatch => {
         try {
             const response = await axiosInstance.get("nationality")
-        
+
             dispatch({
                 type: GET_NATIONALITY,
                 payload: response.data
@@ -129,15 +129,49 @@ export const getNationality = () => {
     }
 }
 
-export const createResume = (data) => {
+export const createResume = (data, accessToken, uploadImage, multipleFiles) => {
     return async dispatch => {
         try {
-            const response = await axiosInstance.post('resumes', data)
+            const response = await axiosInstance.post('resumes', data, { headers: { Authorization: `Bearer ${accessToken}` } })
+                .catch((error) => {
+                    dispatch(showToast(error))
+                });
 
-            dispatch ({
+            dispatch(uploadFiles(uploadImage, response.data._id, accessToken))
+            for (let i = 0; i < multipleFiles.length; i++) {
+                dispatch(uploadFiles(multipleFiles[i], response.data._id, accessToken))
+            }
+
+            dispatch({
                 type: CREATE_RESUME,
                 payload: response
-              })
+            })
+        }
+        catch (error) {
+            dispatch(setAlert(error.response.data.message))
+        }
+    }
+}
+
+export const uploadFiles = (uploadImage, resumeId, accessToken) => {
+    return async dispatch => {
+        try {
+            const formData = new FormData();
+            formData.append("image", uploadImage);
+            formData.append("resumeId", resumeId);
+
+            const response = await axiosInstance
+                .post("media", formData, {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                        "Content-Type": "multipart/form-data",
+                        Accept: "application/json",
+                        type: "formData",
+                    },
+                })
+                .catch((err) => console.log(err));
+
+            return response;
         }
         catch (error) {
             dispatch(setAlert(error.response.data.message))
@@ -150,7 +184,7 @@ export const saveToMyList = (id) => {
         try {
             const response = await axiosInstance.post(`resumes/save/${id}`)
 
-            dispatch ({
+            dispatch({
                 type: SAVE_TO_MY_LIST,
                 payload: response.data
             })

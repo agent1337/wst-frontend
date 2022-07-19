@@ -96,6 +96,7 @@ export default function SelfIntroduction({ setUploadImage, uploadImage, values, 
                     value={values.birthday}
                     text={"Birthday"}
                     onChange={handleChange}
+                    errors={errors.birthday}
                 />
 
                 <TextInput
@@ -104,6 +105,7 @@ export default function SelfIntroduction({ setUploadImage, uploadImage, values, 
                     value={values.phone}
                     onChange={handleChange}
                     placeholder={"Ex : 080-0000-0000"}
+                    errors={errors.phone}
                 />
 
                 <TextInput
@@ -113,6 +115,7 @@ export default function SelfIntroduction({ setUploadImage, uploadImage, values, 
                     value={values.eMail}
                     onChange={handleChange}
                     placeholder={"Ex : name@example.com"}
+                    errors={errors.eMail}
                 />
 
                 <TextInput
@@ -120,6 +123,7 @@ export default function SelfIntroduction({ setUploadImage, uploadImage, values, 
                     text={"Address"}
                     value={values.address}
                     onChange={handleChange}
+                    errors={errors.address}
                 />
 
                 <TextInput
@@ -127,6 +131,7 @@ export default function SelfIntroduction({ setUploadImage, uploadImage, values, 
                     text={"Closest Train/Bus Station"}
                     value={values.busStation}
                     onChange={handleChange}
+                    errors={errors.busStation}
                 />
 
                 <TextInput
@@ -134,6 +139,7 @@ export default function SelfIntroduction({ setUploadImage, uploadImage, values, 
                     text={"Transport"}
                     value={values.transport}
                     onChange={handleChange}
+                    errors={errors.transport}
                 />
             </Box>
         </div>
