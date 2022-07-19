@@ -1,23 +1,22 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux';
+import { hideToast } from '../../redux/alert/alert.actions';
 import './toast.styles.css'
 
-export default function Toast({ toastlist, setList }) {
-    const deleteToast = useCallback(id => {
-        const toastListItem = toastlist.filter(e => e.id !== id);
-        setList(toastListItem);
-    }, [toastlist, setList]);
+export default function Toast({ toastlist, }) {
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        const interval = setInterval(() => {
+        const interval = setTimeout(() => {
             if (toastlist.length) {
-                deleteToast(toastlist[0].id);
+                dispatch(hideToast(toastlist[0].id))
             }
         }, 3000);
 
         return () => {
-            clearInterval(interval);
+            clearTimeout(interval);
         }
-    }, [toastlist, deleteToast]);
+    }, [toastlist]);
 
     return (
         <div className="toastContainer">

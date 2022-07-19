@@ -12,7 +12,7 @@ import Pdf from "react-to-pdf";
 import moment from "moment";
 import { styles } from "./viewResume.styles";
 import { white, main } from "../../colors";
-import { axiosInstance } from "../../api/axios"
+import { axiosInstance } from "../../api/axios";
 
 const ref = React.createRef();
 
