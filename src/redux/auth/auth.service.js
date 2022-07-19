@@ -81,10 +81,6 @@ export const forgotPassword = (data) => {
         }
         catch (err) {
             console.log(err.response)
-            // dispatch({
-            //     type: SET_ALERT,
-            //     payload: err.response.data.message
-            // })
         }
     }
 }

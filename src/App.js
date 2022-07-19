@@ -37,7 +37,6 @@ export default function App() {
         {user === null
           &&
           <>
-            <Redirect to="/" />
             <AppRoute exact path="/" layout={AuthLayout} component={Signup} />
             <AppRoute path="/signin" layout={AuthLayout} component={Signin} />
             <AppRoute path="/acceptline" layout={AuthLayout} component={AcceptLine} />

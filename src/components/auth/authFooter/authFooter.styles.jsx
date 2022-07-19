@@ -7,12 +7,12 @@ export const styles = {
     padding: "20px 0",
     textAlign: "center",
     marginTop: "50px",
-    "@media(min-width: 900px)": {
+    "@media(min-width: 899px)": {
       display: "none",
     },
   },
   dekstop: {
-    "@media(max-width: 900px)": {
+    "@media(max-width: 901px)": {
       display: "none",
     },
     marginTop: "30px",

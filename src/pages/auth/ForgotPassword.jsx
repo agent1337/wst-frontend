@@ -3,7 +3,7 @@ import { Grid, Box, Typography, Button } from "@mui/material";
 import AuthInput from "../../custom/inputs/authInput/AuthInput"
 import SeparatorLine from "../../custom/separatorLine/SeparatorLine";
 import { Link, } from "react-router-dom"
-import { main, text } from "../../colors";
+import { grey, main, text } from "../../colors";
 import { useDispatch } from "react-redux";
 import { forgotPassword } from "../../redux/auth/auth.service";
 
@@ -136,7 +136,6 @@ export default function ForgotPassword() {
 
     return (
         <>
-            {/* <Head /> */}
             <Grid container sx={styles.container}>
                 <Grid sx={styles.content}>
                     {!isSubmit ? (
@@ -155,7 +154,15 @@ export default function ForgotPassword() {
                                         onChange={e => setEmail(e.target.value)}
                                         value={email}
                                         placeholder={"Email"}
-                                        style={{ paddingLeft: '10px' }}
+                                        style={{ 
+                                            paddingLeft: '10px', 
+                                            width: 'calc(100% - 16px)',
+                                            borderRadius: "3px",
+                                            padding: "10px 8px",
+                                            outlineColor: `${main}`,
+                                            marginBottom: '20px',
+                                            border: `1px solid ${grey}`
+                                         }}
                                     />
                                    
                                 </Box>

@@ -9,7 +9,7 @@ export const styles = {
       padding: "12px 0",
       height: "50px",
     },
-    "@media (max-width: 530px)": {
+    "@media (max-width: 899px)": {
       display: "none",
     },
   },
