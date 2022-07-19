@@ -6,21 +6,18 @@ import {
     LineIcon,
     TwitterShareButton,
     TwitterIcon,
-
 } from "react-share";
 import { Box, Typography } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import { ToastContainer, toast } from 'react-toastify';
 import { main } from '../../colors';
 import { styles } from './sharing.styles';
-import {toastStyle} from '../../utils/toastStyle';
 
 export default function Sharing() {
     const shareUrl = window.location.href
 
     const copy = () => {
         navigator.clipboard.writeText(window.location.href)
-        toast('Link Copied', toastStyle)
+        // toast('Link Copied', toastStyle)
     }
     return (
         <Box sx={styles.container}>
@@ -65,7 +62,6 @@ export default function Sharing() {
             <Box sx={styles.buttonBlock}>
                 <button style={styles.btn}>Cancel</button>
             </Box>
-            <ToastContainer />
         </Box>
     )
 }

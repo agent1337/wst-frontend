@@ -6,11 +6,14 @@ import { useDispatch, } from 'react-redux';
 import { saveToMyList } from '../../redux/profile/profile.service';
 import CircleIcon from '@mui/icons-material/Circle';
 import { styles } from './actionHeader.styles';
+import Popup from '../modal/Popup';
+import Sharing from '../sharing/Sharing';
 
 export default function ActionHeader({ type, publishResume, resumeId }) {
     const dispatch = useDispatch()
     const history = useHistory();
     const [isShow, setIsShow] = useState(false)
+    const [isOpen, setIsOpen] = useState(false);
 
     const saveCVtoMyList = (resumeId) => {
         dispatch(saveToMyList(resumeId))
@@ -37,7 +40,7 @@ export default function ActionHeader({ type, publishResume, resumeId }) {
                     <>
                         <ActionButton text={"Edit"} func={() => openEditResume(resumeId)} />
                         <ActionButton text={"Download PDF"} func={generate} />
-                        <ActionButton text={"Share"} func={() => alert('share')} />
+                        <ActionButton text={"Share"} func={() => setIsOpen(true)} />
                     </>
                 )}
 
@@ -45,10 +48,14 @@ export default function ActionHeader({ type, publishResume, resumeId }) {
                     <>
                         <ActionButton text={"Save to list"} func={() => saveCVtoMyList(resumeId)} />
                         <ActionButton text={"Download PDF"} func={() => alert('download')} />
-                        <ActionButton text={"Share"} func={() => alert('share')} />
+                        <ActionButton text={"Share"} func={() => setIsOpen(true)} />
                     </>
                 )}
             </Box>
+
+            <Popup handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+                <Sharing />
+            </Popup>
 
             <Box sx={styles.mobile}>
                 <button style={styles.combineButton} onClick={() => setIsShow(!isShow)}>

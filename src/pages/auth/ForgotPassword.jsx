@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Grid, Box, Typography, Button } from "@mui/material";
-import AuthInput from "../../custom/inputs/authInput/AuthInput"
 import SeparatorLine from "../../custom/separatorLine/SeparatorLine";
 import { Link, } from "react-router-dom"
 import { grey, main, text } from "../../colors";
@@ -85,18 +84,6 @@ const styles = {
     caption: {
         color: `${main}`
     }
-}
-
-const Head = () => {
-    return (
-        <Box sx={styles.logo}>
-            <img src="../../logo/logo.svg" alt="logo" />
-            <Box>
-                <Typography sx={styles.caption}>WelcomeHR</Typography>
-                <Typography sx={styles.caption}>Part-time Resume</Typography>
-            </Box>
-        </Box>
-    )
 }
 
 const ImageBox = ({ type }) => {

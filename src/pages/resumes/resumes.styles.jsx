@@ -7,7 +7,7 @@ export const styles = {
     margin: '0 auto 40px auto',
   },
   box: {
-    minHeight: '690px',
+    minHeight: '400px',
     display: "flex",
     flexWrap: "wrap",
     padding: '20px 40px',
