@@ -1,7 +1,6 @@
 
 import { axiosInstance } from "../../api/axios"
 import { setAlert, showToast } from "../alert/alert.actions";
-import { SET_ALERT } from "../alert/alert.constants";
 import {
     CLONE_SELECTED_RESUME,
     CREATE_RESUME,
@@ -174,7 +173,7 @@ export const uploadFiles = (uploadImage, resumeId, accessToken) => {
             return response;
         }
         catch (error) {
-            dispatch(setAlert(error.response.data.message))
+            dispatch(showToast(error.response.data.message))
         }
     }
 }
@@ -190,7 +189,7 @@ export const saveToMyList = (id) => {
             })
         }
         catch (error) {
-            console.log(error.response.data.message)
+            dispatch(showToast(error.response.data.message))
         }
     }
 }
@@ -205,13 +204,10 @@ export const removeSelectedResume = (resumeId) => {
                 payload: response.data
             })
 
-            dispatch({
-                type: SET_ALERT,
-                payload: `${response.data.resumeTitle} was delete`
-            })
+            dispatch(showToast(`"${response.data.resumeTitle}" was delete`))
         }
         catch (error) {
-            console.log(error.response.data.message)
+            console.log(error)
         }
     }
 }
@@ -226,13 +222,10 @@ export const cloneResume = (resumeId) => {
                 payload: response.data
             })
 
-            dispatch({
-                type: SET_ALERT,
-                payload: `Created “${response.data.resumeTitle}”`
-            })
+            dispatch(showToast(`Created "${response.data.resumeTitle}"`))
         }
         catch (error) {
-            console.log(error.response.data.message)
+            dispatch(showToast(error.response.data.message))
         }
     }
 }

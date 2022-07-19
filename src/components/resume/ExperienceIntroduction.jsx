@@ -4,7 +4,7 @@ import AutoInput from '../../custom/inputs/autoInput/AutoInput';
 import UploadFile from '../../custom/buttons/uploadButton/UploadFile';
 import SelectDate from './SelectDate';
 
-export default function ExperienceIntroduction({ experienceState, setExperienceState }) {
+export default function ExperienceIntroduction({ experienceState, setExperienceState, multipleFiles, setMultipleFiles }) {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setExperienceState({ ...experienceState, [name]: value });
@@ -92,7 +92,10 @@ export default function ExperienceIntroduction({ experienceState, setExperienceS
                 value={experienceState.interests}
             />
 
-            <UploadFile />
+            <UploadFile
+                multipleFiles={multipleFiles} 
+                setMultipleFiles={setMultipleFiles} 
+            />
 
             <SelectDate
                 name={"whenStart"}

@@ -4,9 +4,7 @@ import { styles } from './uploadButton.styles';
 import AddIcon from "@mui/icons-material/Add";
 import UploadedFile from '../../outputs/uploadedFile/UploadedFile';
 
-export default function UploadFile() {
-    const [multipleFiles, setMultipleFiles] = useState(null);
-
+export default function UploadFile({multipleFiles, setMultipleFiles}) {
     const upload = (e) => {
         const data = [];
         console.log(e.target.files)

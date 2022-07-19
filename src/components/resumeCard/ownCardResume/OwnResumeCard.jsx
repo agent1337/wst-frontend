@@ -1,30 +1,25 @@
 import React, { useState } from 'react'
 import { Box, Typography, Button, } from "@mui/material";
-import { Link } from "react-router-dom";
-import { styles } from './resumeCard.styles';
 import Popup from '../../modal/Popup';
+import { Link } from "react-router-dom";
 import { danger } from '../../../colors';
-import { toast } from 'react-toastify';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { cloneResume, removeSelectedResume } from '../../../redux/profile/profile.service';
-import { toastStyle } from '../../../utils/toastStyle';
+import { styles } from './resumeCard.styles';
 
 export default function OwnResumeCard({ item, }) {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const alert = useSelector(state => state.alert.alert)
 
   const removeResume = (resumeId) => {
     dispatch(removeSelectedResume(resumeId))
     setIsOpen(false);
-    return toast(`${alert}`, toastStyle);
   };
 
   const copy = (resumeId) => {
     dispatch(cloneResume(resumeId))
-    return toast(`${alert}`, toastStyle);
   }
-  
+
   return (
     <>
       <Popup handleClose={() => setIsOpen(false)} isOpen={isOpen}>

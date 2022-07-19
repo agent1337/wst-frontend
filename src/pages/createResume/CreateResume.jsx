@@ -10,19 +10,17 @@ import Schedule from '../../components/schedule/Schedule';
 import { showToast } from '../../redux/alert/alert.actions';
 import { styles } from './createResume.styles';
 import { initialExperienceValue, formValidation } from '../../helpers/initialValues';
-import { axiosInstance } from "../../api/axios"
 import { createResume } from '../../redux/profile/profile.service';
 
 export default function CreateResume() {
     const dispatch = useDispatch()
     const history = useHistory()
+    const selfFormikRef = useRef();
     const accessToken = localStorage.getItem("accessToken")
     const [resumeTitle, setResumeTitle] = useState("Untitled Resume")
     const [uploadImage, setUploadImage] = useState(null)
     const [multipleFiles, setMultipleFiles] = useState([])
     const [experienceState, setExperienceState] = useState(initialExperienceValue)
-    const [submitted, setSubmitted] = useState(false);
-    const selfFormikRef = useRef();
     const [workshift, setWorkshift] = useState([])
 
     const publish = async (stat) => {
@@ -70,8 +68,7 @@ export default function CreateResume() {
                         type={'first'}
                         publishResume={publish}
                         selfFormikRef={selfFormikRef}
-                        submitted={submitted}
-                        setSubmitted={setSubmitted} />
+                    />
                 </Box>
 
                 <Formik
@@ -108,6 +105,8 @@ export default function CreateResume() {
                                 <ExperienceIntroduction
                                     experienceState={experienceState}
                                     setExperienceState={setExperienceState}
+                                    multipleFiles={multipleFiles}
+                                    setMultipleFiles={setMultipleFiles}
                                 />
 
                                 <Schedule setWorkshift={setWorkshift} />

@@ -32,7 +32,7 @@ export const profileReducer = (state = initialState, action) => {
                 resumes: [...state.resumes, action.payload]
             }
         case UPLOAD_FILE: 
-        
+
         case SET_PROFILE:
             return { ...state, user: action.payload }
         case GET_OWN_RESUMES_DATA:
@@ -54,8 +54,9 @@ export const profileReducer = (state = initialState, action) => {
         case GET_NATIONALITY:
             return { ...state, nationality: action.payload }
         case REMOVE_SELECTED_RESUME:
+            const newList = state.resumes.filter(resume =>resume.id !== action.payload)
             return {
-                ...state, resumes: state.resumes.filter(resume =>resume.id !== action.payload)
+                ...state, resumes: newList
             }
         case CLONE_SELECTED_RESUME:
             return {
