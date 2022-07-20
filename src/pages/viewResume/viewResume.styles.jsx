@@ -2,6 +2,7 @@ import { dark_warning, grey } from "../../colors";
 
 export const styles = {
   section: {
+    position: 'relative',
     maxWidth: '970px',
     margin: '0 auto',
     "@media (max-width: 970px)": {
@@ -57,7 +58,7 @@ export const styles = {
   },
   fields: {
     width: 'calc(100% - 16px)',
-    padding: '0 16px'
+    padding: '10px 16px'
   },
   qrBox: {
     width: "150px",

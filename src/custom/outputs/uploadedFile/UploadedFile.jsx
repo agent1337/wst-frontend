@@ -3,17 +3,14 @@ import { Box, } from "@mui/material";
 import './uploadedFile.styles.css'
 
 export default function UploadedFile({ file }) {
-
-    console.log(file, 'file')
     const preview = () => {
 
     }
 
-
     return (
         <Box className="fileBox">
             <p className="fileName">
-                {file.name.length > 25 ? file.name.substr(0, 25) + "..." : file.name}
+                {file.originalname.length > 25 ? file.originalname.substr(0, 25) + "..." : file.originalname}
             </p>
             <img className="image" src="../../book.png" alt="" />
             <div className="action">

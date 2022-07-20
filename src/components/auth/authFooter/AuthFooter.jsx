@@ -8,41 +8,44 @@ const AuthFooter = ({ type }) => {
       {type === "mobile" && (
         <Grid sx={styles.mobile}>
           {window.location.pathname === "/" ? (
-            <Link to="/signin" className="link">
-              <Typography sx={styles.redirectLink}>
-                Already have account?{" "}
+            <Typography sx={styles.redirectLink}>
+              Already have account?{" "}
+              <Link to="/signin" className="link">
                 <span style={styles.typeAuth}>Log In</span>
-              </Typography>
-            </Link>
+              </Link>
+            </Typography>
           ) : (
-            <Link to="/" className="link">
               <Typography sx={styles.redirectLink}>
                 Don’t have an account?{" "}
-                <span style={styles.typeAuth}>Sign Up</span>
+                <Link to="/" className="link">
+                  <span style={styles.typeAuth}>Sign Up</span>
+                </Link>
               </Typography>
-            </Link>
-          )}
+            )}
         </Grid>
       )}
       {type === "dekstop" && (
         <Grid sx={styles.dekstop}>
           {window.location.pathname === "/" ? (
-            <Link to="/signin" className="link">
-              <Typography sx={styles.redirectLink}>
-                Already have account?{" "}
+
+            <Typography sx={styles.redirectLink}>
+              Already have account?{" "}
+              <Link to="/signin" className="link">
                 <span style={styles.typeAuth}>Log In</span>
-              </Typography>
-            </Link>
+              </Link>
+            </Typography>
+
           ) : (
-            <Link to="/" className="link">
               <Typography sx={styles.redirectLink}>
                 Don’t have an account?{" "}
-                <span style={styles.typeAuth}>Sign Up</span>
+                <Link to="/" className="link">
+                  <span style={styles.typeAuth}>Sign Up</span>
+                </Link>
               </Typography>
-            </Link>
-          )}
+            )}
         </Grid>
-      )}
+      )
+      }
     </>
   );
 };

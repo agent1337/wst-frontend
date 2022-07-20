@@ -1,6 +1,7 @@
 import axios from "axios"
 
-const baseURL = `http://localhost:4040/`;
+const baseURL = `https://1721-93-76-142-93.eu.ngrok.io/`;
+
 export const accessToken = localStorage.getItem("accessToken");
 
 export const axiosInstance = axios.create({

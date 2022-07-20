@@ -12,6 +12,7 @@ import Pdf from "react-to-pdf";
 import moment from "moment";
 import { styles } from "./viewResume.styles";
 import { white, main } from "../../colors";
+import UploadedFile from "../../custom/outputs/uploadedFile/UploadedFile";
 
 const ref = React.createRef();
 
@@ -70,7 +71,7 @@ export default function ViewResume() {
   useEffect(() => {
     dispatch(getOwnResume(id))
     dispatch(getUploadedFiles(id))
-  }, [dispatch, id])
+  }, [id])
 
   useEffect(() => {
     QRcode.toDataURL(document.location.href).then(setCode)
@@ -90,7 +91,7 @@ export default function ViewResume() {
     dispatch(getUploadedFiles(id))
     setImage(media[0].filePath);
     setFiles(media.splice(1));
-  }, [dispatch])
+  }, [])
 
   const type = user._id !== resume.userId ? "third" : "second"
 
@@ -108,7 +109,7 @@ export default function ViewResume() {
           </Box>
 
           <Pdf targetRef={ref} filename="code-example.pdf" scale={0.78} x={4} y={5}>
-            {({ toPdf }) => <button style={{ position: "absolute", right: "0", top: "0px", padding: "11px 23px", color: "transparent" }} onClick={toPdf}>Generate Pdf</button>}
+            {({ toPdf }) => <button style={{ position: "absolute", right: "135px", fontSize: '16px', top: "0px", padding: "11px 23px", color: 'transparent' }} onClick={toPdf}>Download Pdf</button>}
           </Pdf>
 
           <Box ref={ref} sx={styles.container}>
@@ -218,9 +219,9 @@ export default function ViewResume() {
                   <Typography sx={styles.title}>Files</Typography>
                   {files?.map((file, index) => {
                     return (
-                      <p key={index}>{file.originalname}</p>
+                      <UploadedFile key={index} file={file} />
                     )
-                    //  <UploadedFile key={index} file={file} />
+                    
                   })}
                 </>
               )}

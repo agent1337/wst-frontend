@@ -11,13 +11,16 @@ import { Box, Typography } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { main } from '../../colors';
 import { styles } from './sharing.styles';
+import { useDispatch } from 'react-redux';
+import { showToast } from '../../redux/alert/alert.actions';
 
-export default function Sharing() {
+export default function Sharing({setIsOpen}) {
     const shareUrl = window.location.href
+    const dispatch = useDispatch()
 
     const copy = () => {
         navigator.clipboard.writeText(window.location.href)
-        // toast('Link Copied', toastStyle)
+        dispatch(showToast('Link Copied'))
     }
     return (
         <Box sx={styles.container}>
@@ -60,7 +63,7 @@ export default function Sharing() {
             </Box>
 
             <Box sx={styles.buttonBlock}>
-                <button style={styles.btn}>Cancel</button>
+                <button style={styles.btn} onClick={() => setIsOpen(false)}>Cancel</button>
             </Box>
         </Box>
     )

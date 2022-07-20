@@ -123,7 +123,8 @@ export const getNationality = () => {
             })
         }
         catch (error) {
-            dispatch(showToast(error.response.data.message))
+            console.log(error)
+            // dispatch(showToast(error.response.data.message))
         }
     }
 }

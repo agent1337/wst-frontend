@@ -54,7 +54,7 @@ export default function ActionHeader({ type, publishResume, resumeId }) {
             </Box>
 
             <Popup handleClose={() => setIsOpen(false)} isOpen={isOpen}>
-                <Sharing />
+                <Sharing setIsOpen={setIsOpen} />
             </Popup>
 
             <Box sx={styles.mobile}>

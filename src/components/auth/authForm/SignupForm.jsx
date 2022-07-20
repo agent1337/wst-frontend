@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid, } from "@mui/material";
 import FormText from '../authText/FormText';
 import AuthInput from '../../../custom/inputs/authInput/AuthInput';
@@ -9,14 +9,13 @@ import { authentication } from '../../context/base';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signup, gotwitter } from '../../../redux/auth/auth.service';
-import { getProfile, getOwnResumeData } from '../../../redux/profile/profile.service';
 import { showToast } from '../../../redux/alert/alert.actions';
 import { styles } from './authForm.styles';
 
 const SignupForm = () => {
     const history = useHistory();
     const dispatch = useDispatch()
-    const isLogined = useSelector(state => state.auth.isLogined)
+    const token = useSelector(state => state.auth.token)
 
     const [user, setUser] = useState({
         email: "",
@@ -28,20 +27,18 @@ const SignupForm = () => {
         password: false
     })
 
+    useEffect(() => {
+        if (token) {
+            history.push("/resumes")
+        }
+    }, [token])
+
     async function onSubmitForm(e) {
         e.preventDefault();
 
-        if (!isFormValid()) {
-            return
-        }
+        if (!isFormValid(user.email, user.password)) return
 
-        dispatch(signup(user.email, user.password))
-
-        if (isLogined) {
-            dispatch(getProfile())
-            dispatch(getOwnResumeData())
-            history.push("/resumes")
-        }
+        await dispatch(signup(user.email, user.password))
     }
 
     const handleInputChange = (e) => {
@@ -57,11 +54,10 @@ const SignupForm = () => {
     };
 
     const isFormValid = () => {
-        const regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
         let isValid = true;
         let errorsData = {}
 
-        if (!user.email || regex.test(user.email) === false) {
+        if (!user.email) {
             errorsData.email = true;
             isValid = false;
             dispatch(showToast('Email is not correct'))
@@ -88,13 +84,8 @@ const SignupForm = () => {
                 }
 
                 dispatch(gotwitter(data))
-
-                if (isLogined) {
-                    dispatch(getProfile())
-                    history.push("/resumes")
-                }
             })
-            .catch((err) => console.log(err))
+            .catch((error) => dispatch(showToast(error.data.message)))
     }
 
 
@@ -140,7 +131,7 @@ const SignupForm = () => {
 
                         <a
                             onClick={line}
-                            href="https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1657233949&redirect_uri=http://localhost:4040/auth/line/signin&state=wst&scope=profile, openid"
+                            href="https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1657233949&redirect_uri=https://1721-93-76-142-93.eu.ngrok.io/https://1721-93-76-142-93.eu.ngrok.io/auth/line/signin&state=wst&scope=profile, openid"
                         >
                             <button style={{ ...styles.button, ...styles.lineButton, }}>
                                 Login with LINE

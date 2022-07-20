@@ -42,11 +42,10 @@ const SigninForm = () => {
     }
 
     const isFormValid = () => {
-        const regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
         let isValid = true;
         let errorsData = {}
 
-        if (!user.email || regex.test(user.email) === false) {
+        if (!user.email) {
             errorsData.email = true;
             isValid = false;
             dispatch(showToast('Email is not correct'))
@@ -85,7 +84,7 @@ const SigninForm = () => {
 
                 dispatch(gotwitter(data))
             })
-            .catch((err) => console.log(err))
+            .catch((error) => dispatch(showToast(error.data.message)))
     }
 
     const line = () => { }
@@ -139,7 +138,7 @@ const SigninForm = () => {
 
                         <a
                             onClick={line}
-                            href="https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1657233949&redirect_uri=http://localhost:4040/auth/line/signin&state=wst&scope=profile, openid"
+                            href="https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1657233949&redirect_uri=https://1721-93-76-142-93.eu.ngrok.io/auth/line/signin&state=wst&scope=profile, openid"
                         >
                             <button style={{ ...styles.button, ...styles.lineButton, }}>
                                 Login with LINE
