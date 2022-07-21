@@ -1,21 +1,37 @@
-
-import { axiosInstance } from "../../api/axios"
+import { axiosInstance } from "../../api/axios";
+import { logout } from "../auth/auth.actions";
 import {
-    SET_PROFILE,
+  GET_ME,
+  GET_ME_SUCCESS,
+  REMOVE_TOKEN,
+  SAVE_TOKEN,
 } from "./profile.types";
 
-export const getProfile = () => {
-    return async dispatch => {
-        try {
-            const response = await axiosInstance.get("auth/me")
+export const getMe = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(getMeInit());
+      const response = await axiosInstance.get("auth/me");
 
-            dispatch({
-                type: SET_PROFILE,
-                payload: response.data
-            })
-        }
-        catch (error) {
-            console.log(error.response.data.message)
-        }
+      dispatch(getMeSuccess(response.data));
+    } catch (error) {
+      dispatch(logout());
     }
-}
+  };
+};
+
+export const getMeInit = () => {
+  return { type: GET_ME };
+};
+
+export const getMeSuccess = (payload) => {
+  return { type: GET_ME_SUCCESS, payload };
+};
+
+export const saveToken = (payload) => {
+  return { type: SAVE_TOKEN, payload };
+};
+
+export const removeToken = () => {
+  return { type: REMOVE_TOKEN };
+};
