@@ -2,7 +2,7 @@
 import { axiosInstance } from "../../api/axios"
 import {
     SET_PROFILE,
-} from "./profile.constants";
+} from "./profile.types";
 
 export const getProfile = () => {
     return async dispatch => {

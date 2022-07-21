@@ -1,4 +1,4 @@
-import { SET_PROFILE } from "./profile.constants";
+import { SET_PROFILE } from "./profile.types";
 
 const initialState = {
     user: [],

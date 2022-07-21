@@ -1,17 +1,17 @@
 import {
-    CREATE_RESUME,
-    GET_OWN_RESUME,
+    CREATE_RESUME_SUCCESS,
     CLONE_SELECTED_RESUME,
     REMOVE_SELECTED_RESUME,
-    GET_OWN_RESUMES_DATA,
-    GET_OTHER_RESUME_DATA,
     GET_OTHER_RESUME,
     SAVE_TO_MY_LIST,
     GET_NATIONALITY,
     GET_MEDIA_REQUEST,
     GET_MEDIA_SUCCESS,
     GET_MEDIA_ERROR,
-} from "./resume.constants";
+    GET_OWN_RESUMES_DATA_SUCCESS,
+    GET_OTHER_RESUME_DATA_SUCCESS,
+    GET_OWN_RESUME_SUCCESS,
+} from "./resume.types";
 
 const initialState = {
     resumes: [],
@@ -24,16 +24,16 @@ const initialState = {
 
 export const resumeReducer = (state = initialState, action) => {
     switch (action.type) {
-        case CREATE_RESUME:
+        case CREATE_RESUME_SUCCESS:
             return {
                 ...state,
                 resumes: [...state.resumes, action.payload]
             }
-        case GET_OWN_RESUMES_DATA:
+        case GET_OWN_RESUMES_DATA_SUCCESS:
             return { ...state, resumes: action.payload }
-        case GET_OTHER_RESUME_DATA:
+        case GET_OTHER_RESUME_DATA_SUCCESS:
             return { ...state, othersResumes: action.payload }
-        case GET_OWN_RESUME:
+        case GET_OWN_RESUME_SUCCESS:
             return { ...state, resume: action.payload, loading: false }
         case GET_OTHER_RESUME:
             return { ...state, resume: action.payload }

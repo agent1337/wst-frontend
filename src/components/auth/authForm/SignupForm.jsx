@@ -8,7 +8,7 @@ import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
 import { authentication } from '../../context/base';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { signup, gotwitter } from '../../../redux/auth/auth.service';
+import { signup, signInWithTwitter } from '../../../redux/auth/auth.actions';
 import { showToast } from '../../../redux/alert/alert.actions';
 import { styles } from './authForm.styles';
 
@@ -83,7 +83,7 @@ const SignupForm = () => {
                     externalId: res.user.uid
                 }
 
-                dispatch(gotwitter(data))
+                dispatch(signInWithTwitter(data))
             })
             .catch((error) => dispatch(showToast(error.data.message)))
     }

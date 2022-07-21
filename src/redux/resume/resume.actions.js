@@ -3,18 +3,18 @@ import { axiosInstance } from "../../api/axios"
 import { showToast } from "../alert/alert.actions";
 import {
     CLONE_SELECTED_RESUME,
-    CREATE_RESUME,
-    GET_OWN_RESUME,
     REMOVE_SELECTED_RESUME,
-    GET_OWN_RESUMES_DATA,
-    GET_OTHER_RESUME_DATA,
     SAVE_TO_MY_LIST,
     GET_OTHER_RESUME,
     GET_NATIONALITY,
     GET_MEDIA_REQUEST,
     GET_MEDIA_SUCCESS,
     GET_MEDIA_ERROR,
-} from "./resume.constants";
+    GET_OWN_RESUMES_DATA_SUCCESS,
+    GET_OTHER_RESUME_DATA_SUCCESS,
+    GET_OWN_RESUME_SUCCESS,
+    CREATE_RESUME_SUCCESS,
+} from "./resume.types";
 
 
 export const getOwnResumeData = () => {
@@ -23,7 +23,7 @@ export const getOwnResumeData = () => {
             const response = await axiosInstance.get("resumes/own")
 
             dispatch({
-                type: GET_OWN_RESUMES_DATA,
+                type: GET_OWN_RESUMES_DATA_SUCCESS,
                 payload: response.data
             })
         }
@@ -33,14 +33,13 @@ export const getOwnResumeData = () => {
     }
 }
 
-
 export const getOtherResumeData = () => {
     return async dispatch => {
         try {
             const response = await axiosInstance.get("resumes/others")
 
             dispatch({
-                type: GET_OTHER_RESUME_DATA,
+                type: GET_OTHER_RESUME_DATA_SUCCESS,
                 payload: response.data
             })
         }
@@ -60,7 +59,7 @@ export const getOwnResume = (id) => {
             const response = await axiosInstance.get(`/resumes/own/${id}`)
 
             dispatch({
-                type: GET_OWN_RESUME,
+                type: GET_OWN_RESUME_SUCCESS,
                 payload: response.data
             })
         }
@@ -124,7 +123,6 @@ export const getNationality = () => {
         }
         catch (error) {
             console.log(error)
-            // dispatch(showToast(error.response.data.message))
         }
     }
 }
@@ -143,13 +141,12 @@ export const createResume = (data, accessToken, uploadImage, multipleFiles) => {
             }
 
             dispatch({
-                type: CREATE_RESUME,
+                type: CREATE_RESUME_SUCCESS,
                 payload: response
             })
         }
         catch (error) {
             console.log(error)
-            // dispatch(showToast(error.response.data.message))
         }
     }
 }

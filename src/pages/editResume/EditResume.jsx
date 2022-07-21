@@ -4,7 +4,7 @@ import { Box, } from '@mui/material';
 import ActionHeader from '../../components/actionHeader/ActionHeader';
 import SelfIntroduction from '../../components/resume/SelfIntroduction';
 import ExperienceIntroduction from '../../components/resume/ExperienceIntroduction';
-import { getOwnResume, getUploadedFiles } from "../../redux/resume/resume.service";
+import { getOwnResume, getUploadedFiles } from "../../redux/resume/resume.actions";
 import { useDispatch, useSelector } from 'react-redux';
 import { styles } from './editResume.styles';
 import Schedule from "../../components/schedule/Schedule";

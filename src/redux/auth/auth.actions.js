@@ -1,5 +1,6 @@
-import { RESET_PASSWORD, SIGN_IN_SUCCESS, LOGOUT } from "./auth.constants"
+import { RESET_PASSWORD, SIGN_IN_SUCCESS, LOGOUT } from "./auth.types"
 import { axiosInstance } from "../../api/axios"
+import { showToast } from "../alert/alert.actions"
 
 export const signup = (email, password) => {
     return async dispatch => {
@@ -14,6 +15,7 @@ export const signup = (email, password) => {
         }
         catch (error) {
             console.log(error)
+            dispatch(showToast(error.response.data.message))
         }
     }
 }
@@ -35,7 +37,7 @@ export const signin = (email, password) => {
     }
 }
 
-export const gotwitter = (data) => {
+export const signInWithTwitter = (data) => {
     return async dispatch => {
         try {
             const response = await axiosInstance.post("auth/twitter/signin", data)

@@ -6,7 +6,7 @@ import Popup from '../../modal/Popup';
 import { danger } from '../../../colors';
 import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeSelectedResume } from '../../../redux/resume/resume.service';
+import { removeSelectedResume } from '../../../redux/resume/resume.actions';
 import { toastStyle } from '../../../utils/toastStyle';
 import { main } from '../../../colors'
 

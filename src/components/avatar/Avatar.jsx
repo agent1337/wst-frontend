@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { getProfile } from "../../redux/profile/profile.service";
-import { LOGOUT } from "../../redux/auth/auth.constants";
+import { getProfile } from "../../redux/profile/profile.actions";
+import { LOGOUT } from "../../redux/auth/auth.types";
 
 const styles = {
     title: {

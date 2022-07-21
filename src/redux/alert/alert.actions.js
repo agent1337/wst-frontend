@@ -1,4 +1,4 @@
-import { SHOW_ALERT, HIDE_ALERT } from "./alert.constants";
+import { SHOW_ALERT, HIDE_ALERT } from "./alert.types";
 
 export const showToast = (payload) => ({
   type: SHOW_ALERT,

@@ -4,7 +4,7 @@ import SeparatorLine from "../../custom/separatorLine/SeparatorLine";
 import { Link, } from "react-router-dom"
 import { grey, main, text } from "../../colors";
 import { useDispatch } from "react-redux";
-import { forgotPassword } from "../../redux/auth/auth.service";
+import { forgotPassword } from "../../redux/auth/auth.actions";
 
 const styles = {
     container: {

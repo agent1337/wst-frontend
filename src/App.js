@@ -14,7 +14,7 @@ import MainLayout from './layouts/MainLayout';
 import PageNotFound from './pages/auth/PageNotFound';
 import Test from './pages/Test';
 import { useDispatch, useSelector } from 'react-redux';
-import { SIGN_IN_SUCCESS } from './redux/auth/auth.constants';
+import { SIGN_IN_SUCCESS } from './redux/auth/auth.types';
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => {
   return (

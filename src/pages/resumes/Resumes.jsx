@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Tabs, Tab, Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { getOtherResumeData, getOwnResumeData } from "../../redux/resume/resume.service";
+import { getOtherResumeData, getOwnResumeData } from "../../redux/resume/resume.actions";
 import CreateResumeButton from "../../custom/buttons/createResume/CreateResumeButton";
 import OwnResumeCard from "../../components/resumeCard/ownCardResume/OwnResumeCard";
 import OtherResumeCard from "../../components/resumeCard/otherCardResume/OtherResumeCard";

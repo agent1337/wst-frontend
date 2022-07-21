@@ -10,7 +10,7 @@ import Schedule from '../../components/schedule/Schedule';
 import { showToast } from '../../redux/alert/alert.actions';
 import { styles } from './createResume.styles';
 import { initialExperienceValue, formValidation } from '../../helpers/initialValues';
-import { createResume } from '../../redux/resume/resume.service';
+import { createResume } from '../../redux/resume/resume.actions';
 
 export default function CreateResume() {
     const dispatch = useDispatch()

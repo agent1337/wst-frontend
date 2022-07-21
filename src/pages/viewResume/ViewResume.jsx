@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 import ActionHeader from "../../components/actionHeader/ActionHeader";
 import Experience from "./components/Experience";
 import DisplaySchedule from "../../components/schedule/DisplaySchedule";
-import { getOwnResume, getUploadedFiles } from "../../redux/resume/resume.service";
+import { getOwnResume, getUploadedFiles } from "../../redux/resume/resume.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { getAge, getDay } from "../../helpers/dateCalculation";
 import QRcode from "qrcode";
@@ -112,14 +112,14 @@ export default function ViewResume() {
           <Box ref={ref} sx={styles.container}>
             <Box sx={styles.selfIntroduction}>
               <Box sx={styles.imageBox}>
-                {/* <img
+                <img
                   src={
                     media &&
                     `https://storage.cloud.google.com/wst-files/${media[0].filePath}`
                   }
                   alt="123"
                   style={{ width: "inherit", height: "inherit" }}
-                /> */}
+                />
 
                 <InfoBlock resume={resume} />
               </Box>
