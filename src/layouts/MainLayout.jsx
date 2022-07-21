@@ -1,9 +1,12 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
-import { Box } from "@mui/material";
-import Header from "../components/header/Header";
-import Footer from "../components/footer/Footer";
 import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
+
+import Footer from "../components/footer/Footer";
+import Header from "../components/header/Header";
+import { Box } from "@mui/material";
+
+import { routes } from "../routing/Routes";
 
 const MainLayout = ({ children }) => {
   const { accessToken, loading } = useSelector((state) => state.profile);
@@ -15,7 +18,7 @@ const MainLayout = ({ children }) => {
       <Footer />
     </Box>
   ) : (
-    <Redirect to="/" />
+    <Redirect to={routes().signup} />
   );
 };
 

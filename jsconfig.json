@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@components": ["./components"],
+      "@custom": ["./custom"],
+      "@redux": ["./redux"],
+      "@routing": ["./routing"]
+    }
+  },
+  "exclude": ["node_modules"]
+}

@@ -7,14 +7,15 @@ import AuthFooter from "../authFooter/AuthFooter";
 import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
 import { authentication } from "../../context/base";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { signup, signInWithTwitter } from "../../../redux/auth/auth.actions";
-import { showToast } from "../../../redux/alert/alert.actions";
+import { useSelector } from "react-redux";
 import { styles } from "./authForm.styles";
+import { useAuthActions } from "../../../redux/auth/useAuthActions";
+import { useAlertActions } from "../../../redux/alert/useAlertActions";
 
 const SignupForm = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
+  const { signup, signInWithTwitter } = useAuthActions();
+  const { showToast } = useAlertActions();
   const accessToken = useSelector((state) => state.profile.accessToken);
 
   const [user, setUser] = useState({
@@ -38,7 +39,7 @@ const SignupForm = () => {
 
     if (!isFormValid(user.email, user.password)) return;
 
-    await dispatch(signup(user.email, user.password));
+    await signup(user.email, user.password);
   }
 
   const handleInputChange = (e) => {
@@ -60,13 +61,13 @@ const SignupForm = () => {
     if (!user.email) {
       errorsData.email = true;
       isValid = false;
-      dispatch(showToast("Email is not correct"));
+      showToast("Email is not correct");
     }
 
     if (!user.password || user.password.length < 8) {
       errorsData.password = true;
       isValid = false;
-      dispatch(showToast("Password is too short"));
+      showToast("Password is too short");
     }
 
     setErrors(errorsData);
@@ -82,9 +83,9 @@ const SignupForm = () => {
           externalId: res.user.uid,
         };
 
-        dispatch(signInWithTwitter(data));
+        signInWithTwitter(data);
       })
-      .catch((error) => dispatch(showToast(error.data.message)));
+      .catch((error) => showToast(error.data.message));
   };
 
   const line = () => {};

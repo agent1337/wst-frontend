@@ -1,37 +1,52 @@
 {
-    "plugins": ["react-hooks"],
-    "extends": [
-      "eslint:recommended",
-      "plugin:react/recommended", // Uses the recommended rules from @eslint-plugin-react
-      "plugin:react-hooks/recommended",
-      "plugin:jsx-a11y/recommended"
-    ],
-    "env": {
-      "es6": true,
-      "browser": true,
-      "jest": true,
-      "node": true
+  "plugins": ["react-hooks"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended", // Uses the recommended rules from @eslint-plugin-react
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended"
+  ],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jest": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
     },
-    "settings": {
-      "react": {
-        "version": "detect"
+    "import/resolver": {
+      "alias": {
+        "map": [
+          // And all your import aliases
+          ["@components", "./src/components"],
+          ["@custom", "./src/custom"],
+          ["@redux", "./src/redux"],
+          ["@routing", "./src/routing"]
+        ],
+        "extensions": [".ts", ".js", ".jsx", ".json"]
       }
-    },
-    "rules": {
-      "react/react-in-jsx-scope": 0,
-      "react/display-name": 0,
-      "react/prop-types": 0,
-      "jsx-a11y/click-events-have-key-events": 0,
-      "jsx-a11y/no-static-element-interactions": 0,
-      "jsx-a11y/anchor-is-valid": 0,
-      "no-console": [
-        1,
-        {
-          "allow": ["warn", "error"]
-        }
-      ],
-      "react-hooks/rules-of-hooks": 2,
-      "react-hooks/exhaustive-deps": 0,
-      "import/no-anonymous-default-export": 0
     }
+  },
+  "rules": {
+    "react/react-in-jsx-scope": 0,
+    "react/display-name": 0,
+    "react/prop-types": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "no-console": [
+      1,
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
+    "react-hooks/rules-of-hooks": 2,
+    "react-hooks/exhaustive-deps": 0,
+    "import/no-anonymous-default-export": 0
   }
+}
