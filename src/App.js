@@ -14,7 +14,7 @@ import MainLayout from './layouts/MainLayout';
 import PageNotFound from './pages/auth/PageNotFound';
 import Test from './pages/Test';
 import { useDispatch, useSelector } from 'react-redux';
-import { SIGN_IN } from './redux/auth/auth.constants';
+import { SIGN_IN_SUCCESS } from './redux/auth/auth.constants';
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => {
   return (
@@ -32,7 +32,7 @@ export default function App() {
 
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
-    dispatch({ type: SIGN_IN, payload: accessToken })
+    dispatch({ type: SIGN_IN_SUCCESS, payload: accessToken })
   }, [])
 
   return (

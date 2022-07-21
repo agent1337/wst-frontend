@@ -28,7 +28,7 @@ export const getOwnResumeData = () => {
             })
         }
         catch (error) {
-            console.log(error.response.data.message)
+            console.log(error)
         }
     }
 }
@@ -45,7 +45,7 @@ export const getOtherResumeData = () => {
             })
         }
         catch (error) {
-            console.log(error.response.data.message)
+            console.log(error)
         }
     }
 }
@@ -108,7 +108,6 @@ export const getUploadedFiles = (id) => {
             dispatch({
                 type: GET_MEDIA_ERROR,
             })
-            // dispatch(showToast(error.response.data.message))
         }
     }
 }

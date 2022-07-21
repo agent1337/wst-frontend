@@ -3,7 +3,6 @@ import {
     GET_OWN_RESUME,
     CLONE_SELECTED_RESUME,
     REMOVE_SELECTED_RESUME,
-    SET_PROFILE,
     GET_OWN_RESUMES_DATA,
     GET_OTHER_RESUME_DATA,
     GET_OTHER_RESUME,
@@ -15,7 +14,6 @@ import {
 } from "./resume.constants";
 
 const initialState = {
-    user: [],
     resumes: [],
     othersResumes: [],
     currentResume: {},
@@ -31,8 +29,6 @@ export const resumeReducer = (state = initialState, action) => {
                 ...state,
                 resumes: [...state.resumes, action.payload]
             }
-        case SET_PROFILE:
-            return { ...state, user: action.payload }
         case GET_OWN_RESUMES_DATA:
             return { ...state, resumes: action.payload }
         case GET_OTHER_RESUME_DATA:

@@ -1,4 +1,4 @@
-import { RESET_PASSWORD, SIGN_IN, LOGOUT } from "./auth.constants"
+import { RESET_PASSWORD, SIGN_IN_SUCCESS, LOGOUT } from "./auth.constants"
 import { axiosInstance } from "../../api/axios"
 
 export const signup = (email, password) => {
@@ -8,7 +8,7 @@ export const signup = (email, password) => {
             localStorage.setItem("accessToken", response.data.accessToken);
 
             dispatch({
-                type: SIGN_IN,
+                type: SIGN_IN_SUCCESS,
                 payload: response.data.accessToken
             })
         }
@@ -25,7 +25,7 @@ export const signin = (email, password) => {
             localStorage.setItem("accessToken", response.data.accessToken);
 
             dispatch({
-                type: SIGN_IN,
+                type: SIGN_IN_SUCCESS,
                 payload: response.data.accessToken
             })
         }
@@ -42,7 +42,7 @@ export const gotwitter = (data) => {
             localStorage.setItem("accessToken", response.data.accessToken);
 
             dispatch({
-                type: SIGN_IN,
+                type: SIGN_IN_SUCCESS,
                 payload: response.data.accessToken
             })
         }

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Box } from "@mui/material";
 import ActionButton from '../../custom/buttons/actionButton/ActionButton';
 import { useDispatch, } from 'react-redux';
-import { saveToMyList } from '../../redux/profile/profile.service';
+import { saveToMyList } from '../../redux/resume/resume.service';
 import CircleIcon from '@mui/icons-material/Circle';
 import { styles } from './actionHeader.styles';
 import Popup from '../modal/Popup';

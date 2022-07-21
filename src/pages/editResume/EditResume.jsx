@@ -4,7 +4,7 @@ import { Box, } from '@mui/material';
 import ActionHeader from '../../components/actionHeader/ActionHeader';
 import SelfIntroduction from '../../components/resume/SelfIntroduction';
 import ExperienceIntroduction from '../../components/resume/ExperienceIntroduction';
-import { getOwnResume, getUploadedFiles } from "../../redux/profile/profile.service";
+import { getOwnResume, getUploadedFiles } from "../../redux/resume/resume.service";
 import { useDispatch, useSelector } from 'react-redux';
 import { styles } from './editResume.styles';
 import Schedule from "../../components/schedule/Schedule";
@@ -12,7 +12,7 @@ import Schedule from "../../components/schedule/Schedule";
 export default function EditResume() {
     let location = useLocation();
     let id = location.pathname.split("/")[2];
-    const resume = useSelector(state => state.profile.currentResume)
+    const resume = useSelector(state => state.resume.currentResume)
     const workshift = resume.workshift
     const [resumeTitle, setResumeTitle] = useState(resume.resumeTitle)
     const [schedules, setWorkshift] = useState([])

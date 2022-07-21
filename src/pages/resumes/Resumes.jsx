@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Tabs, Tab, Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { getOtherResumeData, getOwnResumeData } from "../../redux/profile/profile.service";
+import { getOtherResumeData, getOwnResumeData } from "../../redux/resume/resume.service";
 import CreateResumeButton from "../../custom/buttons/createResume/CreateResumeButton";
 import OwnResumeCard from "../../components/resumeCard/ownCardResume/OwnResumeCard";
 import OtherResumeCard from "../../components/resumeCard/otherCardResume/OtherResumeCard";
@@ -40,8 +40,8 @@ function a11yProps(index) {
 
 export default function Resumes() {
   const [value, setValue] = useState(0);
-  const resumes = useSelector(state => state.profile.resumes)
-  const othersResumes = useSelector(state => state.profile.othersResumes)
+  const resumes = useSelector(state => state.resume.resumes)
+  const othersResumes = useSelector(state => state.resume.othersResumes)
   const dispatch = useDispatch()
 
   const handleChange = (event, newValue) => {

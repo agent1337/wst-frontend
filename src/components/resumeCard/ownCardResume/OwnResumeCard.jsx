@@ -4,7 +4,7 @@ import Popup from '../../modal/Popup';
 import { Link } from "react-router-dom";
 import { danger } from '../../../colors';
 import { useDispatch } from 'react-redux';
-import { cloneResume, removeSelectedResume } from '../../../redux/profile/profile.service';
+import { cloneResume, removeSelectedResume } from '../../../redux/resume/resume.service';
 import { styles } from './resumeCard.styles';
 
 export default function OwnResumeCard({ item, }) {

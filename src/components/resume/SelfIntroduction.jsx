@@ -5,14 +5,14 @@ import TextInput from '../../custom/inputs/textInput/TextInput'
 import SelectDate from './SelectDate'
 import { useDispatch, useSelector } from 'react-redux'
 import Selector from './Selector'
-import { getNationality } from '../../redux/profile/profile.service'
+import { getNationality } from '../../redux/resume/resume.service'
 import { styles } from './index.styles'
 
 const gender = [{ text: 'male' }, { text: 'female' }]
 
 export default function SelfIntroduction({ setUploadImage, uploadImage, values, handleChange, errors}) {
     const dispatch = useDispatch()
-    const nationality = useSelector(state => state.profile.nationality)
+    const nationality = useSelector(state => state.resume.nationality)
 
     useEffect(() => {
        dispatch(getNationality())

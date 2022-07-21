@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 import ActionHeader from "../../components/actionHeader/ActionHeader";
 import Experience from "./components/Experience";
 import DisplaySchedule from "../../components/schedule/DisplaySchedule";
-import { getOwnResume, getUploadedFiles } from "../../redux/profile/profile.service";
+import { getOwnResume, getUploadedFiles } from "../../redux/resume/resume.service";
 import { useDispatch, useSelector } from "react-redux";
 import { getAge, getDay } from "../../helpers/dateCalculation";
 import QRcode from "qrcode";
@@ -61,7 +61,7 @@ export default function ViewResume() {
 
   const [code, setCode] = useState("")
   const [files, setFiles] = useState([] || null)
-  const { resume, media, loading } = useSelector(state => state.profile)
+  const { resume, media, loading } = useSelector(state => state.resume)
   const workshift = resume?.workshift
   const [schedules, setTest] = useState([])
 
