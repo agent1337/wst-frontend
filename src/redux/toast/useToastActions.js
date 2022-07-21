@@ -1,8 +1,9 @@
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { showToast, hideToast } from "./alert.actions";
 
-export const useAlertActions = () => {
+import { showToast, hideToast } from "./toast.actions";
+
+export const useToastActions = () => {
   const dispatch = useDispatch();
 
   return bindActionCreators(

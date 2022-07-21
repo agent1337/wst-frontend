@@ -10,7 +10,7 @@ import { routesData } from "./routing/RoutesData";
 
 export default function App() {
   const dispatch = useDispatch();
-  const notify = useSelector((state) => state.alert.list);
+  const notify = useSelector((state) => state.toast.list);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");

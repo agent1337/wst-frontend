@@ -1,3 +1,8 @@
+import { getMe, removeToken, saveToken } from "../profile/profile.actions";
+import { showToast } from "../toast/toast.actions";
+
+import { axiosInstance } from "../../api/axios";
+
 import {
   RESET_PASSWORD,
   SIGN_UP,
@@ -5,9 +10,6 @@ import {
   SIGN_IN,
   SIGN_IN_ERROR,
 } from "./auth.types";
-import { axiosInstance } from "../../api/axios";
-import { showToast } from "../alert/alert.actions";
-import { getMe, removeToken, saveToken } from "../profile/profile.actions";
 
 export const signup = (email, password) => {
   return async (dispatch) => {

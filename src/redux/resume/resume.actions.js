@@ -1,230 +1,222 @@
+import { showToast } from "../toast/toast.actions";
 
-import { axiosInstance } from "../../api/axios"
-import { showToast } from "../alert/alert.actions";
+import { axiosInstance } from "../../api/axios";
+
 import {
-    CLONE_SELECTED_RESUME,
-    REMOVE_SELECTED_RESUME,
-    SAVE_TO_MY_LIST,
-    GET_OTHER_RESUME,
-    GET_NATIONALITY,
-    GET_MEDIA_REQUEST,
-    GET_MEDIA_SUCCESS,
-    GET_MEDIA_ERROR,
-    GET_OWN_RESUMES_DATA_SUCCESS,
-    GET_OTHER_RESUME_DATA_SUCCESS,
-    GET_OWN_RESUME_SUCCESS,
-    CREATE_RESUME_SUCCESS,
+  CLONE_SELECTED_RESUME,
+  REMOVE_SELECTED_RESUME,
+  SAVE_TO_MY_LIST,
+  GET_OTHER_RESUME,
+  GET_NATIONALITY,
+  GET_MEDIA_REQUEST,
+  GET_MEDIA_SUCCESS,
+  GET_MEDIA_ERROR,
+  GET_OWN_RESUMES_DATA_SUCCESS,
+  GET_OTHER_RESUME_DATA_SUCCESS,
+  GET_OWN_RESUME_SUCCESS,
+  CREATE_RESUME_SUCCESS,
 } from "./resume.types";
 
-
 export const getOwnResumeData = () => {
-    return async dispatch => {
-        try {
-            const response = await axiosInstance.get("resumes/own")
+  return async (dispatch) => {
+    try {
+      const response = await axiosInstance.get("resumes/own");
 
-            dispatch({
-                type: GET_OWN_RESUMES_DATA_SUCCESS,
-                payload: response.data
-            })
-        }
-        catch (error) {
-            console.log(error)
-        }
+      dispatch({
+        type: GET_OWN_RESUMES_DATA_SUCCESS,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
     }
-}
+  };
+};
 
 export const getOtherResumeData = () => {
-    return async dispatch => {
-        try {
-            const response = await axiosInstance.get("resumes/others")
+  return async (dispatch) => {
+    try {
+      const response = await axiosInstance.get("resumes/others");
 
-            dispatch({
-                type: GET_OTHER_RESUME_DATA_SUCCESS,
-                payload: response.data
-            })
-        }
-        catch (error) {
-            console.log(error)
-        }
+      dispatch({
+        type: GET_OTHER_RESUME_DATA_SUCCESS,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
     }
-}
+  };
+};
 
 export const getOwnResume = (id) => {
-    return async dispatch => {
-        try {
-            dispatch({
-                type: GET_MEDIA_REQUEST,
-            })
-            
-            const response = await axiosInstance.get(`/resumes/own/${id}`)
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: GET_MEDIA_REQUEST,
+      });
 
-            dispatch({
-                type: GET_OWN_RESUME_SUCCESS,
-                payload: response.data
-            })
-        }
-        catch (error) {
-            console.log(error)
-            dispatch({
-                type: GET_MEDIA_ERROR,
-            })
-        }
+      const response = await axiosInstance.get(`/resumes/own/${id}`);
+
+      dispatch({
+        type: GET_OWN_RESUME_SUCCESS,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: GET_MEDIA_ERROR,
+      });
     }
-}
+  };
+};
 
 export const getOtherResume = (id) => {
-    return async dispatch => {
-        try {
-            const response = await axiosInstance.get(`/resumes/other/${id}`)
+  return async (dispatch) => {
+    try {
+      const response = await axiosInstance.get(`/resumes/other/${id}`);
 
-            dispatch({
-                type: GET_OTHER_RESUME,
-                payload: response.data
-            })
-        }
-        catch (error) {
-            console.log(error)
-        }
+      dispatch({
+        type: GET_OTHER_RESUME,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
     }
-}
+  };
+};
 
 export const getUploadedFiles = (id) => {
-    return async dispatch => {
-        try {
-            dispatch({
-                type: GET_MEDIA_REQUEST,
-            })
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: GET_MEDIA_REQUEST,
+      });
 
-            const response = await axiosInstance.get(`/media/${id}`)
+      const response = await axiosInstance.get(`/media/${id}`);
 
-            dispatch({
-                type: GET_MEDIA_SUCCESS,
-                payload: response.data
-            })
-        }
-        catch (error) {
-            console.log(error)
-            dispatch({
-                type: GET_MEDIA_ERROR,
-            })
-        }
+      dispatch({
+        type: GET_MEDIA_SUCCESS,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: GET_MEDIA_ERROR,
+      });
     }
-}
+  };
+};
 
 export const getNationality = () => {
-    return async dispatch => {
-        try {
-            const response = await axiosInstance.get("nationality")
+  return async (dispatch) => {
+    try {
+      const response = await axiosInstance.get("nationality");
 
-            dispatch({
-                type: GET_NATIONALITY,
-                payload: response.data
-            })
-        }
-        catch (error) {
-            console.log(error)
-        }
+      dispatch({
+        type: GET_NATIONALITY,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
     }
-}
+  };
+};
 
 export const createResume = (data, accessToken, uploadImage, multipleFiles) => {
-    return async dispatch => {
-        try {
-            const response = await axiosInstance.post('resumes', data, { headers: { Authorization: `Bearer ${accessToken}` } })
-                .catch((error) => {
-                    dispatch(showToast(error.response.data.message))
-                });
+  return async (dispatch) => {
+    try {
+      const response = await axiosInstance
+        .post("resumes", data, {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        })
+        .catch((error) => {
+          dispatch(showToast(error.response.data.message));
+        });
 
-            dispatch(uploadFiles(uploadImage, response.data._id, accessToken))
-            for (let i = 0; i < multipleFiles.length; i++) {
-                dispatch(uploadFiles(multipleFiles[i], response.data._id, accessToken))
-            }
+      dispatch(uploadFiles(uploadImage, response.data._id, accessToken));
+      for (let i = 0; i < multipleFiles.length; i++) {
+        dispatch(uploadFiles(multipleFiles[i], response.data._id, accessToken));
+      }
 
-            dispatch({
-                type: CREATE_RESUME_SUCCESS,
-                payload: response
-            })
-        }
-        catch (error) {
-            console.log(error)
-        }
+      dispatch({
+        type: CREATE_RESUME_SUCCESS,
+        payload: response,
+      });
+    } catch (error) {
+      console.log(error);
     }
-}
+  };
+};
 
 export const uploadFiles = (uploadImage, resumeId, accessToken) => {
-    return async dispatch => {
-        try {
-            const formData = new FormData();
-            formData.append("image", uploadImage);
-            formData.append("resumeId", resumeId);
+  return async (dispatch) => {
+    try {
+      const formData = new FormData();
+      formData.append("image", uploadImage);
+      formData.append("resumeId", resumeId);
 
-            const response = await axiosInstance
-                .post("media", formData, {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                        "Content-Type": "multipart/form-data",
-                        Accept: "application/json",
-                        type: "formData",
-                    },
-                })
-                .catch((err) => console.log(err));
+      const response = await axiosInstance
+        .post("media", formData, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "multipart/form-data",
+            Accept: "application/json",
+            type: "formData",
+          },
+        })
+        .catch((err) => console.log(err));
 
-            return response;
-        }
-        catch (error) {
-            dispatch(showToast(error.response.data.message))
-        }
+      return response;
+    } catch (error) {
+      dispatch(showToast(error.response.data.message));
     }
-}
+  };
+};
 
 export const saveToMyList = (id) => {
-    return async dispatch => {
-        try {
-            const response = await axiosInstance.post(`resumes/save/${id}`)
+  return async (dispatch) => {
+    try {
+      const response = await axiosInstance.post(`resumes/save/${id}`);
 
-            dispatch({
-                type: SAVE_TO_MY_LIST,
-                payload: response.data
-            })
-        }
-        catch (error) {
-            dispatch(showToast(error.response.data.message))
-        }
+      dispatch({
+        type: SAVE_TO_MY_LIST,
+        payload: response.data,
+      });
+    } catch (error) {
+      dispatch(showToast(error.response.data.message));
     }
-}
+  };
+};
 
 export const removeSelectedResume = (resumeId) => {
-    return async dispatch => {
-        try {
-            const response = await axiosInstance.delete(`resumes/` + resumeId)
+  return async (dispatch) => {
+    try {
+      const response = await axiosInstance.delete(`resumes/` + resumeId);
 
-            dispatch({
-                type: REMOVE_SELECTED_RESUME,
-                payload: response.data
-            })
+      dispatch({
+        type: REMOVE_SELECTED_RESUME,
+        payload: response.data,
+      });
 
-            dispatch(showToast(`"${response.data.resumeTitle}" was delete`))
-        }
-        catch (error) {
-            console.log(error)
-        }
+      dispatch(showToast(`"${response.data.resumeTitle}" was delete`));
+    } catch (error) {
+      console.log(error);
     }
-}
+  };
+};
 
 export const cloneResume = (resumeId) => {
-    return async dispatch => {
-        try {
-            const response = await axiosInstance.post(`resumes/copy/` + resumeId)
+  return async (dispatch) => {
+    try {
+      const response = await axiosInstance.post(`resumes/copy/` + resumeId);
 
-            dispatch({
-                type: CLONE_SELECTED_RESUME,
-                payload: response.data
-            })
+      dispatch({
+        type: CLONE_SELECTED_RESUME,
+        payload: response.data,
+      });
 
-            dispatch(showToast(`Created "${response.data.resumeTitle}"`))
-        }
-        catch (error) {
-            dispatch(showToast(error.response.data.message))
-        }
+      dispatch(showToast(`Created "${response.data.resumeTitle}"`));
+    } catch (error) {
+      dispatch(showToast(error.response.data.message));
     }
-}
+  };
+};

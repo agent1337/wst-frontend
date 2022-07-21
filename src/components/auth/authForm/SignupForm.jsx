@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
+import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+
 import { Grid } from "@mui/material";
-import FormText from "../authText/FormText";
+import { styles } from "./authForm.styles";
 import AuthInput from "../../../custom/inputs/authInput/AuthInput";
 import SeparatorLine from "../../../custom/separatorLine/SeparatorLine";
-import AuthFooter from "../authFooter/AuthFooter";
-import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
-import { authentication } from "../../context/base";
-import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { styles } from "./authForm.styles";
 import { useAuthActions } from "../../../redux/auth/useAuthActions";
-import { useAlertActions } from "../../../redux/alert/useAlertActions";
+import { useToastActions } from "../../../redux/toast/useToastActions";
+import { authentication } from "../../context/base";
+import AuthFooter from "../authFooter/AuthFooter";
+import FormText from "../authText/FormText";
 
 const SignupForm = () => {
   const history = useHistory();
   const { signup, signInWithTwitter } = useAuthActions();
-  const { showToast } = useAlertActions();
+  const { showToast } = useToastActions();
   const accessToken = useSelector((state) => state.profile.accessToken);
 
   const [user, setUser] = useState({

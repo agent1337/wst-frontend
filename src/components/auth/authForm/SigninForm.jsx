@@ -10,7 +10,7 @@ import { authentication } from "../../context/base";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signin, signInWithTwitter } from "../../../redux/auth/auth.actions";
-import { showToast } from "../../../redux/alert/alert.actions";
+import { showToast } from "../../../redux/toast/toast.actions";
 import { styles } from "./authForm.styles";
 
 const SigninForm = () => {

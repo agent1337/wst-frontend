@@ -1,11 +1,11 @@
-import { SHOW_ALERT, HIDE_ALERT } from "./alert.types";
+import { SHOW_TOAST, HIDE_TOAST } from "./toast.types";
 
 export const showToast = (payload) => ({
-  type: SHOW_ALERT,
+  type: SHOW_TOAST,
   payload,
-})
+});
 
 export const hideToast = (payload) => ({
-  type: HIDE_ALERT,
+  type: HIDE_TOAST,
   payload,
-})
+});

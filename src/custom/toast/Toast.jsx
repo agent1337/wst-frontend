@@ -1,35 +1,30 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux';
-import { hideToast } from '../../redux/alert/alert.actions';
-import './toast.styles.css'
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { hideToast } from "../../redux/toast/toast.actions";
+import "./toast.styles.css";
 
-export default function Toast({ toastlist, }) {
-    const dispatch = useDispatch()
+export default function Toast({ toastlist }) {
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        const interval = setTimeout(() => {
-            if (toastlist.length) {
-                dispatch(hideToast(toastlist[0].id))
-            }
-        }, 3000);
+  useEffect(() => {
+    const interval = setTimeout(() => {
+      if (toastlist.length) {
+        dispatch(hideToast(toastlist[0].id));
+      }
+    }, 3000);
 
-        return () => {
-            clearTimeout(interval);
-        }
-    }, [toastlist, dispatch]);
+    return () => {
+      clearTimeout(interval);
+    };
+  }, [toastlist, dispatch]);
 
-    return (
-        <div className="toastContainer">
-            {
-                toastlist.map((toast, i) => (
-                    <div
-                        key={i}
-                        className="notification"
-                    >
-                       {toast.description}
-                    </div>
-                ))
-            }
+  return (
+    <div className="toastContainer">
+      {toastlist.map((toast, i) => (
+        <div key={i} className="notification">
+          {toast.description}
         </div>
-    )
+      ))}
+    </div>
+  );
 }
