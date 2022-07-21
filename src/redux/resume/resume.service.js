@@ -1,12 +1,11 @@
 
 import { axiosInstance } from "../../api/axios"
-import {  showToast } from "../alert/alert.actions";
+import { showToast } from "../alert/alert.actions";
 import {
     CLONE_SELECTED_RESUME,
     CREATE_RESUME,
     GET_OWN_RESUME,
     REMOVE_SELECTED_RESUME,
-    SET_PROFILE,
     GET_OWN_RESUMES_DATA,
     GET_OTHER_RESUME_DATA,
     SAVE_TO_MY_LIST,
@@ -15,23 +14,8 @@ import {
     GET_MEDIA_REQUEST,
     GET_MEDIA_SUCCESS,
     GET_MEDIA_ERROR,
-} from "./profile.constants";
+} from "./resume.constants";
 
-export const getProfile = () => {
-    return async dispatch => {
-        try {
-            const response = await axiosInstance.get("auth/me")
-
-            dispatch({
-                type: SET_PROFILE,
-                payload: response.data
-            })
-        }
-        catch (error) {
-            console.log(error.response.data.message)
-        }
-    }
-}
 
 export const getOwnResumeData = () => {
     return async dispatch => {

@@ -12,7 +12,7 @@ import {
     GET_MEDIA_REQUEST,
     GET_MEDIA_SUCCESS,
     GET_MEDIA_ERROR,
-} from "./profile.constants";
+} from "./resume.constants";
 
 const initialState = {
     user: [],
@@ -24,7 +24,7 @@ const initialState = {
     loading: false
 }
 
-export const profileReducer = (state = initialState, action) => {
+export const resumeReducer = (state = initialState, action) => {
     switch (action.type) {
         case CREATE_RESUME:
             return {

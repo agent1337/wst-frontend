@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const baseURL = `https://1721-93-76-142-93.eu.ngrok.io/`;
+const baseURL = `https://77ac-93-76-142-93.eu.ngrok.io/`;
 
 export const accessToken = localStorage.getItem("accessToken");
 

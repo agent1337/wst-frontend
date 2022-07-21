@@ -54,24 +54,27 @@ const InfoBlock = ({ resume }) => {
 
 export default function ViewResume() {
   const dispatch = useDispatch()
-  const user = useSelector(state => state.profile.user)
 
   let location = useLocation();
   let arr = location.pathname.split("/")
   let id = arr[arr.length - 1];
 
   const [code, setCode] = useState("")
-  const [image, setImage] = useState([] || null)
   const [files, setFiles] = useState([] || null)
-  const resume = useSelector(state => state.profile.currentResume)
-  const media = useSelector(state => state.profile.media)
-  const workshift = resume.workshift
+  const { resume, media, loading } = useSelector(state => state.profile)
+  const workshift = resume?.workshift
   const [schedules, setTest] = useState([])
 
   useEffect(() => {
     dispatch(getOwnResume(id))
     dispatch(getUploadedFiles(id))
-  }, [id])
+  }, [])
+
+  useEffect(() => {
+    if (!loading) {
+      setFiles(media.splice(1));
+    }
+  }, [media])
 
   useEffect(() => {
     QRcode.toDataURL(document.location.href).then(setCode)
@@ -87,13 +90,8 @@ export default function ViewResume() {
     setTest(arr)
   }, [workshift])
 
-  useEffect(() =>  {
-    dispatch(getUploadedFiles(id))
-    setImage(media[0].filePath);
-    setFiles(media.splice(1));
-  }, [])
+  console.log(resume, 'resime')
 
-  const type = user._id !== resume.userId ? "third" : "second"
 
   return (
     <section style={styles.section}>
@@ -102,10 +100,7 @@ export default function ViewResume() {
           <Box
             sx={styles.block}
           >
-            <Typography>
-              {user._id === resume.userId && resume.resumeTitle}
-            </Typography>
-            <ActionHeader type={type} resumeId={id} />
+            <ActionHeader type={"second"} />
           </Box>
 
           <Pdf targetRef={ref} filename="code-example.pdf" scale={0.78} x={4} y={5}>
@@ -115,14 +110,15 @@ export default function ViewResume() {
           <Box ref={ref} sx={styles.container}>
             <Box sx={styles.selfIntroduction}>
               <Box sx={styles.imageBox}>
-                <img
+                {/* <img
                   src={
-                    image !== undefined &&
-                    `https://storage.cloud.google.com/wst-files/${image}`
+                    media &&
+                    `https://storage.cloud.google.com/wst-files/${media[0].filePath}`
                   }
-                  alt={`${image}`}
+                  alt="123"
                   style={{ width: "inherit", height: "inherit" }}
-                />
+                /> */}
+
                 <InfoBlock resume={resume} />
               </Box>
               <Box
@@ -140,7 +136,7 @@ export default function ViewResume() {
                     width: "200px",
                   }}
                 >
-                  {resume.surname} {resume.name}
+                  {/* {resume.surname} {resume.name} */}
                 </Typography>
                 <Typography>{resume.position}</Typography>
               </Box>
@@ -221,7 +217,7 @@ export default function ViewResume() {
                     return (
                       <UploadedFile key={index} file={file} />
                     )
-                    
+
                   })}
                 </>
               )}
