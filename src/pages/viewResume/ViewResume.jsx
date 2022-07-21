@@ -31,7 +31,7 @@ const InfoBlock = ({ resume }) => {
             lineHeight: '33px',
           }}
         >
-          {resume.surname} {resume.name}
+          {resume?.surname} {resume?.name}
         </Typography>
         <Typography sx={{
           marginTop: '5px',
@@ -61,6 +61,7 @@ export default function ViewResume() {
 
   const [code, setCode] = useState("")
   const [files, setFiles] = useState([] || null)
+  const user = useSelector(state => state.profile.user)
   const { resume, media, loading } = useSelector(state => state.resume)
   const workshift = resume?.workshift
   const [schedules, setTest] = useState([])
@@ -92,7 +93,7 @@ export default function ViewResume() {
 
   console.log(resume, 'resime')
 
-
+  const type = user._id !== resume.userId ? "third" : "second"
   return (
     <section style={styles.section}>
       {resume &&
@@ -100,7 +101,8 @@ export default function ViewResume() {
           <Box
             sx={styles.block}
           >
-            <ActionHeader type={"second"} />
+            <Typography>{resume.resumeTitle}</Typography>
+            <ActionHeader type={type} />
           </Box>
 
           <Pdf targetRef={ref} filename="code-example.pdf" scale={0.78} x={4} y={5}>
@@ -136,7 +138,7 @@ export default function ViewResume() {
                     width: "200px",
                   }}
                 >
-                  {/* {resume.surname} {resume.name} */}
+                  {resume.surname} {resume.name}
                 </Typography>
                 <Typography>{resume.position}</Typography>
               </Box>

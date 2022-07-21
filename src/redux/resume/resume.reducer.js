@@ -16,7 +16,7 @@ import {
 const initialState = {
     resumes: [],
     othersResumes: [],
-    currentResume: {},
+    resume: {},
     media: [],
     nationality: [],
     loading: false
@@ -34,9 +34,9 @@ export const resumeReducer = (state = initialState, action) => {
         case GET_OTHER_RESUME_DATA:
             return { ...state, othersResumes: action.payload }
         case GET_OWN_RESUME:
-            return { ...state, currentResume: action.payload, loading: false }
+            return { ...state, resume: action.payload, loading: false }
         case GET_OTHER_RESUME:
-            return { ...state, currentResume: action.payload }
+            return { ...state, resume: action.payload }
         case SAVE_TO_MY_LIST:
             return {
                 ...state,
