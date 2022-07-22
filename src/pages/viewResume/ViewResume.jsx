@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { main } from "colors";
+import ActionHeader from "components/actionHeader/ActionHeader";
+import DisplaySchedule from "components/schedule/DisplaySchedule";
+import UploadedFile from "custom/outputs/uploadedFile/UploadedFile";
+import { getAge, getDay } from "helpers/dateCalculation";
 import moment from "moment";
 import QRcode from "qrcode";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import Pdf from "react-to-pdf";
+import {
+  getOwnResumeDetail,
+  getUploadedFiles,
+} from "redux/resume/resume.actions";
 
-import ActionHeader from "../../components/actionHeader/ActionHeader";
-import DisplaySchedule from "../../components/schedule/DisplaySchedule";
 import Experience from "./components/Experience";
 import InfoBlock from "./components/InfoBlock";
 import { Box, Typography } from "@mui/material";
 import { styles } from "./viewResume.styles";
-import UploadedFile from "../../custom/outputs/uploadedFile/UploadedFile";
-import { getAge, getDay } from "../../helpers/dateCalculation";
-import {
-  getOwnResume,
-  getUploadedFiles,
-} from "../../redux/resume/resume.actions";
 
 const ref = React.createRef();
 
@@ -36,7 +36,7 @@ export default function ViewResume() {
   const [schedules, setTest] = useState([]);
 
   useEffect(() => {
-    dispatch(getOwnResume(id));
+    dispatch(getOwnResumeDetail(id));
     dispatch(getUploadedFiles(id));
   }, []);
 

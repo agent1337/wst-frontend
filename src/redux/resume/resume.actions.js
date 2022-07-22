@@ -1,6 +1,5 @@
-import { showToast } from "../toast/toast.actions";
-
-import { axiosInstance } from "../../api/axios";
+import { axiosInstance } from "api/axios";
+import { showToast } from "redux/toast/toast.actions";
 
 import {
   CLONE_SELECTED_RESUME,
@@ -15,39 +14,59 @@ import {
   GET_OTHER_RESUME_DATA_SUCCESS,
   GET_OWN_RESUME_SUCCESS,
   CREATE_RESUME_SUCCESS,
+  GET_OWN_RESUMES_DATA,
+  GET_OTHER_RESUME_DATA,
+  CREATE_RESUME,
+  CREATE_RESUME_ERROR,
+  UPLOAD_FILE,
+  UPLOAD_FILE_ERROR,
 } from "./resume.types";
 
 export const getOwnResumeData = () => {
   return async (dispatch) => {
     try {
+      dispatch(getOwnResumeDataInit());
+
       const response = await axiosInstance.get("resumes/own");
 
-      dispatch({
-        type: GET_OWN_RESUMES_DATA_SUCCESS,
-        payload: response.data,
-      });
+      dispatch(getOwnResumeDataSuccess(response.data));
     } catch (error) {
       console.log(error);
     }
   };
+};
+
+export const getOwnResumeDataInit = () => {
+  return { type: GET_OWN_RESUMES_DATA };
+};
+
+export const getOwnResumeDataSuccess = (payload) => {
+  return { type: GET_OWN_RESUMES_DATA_SUCCESS, payload };
 };
 
 export const getOtherResumeData = () => {
   return async (dispatch) => {
     try {
+      dispatch(getOtherResumeDataInit());
+
       const response = await axiosInstance.get("resumes/others");
 
-      dispatch({
-        type: GET_OTHER_RESUME_DATA_SUCCESS,
-        payload: response.data,
-      });
+      dispatch(getOtherResumeDataSuccess(response.data));
     } catch (error) {
       console.log(error);
     }
   };
 };
 
-export const getOwnResume = (id) => {
+export const getOtherResumeDataInit = () => {
+  return { type: GET_OTHER_RESUME_DATA };
+};
+
+export const getOtherResumeDataSuccess = (payload) => {
+  return { type: GET_OTHER_RESUME_DATA_SUCCESS, payload };
+};
+
+export const getOwnResumeDetail = (id) => {
   return async (dispatch) => {
     try {
       dispatch({
@@ -124,6 +143,8 @@ export const getNationality = () => {
 export const createResume = (data, accessToken, uploadImage, multipleFiles) => {
   return async (dispatch) => {
     try {
+      dispatch(createResumeInit());
+
       const response = await axiosInstance
         .post("resumes", data, {
           headers: { Authorization: `Bearer ${accessToken}` },
@@ -137,19 +158,29 @@ export const createResume = (data, accessToken, uploadImage, multipleFiles) => {
         dispatch(uploadFiles(multipleFiles[i], response.data._id, accessToken));
       }
 
-      dispatch({
-        type: CREATE_RESUME_SUCCESS,
-        payload: response,
-      });
+      dispatch(createResumeSuccess(response));
     } catch (error) {
-      console.log(error);
+      dispatch(createResumeError(error));
     }
   };
+};
+
+export const createResumeInit = () => {
+  return { type: CREATE_RESUME };
+};
+
+export const createResumeSuccess = (payload) => {
+  return { type: CREATE_RESUME_SUCCESS, payload };
+};
+
+export const createResumeError = (payload) => {
+  return { type: CREATE_RESUME_ERROR, payload };
 };
 
 export const uploadFiles = (uploadImage, resumeId, accessToken) => {
   return async (dispatch) => {
     try {
+      dispatch(uploadFilesInit());
       const formData = new FormData();
       formData.append("image", uploadImage);
       formData.append("resumeId", resumeId);
@@ -167,9 +198,18 @@ export const uploadFiles = (uploadImage, resumeId, accessToken) => {
 
       return response;
     } catch (error) {
+      dispatch(uploadFilesError(error.response.data.message));
       dispatch(showToast(error.response.data.message));
     }
   };
+};
+
+export const uploadFilesInit = () => {
+  return { type: UPLOAD_FILE };
+};
+
+export const uploadFilesError = (payload) => {
+  return { type: UPLOAD_FILE_ERROR, payload };
 };
 
 export const saveToMyList = (id) => {

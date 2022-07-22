@@ -1,4 +1,4 @@
-import { axiosInstance } from "../../api/axios";
+import { axiosInstance } from "api/axios";
 import { logout } from "../auth/auth.actions";
 import {
   GET_ME,

@@ -1,7 +1,7 @@
 import { getMe, removeToken, saveToken } from "../profile/profile.actions";
-import { showToast } from "../toast/toast.actions";
+import { showToast } from "redux/toast/toast.actions";
 
-import { axiosInstance } from "../../api/axios";
+import { axiosInstance } from "api/axios";
 
 import {
   SIGN_UP,
