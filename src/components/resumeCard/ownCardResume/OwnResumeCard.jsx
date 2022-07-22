@@ -22,7 +22,6 @@ export default function OwnResumeCard({ item }) {
     dispatch(cloneResume(resumeId));
   };
 
-  // console.log(item._id, "id");
   return (
     <>
       <Popup handleClose={() => setIsOpen(false)} isOpen={isOpen}>
