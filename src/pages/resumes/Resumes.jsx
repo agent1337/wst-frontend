@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getOtherResumeData,
   getOwnResumeData,
-} from "../../redux/resume/resume.actions";
+} from "redux/resume/resume.actions";
 import CreateResumeButton from "../../custom/buttons/createResume/CreateResumeButton";
-import OwnResumeCard from "../../components/resumeCard/ownCardResume/OwnResumeCard";
-import OtherResumeCard from "../../components/resumeCard/otherCardResume/OtherResumeCard";
+import OwnResumeCard from "components/resumeCard/ownCardResume/OwnResumeCard";
+import OtherResumeCard from "components/resumeCard/otherCardResume/OtherResumeCard";
 import { main } from "colors";
 import { styles } from "./resumes.styles";
 

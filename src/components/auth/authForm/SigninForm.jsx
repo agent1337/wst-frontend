@@ -3,12 +3,12 @@ import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useAuthActions } from "redux/auth/useAuthActions";
+import { showToast } from "redux/toast/toast.actions";
 
 import { Grid, Typography } from "@mui/material";
 import { styles } from "./authForm.styles";
 import AuthInput from "../../../custom/inputs/authInput/AuthInput";
 import SeparatorLine from "../../../custom/separatorLine/SeparatorLine";
-import { showToast } from "../../../redux/toast/toast.actions";
 import { authentication } from "../../context/base";
 import AuthCheckbox from "../authCheckbox/AuthCheckbox";
 import AuthFooter from "../authFooter/AuthFooter";

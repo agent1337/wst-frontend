@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import { danger } from "colors";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { cloneResume, removeSelectedResume } from "redux/resume/resume.actions";
 import { routes } from "routing/Routes";
 
 import { Box, Typography, Button } from "@mui/material";
 import { styles } from "./resumeCard.styles";
-import {
-  cloneResume,
-  removeSelectedResume,
-} from "../../../redux/resume/resume.actions";
 import Popup from "../../modal/Popup";
 
 export default function OwnResumeCard({ item }) {

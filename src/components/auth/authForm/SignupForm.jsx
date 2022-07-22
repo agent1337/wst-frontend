@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useAuthActions } from "redux/auth/useAuthActions";
+import { useToastActions } from "redux/toast/useToastActions";
 
 import { Grid } from "@mui/material";
 import { styles } from "./authForm.styles";
 import AuthInput from "../../../custom/inputs/authInput/AuthInput";
 import SeparatorLine from "../../../custom/separatorLine/SeparatorLine";
-import { useAuthActions } from "../../../redux/auth/useAuthActions";
-import { useToastActions } from "../../../redux/toast/useToastActions";
 import { authentication } from "../../context/base";
 import AuthFooter from "../authFooter/AuthFooter";
 import FormText from "../authText/FormText";

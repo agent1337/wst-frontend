@@ -1,20 +1,17 @@
 import React, { useState, useRef } from "react";
+import ActionHeader from "components/actionHeader/ActionHeader";
+import ExperienceIntroduction from "components/resume/ExperienceIntroduction";
+import SelfIntroduction from "components/resume/SelfIntroduction";
+import Schedule from "components/schedule/Schedule";
 import { Formik } from "formik";
+import { formValidation, initialExperienceValue } from "helpers/initialValues";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { createResume } from "redux/resume/resume.actions";
 import { useToastActions } from "redux/toast/useToastActions";
 
-import ActionHeader from "../../components/actionHeader/ActionHeader";
-import ExperienceIntroduction from "../../components/resume/ExperienceIntroduction";
-import SelfIntroduction from "../../components/resume/SelfIntroduction";
-import Schedule from "../../components/schedule/Schedule";
 import { Box } from "@mui/material";
 import { styles } from "./createResume.styles";
-import {
-  initialExperienceValue,
-  formValidation,
-} from "../../helpers/initialValues";
-import { createResume } from "../../redux/resume/resume.actions";
 
 export default function CreateResume() {
   const dispatch = useDispatch();
