@@ -28,6 +28,7 @@ export default function CreateResume() {
   const [workshift, setWorkshift] = useState([]);
 
   const publish = async (stat) => {
+    console.log(selfFormikRef?.current);
     if (selfFormikRef?.current) {
       selfFormikRef.current
         .validateForm()
@@ -41,12 +42,16 @@ export default function CreateResume() {
               workshift: workshift,
             };
 
+            console.log(data, "DATA");
             dispatch(
               createResume(data, accessToken, uploadImage, multipleFiles)
             );
 
             history.push("/resumes");
           } else {
+            if (selfFormikRef?.current?.errors.uploadImage) {
+              showToast(selfFormikRef?.current?.errors.uploadImage);
+            }
             showToast("Please fill the highlighted fields");
           }
         })
@@ -80,6 +85,7 @@ export default function CreateResume() {
         <Formik
           innerRef={selfFormikRef}
           initialValues={{
+            uploadImage: null,
             surname: "",
             name: "",
             kanaSurname: "",
@@ -102,7 +108,7 @@ export default function CreateResume() {
                 <SelfIntroduction
                   values={values}
                   setUploadImage={setUploadImage}
-                  uploadImage={uploadImage}
+                  uploadImage={values.uploadImage}
                   handleChange={handleChange}
                   errors={errors}
                 />

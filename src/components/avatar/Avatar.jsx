@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useAuthActions } from "redux/auth/useAuthActions";
 
@@ -13,6 +14,8 @@ const styles = {
 export default function Avatar() {
   const history = useHistory();
   const { logout } = useAuthActions();
+  const { email } = useSelector((state) => state.profile);
+  const getNameFromEmail = email.split("@")[0];
 
   const handleLogout = () => {
     logout();
@@ -22,7 +25,9 @@ export default function Avatar() {
   return (
     <Box sx={{ position: "relative" }}>
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <Typography sx={styles.title}>Welcome,</Typography>
+        <Typography sx={styles.title}>
+          Welcome, {getNameFromEmail && getNameFromEmail}
+        </Typography>
         <button onClick={() => handleLogout()}>
           <img src="../../auth/Icon.png" alt="icon" />
         </button>

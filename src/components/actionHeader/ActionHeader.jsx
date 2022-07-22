@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { Box } from "@mui/material";
-import ActionButton from "../../custom/buttons/actionButton/ActionButton";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { saveToMyList } from "redux/resume/resume.actions";
+
 import CircleIcon from "@mui/icons-material/Circle";
+import { Box } from "@mui/material";
 import { styles } from "./actionHeader.styles";
+import ActionButton from "../../custom/buttons/actionButton/ActionButton";
 import Popup from "../modal/Popup";
 import Sharing from "../sharing/Sharing";
 
@@ -16,8 +17,9 @@ export default function ActionHeader({ type, publishResume, resumeId }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const saveCVtoMyList = (resumeId) => {
+    console.log(resumeId);
     dispatch(saveToMyList(resumeId));
-    history.push("/resumes");
+    // history.push("/resumes");
   };
 
   const openEditResume = (resumeId) => {

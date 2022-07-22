@@ -68,7 +68,7 @@ export default function ViewResume() {
         <>
           <Box sx={styles.block}>
             <Typography>{resume.resumeTitle}</Typography>
-            <ActionHeader type={type} />
+            <ActionHeader type={type} resumeId={id} />
           </Box>
 
           <Pdf

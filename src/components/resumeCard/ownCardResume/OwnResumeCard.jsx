@@ -22,6 +22,8 @@ export default function OwnResumeCard({ item }) {
     dispatch(cloneResume(resumeId));
   };
 
+  console.log(routes(item._id).resumeById);
+
   return (
     <>
       <Popup handleClose={() => setIsOpen(false)} isOpen={isOpen}>
@@ -80,7 +82,7 @@ export default function OwnResumeCard({ item }) {
               {item.status}
             </Box>
           )}
-          <Link className="link" to={routes(item._id).resumeById}>
+          <Link className="link" to={`/resumes/${item._id}`}>
             <Box
               sx={{
                 display: "flex",

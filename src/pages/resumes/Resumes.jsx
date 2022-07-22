@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { main } from "colors";
+import OtherResumeCard from "components/resumeCard/otherCardResume/OtherResumeCard";
+import OwnResumeCard from "components/resumeCard/ownCardResume/OwnResumeCard";
 import PropTypes from "prop-types";
-import { Tabs, Tab, Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getOtherResumeData,
   getOwnResumeData,
 } from "redux/resume/resume.actions";
-import CreateResumeButton from "../../custom/buttons/createResume/CreateResumeButton";
-import OwnResumeCard from "components/resumeCard/ownCardResume/OwnResumeCard";
-import OtherResumeCard from "components/resumeCard/otherCardResume/OtherResumeCard";
-import { main } from "colors";
+
+import { Tabs, Tab, Box, Typography } from "@mui/material";
 import { styles } from "./resumes.styles";
+import CreateResumeButton from "../../custom/buttons/createResume/CreateResumeButton";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -89,7 +90,7 @@ export default function Resumes() {
                 <OtherResumeCard
                   item={item}
                   key={index}
-                  resumesData={resumes}
+                  resumesData={othersResumes}
                 />
               );
             })
