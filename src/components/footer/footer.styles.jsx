@@ -1,4 +1,4 @@
-import { text } from "../../colors";
+import { text } from "colors";
 
 export const styles = {
   container: {
@@ -22,8 +22,8 @@ export const styles = {
     position: "relative",
   },
   copyright: {
-    fontFamily: 'Arial',
-    fontSize: '10px',
+    fontFamily: "Arial",
+    fontSize: "10px",
     "@media (max-width: 1120px)": {
       position: "absolute",
       top: "35px",
@@ -33,7 +33,7 @@ export const styles = {
     },
   },
   mobileFooter: {
-    fontSize: '12px',
+    fontSize: "12px",
     padding: "0 18px",
     background: "#FCFCFC",
     // "@media (min-width: 531px)": {

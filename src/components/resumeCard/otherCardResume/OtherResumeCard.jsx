@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { removeSelectedResume } from "redux/resume/resume.actions";
 
 import { Box, Typography, Button } from "@mui/material";
 import { styles } from "./resumeCard.styles";
-import { danger } from "../../../colors";
-import { main } from "../../../colors";
-import { removeSelectedResume } from "../../../redux/resume/resume.actions";
+import { danger } from "colors";
+import { main } from "colors";
 import Popup from "../../modal/Popup";
+
+// import { routes } from "routing/Routes";
 
 export default function OtherResumeCard({ item }) {
   const dispatch = useDispatch();
@@ -16,7 +18,6 @@ export default function OtherResumeCard({ item }) {
   const removeResume = (resumeId) => {
     dispatch(removeSelectedResume(resumeId));
     setIsOpen(false);
-    // return toast(`${alert}`, toastStyle);
   };
 
   return (
@@ -62,7 +63,10 @@ export default function OtherResumeCard({ item }) {
       </Popup>
 
       <Box sx={styles.cardsItem}>
-        <Link className="link" to={`/resumes/others/${item._id}`}>
+        <Link
+          className="link"
+          // to={routes(item._id).otherResumeById}
+        >
           <Box
             sx={{
               ...styles.card,

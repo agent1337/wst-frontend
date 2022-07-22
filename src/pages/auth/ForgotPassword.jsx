@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuthActions } from "redux/auth/useAuthActions";
 
 import { Grid, Box, Typography, Button } from "@mui/material";
-import { grey, main, text } from "../../colors";
+import { grey, main, text } from "colors";
 import SeparatorLine from "../../custom/separatorLine/SeparatorLine";
 
 const styles = {

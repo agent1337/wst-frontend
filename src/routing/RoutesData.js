@@ -1,15 +1,16 @@
 import AuthLayout from "../layouts/AuthLayout";
 import MainLayout from "../layouts/MainLayout";
-import Signin from "../pages/auth/Signin";
-import Signup from "../pages/auth/Signup";
 import ResumeLayout from "../layouts/ResumeLayout";
 import AcceptLine from "../pages/auth/AcceptLine";
 import ForgotPassword from "../pages/auth/ForgotPassword";
 import PageNotFound from "../pages/auth/PageNotFound";
+import Signin from "../pages/auth/Signin";
+import Signup from "../pages/auth/Signup";
 import CreateResume from "../pages/createResume/CreateResume";
 import EditResume from "../pages/editResume/EditResume";
 import Resumes from "../pages/resumes/Resumes";
 import ViewResume from "../pages/viewResume/ViewResume";
+
 import { routes } from "./Routes";
 
 export const routesData = [
@@ -43,11 +44,11 @@ export const routesData = [
     Component: ViewResume,
     Layout: ResumeLayout,
   },
-  {
-    path: routes().otherResumeById,
-    Component: ViewResume,
-    Layout: ResumeLayout,
-  },
+  // {
+  //   path: routes().otherResumeById,
+  //   Component: ViewResume,
+  //   Layout: ResumeLayout,
+  // },
 
   // working with resume
   {

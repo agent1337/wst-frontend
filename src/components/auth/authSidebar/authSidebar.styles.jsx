@@ -1,4 +1,4 @@
-import { main } from '../../../colors'
+import { main } from "colors";
 
 export const styles = {
   section: {
@@ -16,7 +16,7 @@ export const styles = {
     display: "flex",
   },
   logo: {
-    color: '#fff',
+    color: "#fff",
     width: "inherit",
     height: "auto",
     filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))",
@@ -94,14 +94,14 @@ export const styles = {
     },
   },
   mobileBox: {
-    height: '34px',
-    width: '56px',
+    height: "34px",
+    width: "56px",
     "@media (min-width: 900px)": {
       display: "none",
     },
   },
   mobileLogo: {
-    width: '100%',
-    height: '100%'
-  }
-}; 
+    width: "100%",
+    height: "100%",
+  },
+};

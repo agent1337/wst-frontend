@@ -1,25 +1,31 @@
-import React, { useState } from 'react'
-import { Box, Typography, Button, } from "@mui/material";
-import Popup from '../../modal/Popup';
+import React, { useState } from "react";
+import { danger } from "colors";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { danger } from '../../../colors';
-import { useDispatch } from 'react-redux';
-import { cloneResume, removeSelectedResume } from '../../../redux/resume/resume.actions';
-import { styles } from './resumeCard.styles';
+import { routes } from "routing/Routes";
 
-export default function OwnResumeCard({ item, }) {
+import { Box, Typography, Button } from "@mui/material";
+import { styles } from "./resumeCard.styles";
+import {
+  cloneResume,
+  removeSelectedResume,
+} from "../../../redux/resume/resume.actions";
+import Popup from "../../modal/Popup";
+
+export default function OwnResumeCard({ item }) {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
 
   const removeResume = (resumeId) => {
-    dispatch(removeSelectedResume(resumeId))
+    dispatch(removeSelectedResume(resumeId));
     setIsOpen(false);
   };
 
   const copy = (resumeId) => {
-    dispatch(cloneResume(resumeId))
-  }
+    dispatch(cloneResume(resumeId));
+  };
 
+  // console.log(item._id, "id");
   return (
     <>
       <Popup handleClose={() => setIsOpen(false)} isOpen={isOpen}>
@@ -62,33 +68,32 @@ export default function OwnResumeCard({ item, }) {
         </Box>
       </Popup>
 
-
       <Box sx={styles.cardsItem}>
         <button onClick={() => setIsOpen(true)} style={styles.deleteButton}>
-          <img
-            src="../../action/delete.png"
-            alt="remove"
-          />
+          <img src="../../action/delete.png" alt="remove" />
         </button>
         <Box
           sx={{
             ...styles.card,
-
           }}
         >
           {item.status && (
             <Box
-              sx={
-                item.status === "save" ? { display: "none" } : styles.status
-              }
+              sx={item.status === "save" ? { display: "none" } : styles.status}
             >
               {item.status}
             </Box>
           )}
-          <Link to={`/resumes/${item._id}`}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100px' }}>
-              <Typography
-                sx={styles.resumeTitle}>
+          <Link className="link" to={routes(item._id).resumeById}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                height: "100px",
+              }}
+            >
+              <Typography sx={styles.resumeTitle}>
                 {item.resumeTitle}
               </Typography>
               <Box sx={{ ...styles.detail }}>
@@ -99,9 +104,7 @@ export default function OwnResumeCard({ item, }) {
                   <b>Created:</b> YYYY/MM/DD {item.created}
                 </Typography>
               </Box>
-
             </Box>
-
           </Link>
           <Box sx={styles.actionBox}>
             <img
@@ -111,11 +114,9 @@ export default function OwnResumeCard({ item, }) {
             />
             <button
               style={{ cursor: "pointer", marginRight: "10px" }}
-              onClick={() => copy(item._id)}>
-              <img
-                src="../../action/copy.png"
-                alt="copy"
-              />
+              onClick={() => copy(item._id)}
+            >
+              <img src="../../action/copy.png" alt="copy" />
             </button>
 
             <img
@@ -124,9 +125,8 @@ export default function OwnResumeCard({ item, }) {
               style={{ cursor: "pointer" }}
             />
           </Box>
-
         </Box>
       </Box>
     </>
-  )
+  );
 }

@@ -12,7 +12,7 @@ import { useToastActions } from "redux/toast/useToastActions";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Box, Typography } from "@mui/material";
 import { styles } from "./sharing.styles";
-import { main } from "../../colors";
+import { main } from "colors";
 
 export default function Sharing({ setIsOpen }) {
   const shareUrl = window.location.href;

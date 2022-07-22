@@ -1,17 +1,17 @@
-import { dark_warning, grey } from "../../colors";
+import { dark_warning, grey } from "colors";
 
 export const styles = {
   section: {
-    position: 'relative',
-    maxWidth: '970px',
-    margin: '0 auto',
+    position: "relative",
+    maxWidth: "970px",
+    margin: "0 auto",
     "@media (max-width: 970px)": {
-      maxWidth: 'auto',
-      padding: '0 20px'
+      maxWidth: "auto",
+      padding: "0 20px",
     },
     "@media (max-width: 800px)": {
-      padding: '0'
-    }
+      padding: "0",
+    },
   },
   block: {
     display: "flex",
@@ -20,45 +20,45 @@ export const styles = {
     marginBottom: "15px",
   },
   imageBox: {
-    position: 'relative',
+    position: "relative",
     width: "100%",
     height: "400px",
     background: `${grey}`,
     marginBottom: "30px",
     "@media (min-width: 800px)": {
-      marginTop: '13px'
+      marginTop: "13px",
     },
   },
   infoBlock: {
-    width: 'calc(100% - 80px)',
-    position: 'absolute',
-    bottom: '0px',
-    background: 'rgba(0, 0, 0, 0.5)',
+    width: "calc(100% - 80px)",
+    position: "absolute",
+    bottom: "0px",
+    background: "rgba(0, 0, 0, 0.5)",
     "@media (min-width: 800px)": {
-     display: 'none'
+      display: "none",
     },
   },
   container: {
-    display: 'flex',
-    position: 'relative',
-    border: '1px solid #ccc',
+    display: "flex",
+    position: "relative",
+    border: "1px solid #ccc",
     "@media (max-width: 800px)": {
-      flexDirection: 'column',
-      border: 'none'
+      flexDirection: "column",
+      border: "none",
     },
   },
   selfIntroduction: {
     "@media (min-width: 801px)": {
-      paddingTop: '13px',
-      maxWidth: '300px',
-      width: '100%',
-      borderRight: '1px solid #ccc',
-      padding: '0 16px'
+      paddingTop: "13px",
+      maxWidth: "300px",
+      width: "100%",
+      borderRight: "1px solid #ccc",
+      padding: "0 16px",
     },
   },
   fields: {
-    width: 'calc(100% - 16px)',
-    padding: '10px 16px'
+    width: "calc(100% - 16px)",
+    padding: "10px 16px",
   },
   qrBox: {
     width: "150px",
@@ -66,13 +66,13 @@ export const styles = {
     display: "block",
     margin: "62px auto",
     "@media (max-width: 800px)": {
-      position: 'absolute',
-      top: '16px',
-      right: '16px',
-      width: '30px',
-      height: '30px',
-      margin: '0',
-     },
+      position: "absolute",
+      top: "16px",
+      right: "16px",
+      width: "30px",
+      height: "30px",
+      margin: "0",
+    },
   },
   qrCode: {
     width: "100%",
@@ -139,12 +139,12 @@ export const styles = {
     marginBottom: "20px",
   },
   goTop: {
-    position: 'absolute',
-    bottom: '30px',
-    right: '16px',
-    width: '48px',
-    height: '48px',
-    borderRadius: '50%',
-    background: `${dark_warning}`
-  }
+    position: "absolute",
+    bottom: "30px",
+    right: "16px",
+    width: "48px",
+    height: "48px",
+    borderRadius: "50%",
+    background: `${dark_warning}`,
+  },
 };

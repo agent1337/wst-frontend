@@ -11,8 +11,8 @@ export const routes = (params) => ({
 
   // WORK WITH RESUME
   resumes: "/resumes",
-  createResume: "/resumes/create",
-  editResumeById: `/resumes/edit/${params?.id || ":id"}`,
+  createResume: "/resume/create",
+  editResumeById: `/resume/edit/${params?.id || ":id"}`,
 
   pageNotFound: "*",
 });

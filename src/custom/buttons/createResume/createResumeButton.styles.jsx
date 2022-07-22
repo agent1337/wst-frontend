@@ -1,4 +1,4 @@
-import { grey } from "../../../colors";
+import { grey } from "colors";
 
 export const styles = {
   cardsItem: {
@@ -8,7 +8,7 @@ export const styles = {
     marginBottom: "1rem",
     marginRight: "24px",
     "@media (max-width: 425px)": {
-      margin: '0px'
+      margin: "0px",
     },
   },
   card: {
@@ -37,9 +37,9 @@ export const styles = {
     width: "100%",
   },
   image: {
-    width: '40px',
-    position: 'absolute',
-    bottom: '0px',
-    right: '0px',
-  }
+    width: "40px",
+    position: "absolute",
+    bottom: "0px",
+    right: "0px",
+  },
 };

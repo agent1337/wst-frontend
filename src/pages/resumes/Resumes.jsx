@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Tabs, Tab, Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { getOtherResumeData, getOwnResumeData } from "../../redux/resume/resume.actions";
+import {
+  getOtherResumeData,
+  getOwnResumeData,
+} from "../../redux/resume/resume.actions";
 import CreateResumeButton from "../../custom/buttons/createResume/CreateResumeButton";
 import OwnResumeCard from "../../components/resumeCard/ownCardResume/OwnResumeCard";
 import OtherResumeCard from "../../components/resumeCard/otherCardResume/OtherResumeCard";
-import { main } from "../../colors"
+import { main } from "colors";
 import { styles } from "./resumes.styles";
 
 function TabPanel(props) {
@@ -20,7 +23,7 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ marginTop: '27px' }}>{children}</Box>}
+      {value === index && <Box sx={{ marginTop: "27px" }}>{children}</Box>}
     </div>
   );
 }
@@ -40,18 +43,18 @@ function a11yProps(index) {
 
 export default function Resumes() {
   const [value, setValue] = useState(0);
-  const resumes = useSelector(state => state.resume.resumes)
-  const othersResumes = useSelector(state => state.resume.othersResumes)
-  const dispatch = useDispatch()
+  const resumes = useSelector((state) => state.resume.resumes);
+  const othersResumes = useSelector((state) => state.resume.othersResumes);
+  const dispatch = useDispatch();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   useEffect(() => {
-    dispatch(getOwnResumeData())
-    dispatch(getOtherResumeData())
-  }, [])
+    dispatch(getOwnResumeData());
+    dispatch(getOtherResumeData());
+  }, []);
 
   return (
     <Box sx={styles.container}>
@@ -60,7 +63,7 @@ export default function Resumes() {
         value={value}
         onChange={handleChange}
         TabIndicatorProps={{
-          style: { backgroundColor: `${main}`, },
+          style: { backgroundColor: `${main}` },
         }}
       >
         <Tab sx={styles.tab} label="My Resumes" {...a11yProps(0)} />
@@ -73,20 +76,14 @@ export default function Resumes() {
           {resumes &&
             resumes.map((item, index) => {
               return (
-                <OwnResumeCard
-                  item={item}
-                  key={index}
-                  resumesData={resumes}
-                />
+                <OwnResumeCard item={item} key={index} resumesData={resumes} />
               );
             })}
-
         </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Box sx={styles.box}>
-      
-          {othersResumes !== null ?
+          {othersResumes !== null ? (
             othersResumes.map((item, index) => {
               return (
                 <OtherResumeCard
@@ -95,10 +92,14 @@ export default function Resumes() {
                   resumesData={resumes}
                 />
               );
-            }) : <Typography>Other user resume that you saved can be accessed here.</Typography>}
+            })
+          ) : (
+            <Typography>
+              Other user resume that you saved can be accessed here.
+            </Typography>
+          )}
         </Box>
       </TabPanel>
     </Box>
   );
 }
-
