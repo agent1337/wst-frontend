@@ -4,11 +4,13 @@ import { showToast } from "../toast/toast.actions";
 import { axiosInstance } from "../../api/axios";
 
 import {
-  RESET_PASSWORD,
   SIGN_UP,
   SIGN_UP_ERROR,
   SIGN_IN,
   SIGN_IN_ERROR,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD,
+  FORGOT_PASSWORD_ERROR,
 } from "./auth.types";
 
 export const signup = (email, password) => {
@@ -84,33 +86,32 @@ export const signInWithTwitter = (data) => {
 export const forgotPassword = (data) => {
   return async (dispatch) => {
     try {
+      dispatch(forgotPasswordInit());
       const response = await axiosInstance.put("/auth", data);
 
       const sendEmail = await axiosInstance.post("/email/html-email", data);
 
-      dispatch({
-        type: RESET_PASSWORD,
-        payload: true,
-      });
+      dispatch(forgotPasswordSuccess(true));
 
       return { response, sendEmail };
     } catch (error) {
-      console.log(error);
+      dispatch(forgotPasswordError(error.response.data.message));
+      dispatch(showToast(error.response.data.message));
     }
   };
 };
 
-export const resetPasswordInit = () => {
-  return { type: RESET_PASSWORD };
+export const forgotPasswordInit = () => {
+  return { type: FORGOT_PASSWORD };
 };
 
-// export const resetPasswordSuccess = (payload) => {
-//   return { type: SIGN_IN_SUCCESS, payload };
-// };
+export const forgotPasswordSuccess = (payload) => {
+  return { type: FORGOT_PASSWORD_SUCCESS, payload };
+};
 
-// export const resetPasswordError = (payload) => {
-//   return { type: SIGN_IN_ERROR, payload };
-// };
+export const forgotPasswordError = (payload) => {
+  return { type: FORGOT_PASSWORD_ERROR, payload };
+};
 
 export const logout = () => {
   return async (dispatch) => {

@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useToastActions } from "redux/toast/useToastActions";
 
 import ActionHeader from "../../components/actionHeader/ActionHeader";
 import ExperienceIntroduction from "../../components/resume/ExperienceIntroduction";
@@ -14,10 +15,10 @@ import {
   formValidation,
 } from "../../helpers/initialValues";
 import { createResume } from "../../redux/resume/resume.actions";
-import { showToast } from "../../redux/toast/toast.actions";
 
 export default function CreateResume() {
   const dispatch = useDispatch();
+  const { showToast } = useToastActions();
   const history = useHistory();
   const selfFormikRef = useRef();
   const accessToken = localStorage.getItem("accessToken");
@@ -49,11 +50,11 @@ export default function CreateResume() {
 
             history.push("/resumes");
           } else {
-            dispatch(showToast("Please fill the highlighted fields"));
+            showToast("Please fill the highlighted fields");
           }
         })
         .catch((e) => {
-          dispatch(showToast(e));
+          showToast(e);
         });
     }
   };

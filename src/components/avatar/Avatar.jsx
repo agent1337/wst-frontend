@@ -1,8 +1,8 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { logout } from "../../redux/auth/auth.actions";
+import { useAuthActions } from "redux/auth/useAuthActions";
+
+import { Box, Typography } from "@mui/material";
 
 const styles = {
   title: {
@@ -12,10 +12,10 @@ const styles = {
 
 export default function Avatar() {
   const history = useHistory();
-  const dispatch = useDispatch();
+  const { logout } = useAuthActions();
 
   const handleLogout = () => {
-    dispatch(logout());
+    logout();
     history.push("/signin");
   };
 

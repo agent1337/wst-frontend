@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
+import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useAuthActions } from "redux/auth/useAuthActions";
+
 import { Grid, Typography } from "@mui/material";
-import FormText from "../authText/FormText";
+import { styles } from "./authForm.styles";
 import AuthInput from "../../../custom/inputs/authInput/AuthInput";
 import SeparatorLine from "../../../custom/separatorLine/SeparatorLine";
+import { showToast } from "../../../redux/toast/toast.actions";
+import { authentication } from "../../context/base";
 import AuthCheckbox from "../authCheckbox/AuthCheckbox";
 import AuthFooter from "../authFooter/AuthFooter";
-import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
-import { authentication } from "../../context/base";
-import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { signin, signInWithTwitter } from "../../../redux/auth/auth.actions";
-import { showToast } from "../../../redux/toast/toast.actions";
-import { styles } from "./authForm.styles";
+import FormText from "../authText/FormText";
 
 const SigninForm = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
+  const { signin, signInWithTwitter } = useAuthActions();
   const accessToken = useSelector((state) => state.profile.accessToken);
   const [user, setUser] = useState({
     email: "",
@@ -38,7 +39,7 @@ const SigninForm = () => {
 
     if (!isFormValid(user.email, user.password)) return;
 
-    await dispatch(signin(user.email, user.password));
+    await signin(user.email, user.password);
   }
 
   const isFormValid = () => {
@@ -48,13 +49,13 @@ const SigninForm = () => {
     if (!user.email) {
       errorsData.email = true;
       isValid = false;
-      dispatch(showToast("Email is not correct"));
+      showToast("Email is not correct");
     }
 
     if (!user.password || user.password.length < 8) {
       errorsData.password = true;
       isValid = false;
-      dispatch(showToast("Password is too short"));
+      showToast("Password is too short");
     }
 
     setErrors(errorsData);
@@ -82,9 +83,9 @@ const SigninForm = () => {
           externalId: res.user.uid,
         };
 
-        dispatch(signInWithTwitter(data));
+        signInWithTwitter(data);
       })
-      .catch((error) => dispatch(showToast(error.data.message)));
+      .catch((error) => showToast(error.data.message));
   };
 
   const line = () => {};

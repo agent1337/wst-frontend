@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Switch, BrowserRouter } from "react-router-dom";
-import { getMe, saveToken } from "redux/profile/profile.actions";
+import { useProfileActions } from "redux/profile/useProfileActions";
 
 import Toast from "./custom/toast/Toast";
 
@@ -9,13 +9,13 @@ import { AppRoute } from "./routing/AppRoute";
 import { routesData } from "./routing/RoutesData";
 
 export default function App() {
-  const dispatch = useDispatch();
+  const { getMe, saveToken } = useProfileActions();
   const notify = useSelector((state) => state.toast.list);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
-    dispatch(saveToken(accessToken));
-    dispatch(getMe());
+    saveToken(accessToken);
+    getMe();
   }, []);
 
   return (

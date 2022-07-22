@@ -1,4 +1,6 @@
 import {
+  FORGOT_PASSWORD,
+  FORGOT_PASSWORD_ERROR,
   LOGOUT,
   SIGN_IN,
   SIGN_IN_ERROR,
@@ -22,6 +24,11 @@ export const authReducer = (state = initialState, action) => {
     case SIGN_UP:
       return { ...state, loading: true };
     case SIGN_UP_ERROR:
+      return { ...state, loading: false };
+
+    case FORGOT_PASSWORD:
+      return { ...state, loading: true };
+    case FORGOT_PASSWORD_ERROR:
       return { ...state, loading: false };
 
     case LOGOUT:

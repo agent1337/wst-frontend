@@ -7,21 +7,22 @@ import {
   TwitterShareButton,
   TwitterIcon,
 } from "react-share";
-import { Box, Typography } from "@mui/material";
+import { useToastActions } from "redux/toast/useToastActions";
+
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { main } from "../../colors";
+import { Box, Typography } from "@mui/material";
 import { styles } from "./sharing.styles";
-import { useDispatch } from "react-redux";
-import { showToast } from "../../redux/toast/toast.actions";
+import { main } from "../../colors";
 
 export default function Sharing({ setIsOpen }) {
   const shareUrl = window.location.href;
-  const dispatch = useDispatch();
+  const { showToast } = useToastActions();
 
   const copy = () => {
     navigator.clipboard.writeText(window.location.href);
-    dispatch(showToast("Link Copied"));
+    showToast("Link Copied");
   };
+
   return (
     <Box sx={styles.container}>
       <Typography sx={{ fontSize: "18px", fontWeight: "400" }}>
